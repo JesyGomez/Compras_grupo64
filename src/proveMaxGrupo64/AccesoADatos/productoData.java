@@ -139,6 +139,7 @@ public Producto buscarProductoPorNombre(String nombre) {
             ps.setDouble(3, producto.getPrecioActual());
             ps.setInt(4, producto.getStock());
             ps.setBoolean(5, producto.isEstado());
+            ps.setInt(6, producto.getIdProducto());
             
             int exito = ps.executeUpdate();
             if (exito == 1) {
