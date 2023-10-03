@@ -151,27 +151,27 @@ public Producto buscarProductoPorNombre(String nombre) {
         }
     }
 
-    public void dadaDeBajaMateria(int id) {
+    public void dadaDeBajaProducto(int id) {
 
-        String sql = "UPDATE materia SET estado = 0 WHERE idMateria = ?";
+        String sql = "UPDATE producto SET estado = 0 WHERE id_producto = ?";
 
         try {
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setInt(1, id);
             int exito = ps.executeUpdate();
             if (exito == 1) {
-                JOptionPane.showMessageDialog(null, "Materia Dada de Baja");
+                JOptionPane.showMessageDialog(null, "Producto Dado de Baja");
 
             }
 
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Materia");
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Producto");
         }
 
     }
 
-    public void eliminarMateriaPorIdYNombre(int id, String nombre) {
-        String sql = "DELETE FROM materia WHERE idMateria = ? AND nombre = ?";
+    public void eliminarProductoPorIdYNombre(int id, String nombre) {
+        String sql = "DELETE FROM producto WHERE id_producto = ? AND nombre = ?";
 
         try {
             PreparedStatement ps = con.prepareStatement(sql);
@@ -180,33 +180,35 @@ public Producto buscarProductoPorNombre(String nombre) {
             ps.executeUpdate();
             ps.close();
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Materia");
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Producto");
         }
     }
 
-    public List<Materia> listarMateria() {
+    public List<Producto> listarProductos() {
 
-        String sql = "SELECT idMateria, nombre, año, estado FROM materia WHERE estado = 1";
-        ArrayList<Materia> materias = new ArrayList<>();
+        String sql = "SELECT id_producto, nombre, descripcion, precioActual, stock, estado FROM producto WHERE estado = 1";
+        ArrayList<Producto> productos = new ArrayList<>();
         try {
             PreparedStatement ps = con.prepareStatement(sql);
 
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                Materia materia = new Materia();
-                materia.setIdMateria(rs.getInt("idMateria"));
-                materia.setNombre(rs.getString("nombre"));
-                materia.setAnio(rs.getInt("año"));
-                materia.setEstado(true);
+                Producto producto = new Producto();
+                producto.setIdProducto(rs.getInt("id_producto"));
+                producto.setNombreProducto(rs.getString("nombre"));
+                producto.setDescripcion(rs.getString("descripcion"));
+                producto.setPrecioActual(rs.getDouble("precioActual"));
+                producto.setStock(rs.getInt("stock"));
+                producto.setEstado(true);
 
-                materias.add(materia);
+                productos.add(producto);
             }
             ps.close();
 
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Materia");
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Producto");
         }
-        return materias;
+        return productos;
     }
 
 }
