@@ -31,9 +31,11 @@ public class Compras_grupo64 {
         // produ.eliminarProductoPorIdYNombre(1, "Sony");
         //produ.dadaDeBajaProducto(2);
 
+        /*
         for (Producto producto : produ.listarProductos()) {
             System.out.println("nombre" + producto.getNombreProducto());
         }
+        */
     }
 
 }
