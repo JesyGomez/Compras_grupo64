@@ -18,6 +18,7 @@ public class ProductoView extends javax.swing.JInternalFrame {
      */
     public ProductoView() {
         initComponents();
+        deshabilitarCampos();
     }
 
     /**
@@ -212,6 +213,7 @@ public class ProductoView extends javax.swing.JInternalFrame {
     private void jbNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbNuevoActionPerformed
         // TODO add your handling code here:
         limpiarCampos();
+        habilitarCampos();
     }//GEN-LAST:event_jbNuevoActionPerformed
 
 
