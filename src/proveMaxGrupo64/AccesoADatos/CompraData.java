@@ -23,8 +23,10 @@ public class CompraData {
 
     public List<Producto> obtenerProductosDeCompraEnFecha(Date fecha) {
         List<Producto> productos = new ArrayList<>();
-        String sql = "SELECT p.* FROM productos p "
-                + "JOIN compras c ON p.idProducto = c.idProducto "
+        String sql = "SELECT d.id_compra, p.nombre AS nombre_producto, d.cantidad, p.precioActual\n"
+                + "FROM compra c\n"
+                + "INNER JOIN detallecompra d ON c.id_compra = d.id_compra\n"
+                + "INNER JOIN producto p ON d.id_producto = p.id_producto\n"
                 + "WHERE c.fechaCompra = ?";
         try {
             PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
@@ -55,7 +57,7 @@ public class CompraData {
 
     public int contarComprasProveedor(Proveedor proveedor) {
         int cantidadCompras = 0;
-        String sql = "SELECT COUNT(*) FROM compras WHERE idProveedor = ?";
+        String sql = "SELECT COUNT(*) FROM compra WHERE id_Proveedor = ?";
         try {
             PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             ps.setInt(1, proveedor.getIdProveedor());
@@ -69,12 +71,13 @@ public class CompraData {
         }
         return cantidadCompras;
     }
+//Todos los productos de una compra en particular
 
     public List<Producto> obtenerProductosEnCompra(int idCompra) {
         List<Producto> productos = new ArrayList<>();
-        String sql = "SELECT p.* FROM productos p "
-                + "JOIN detalle_compra dc ON p.idProducto = dc.idProducto "
-                + "WHERE dc.idCompra = ?";
+
+        String sql = "SELECT * FROM producto p JOIN detallecompra dc ON p.id_producto = dc.id_producto WHERE dc.id_Compra = ?";
+
         try {
             PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             ps.setInt(1, idCompra);
