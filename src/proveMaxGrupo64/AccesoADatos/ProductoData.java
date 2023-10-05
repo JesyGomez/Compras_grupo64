@@ -11,11 +11,11 @@ import javax.swing.JOptionPane;
 import proveMaxGrupo64.Entidades.Producto;
 
 
-public class productoData {
+public class ProductoData {
 
     private Connection con = null;
 
-    public productoData() {
+    public ProductoData() {
 
         con = Conexion.getConexion();
     }

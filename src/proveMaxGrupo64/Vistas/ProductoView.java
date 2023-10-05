@@ -10,7 +10,7 @@ import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.Date;
 import javax.swing.JOptionPane;
-import proveMaxGrupo64.AccesoADatos.productoData;
+import proveMaxGrupo64.AccesoADatos.ProductoData;
 import proveMaxGrupo64.Entidades.Producto;
 
 /**
@@ -69,6 +69,11 @@ public class ProductoView extends javax.swing.JInternalFrame {
         });
 
         jbGuardar.setText("Guardar");
+        jbGuardar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbGuardarActionPerformed(evt);
+            }
+        });
 
         jbEditar.setText("Editar");
 
@@ -233,7 +238,7 @@ public class ProductoView extends javax.swing.JInternalFrame {
          try {
 
             int idProducto = Integer.parseInt(jtfID.getText());
-            productoData produ = new productoData(); 
+            ProductoData produ = new ProductoData(); 
             Producto productoEncontrado = produ.buscarProductoPorId(idProducto);
 
             if (productoEncontrado != null) {
@@ -254,6 +259,12 @@ public class ProductoView extends javax.swing.JInternalFrame {
          deshabilitarCampos();
         
     }//GEN-LAST:event_jbBuscarActionPerformed
+
+    private void jbGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbGuardarActionPerformed
+        // TODO add your handling code here:
+        
+        
+    }//GEN-LAST:event_jbGuardarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -2,7 +2,7 @@ package compras_grupo64;
 
 import java.sql.Connection;
 import proveMaxGrupo64.AccesoADatos.Conexion;
-import proveMaxGrupo64.AccesoADatos.productoData;
+import proveMaxGrupo64.AccesoADatos.ProductoData;
 import proveMaxGrupo64.Entidades.Producto;
 
 public class Compras_grupo64 {
@@ -11,7 +11,7 @@ public class Compras_grupo64 {
         // TODO code application logic here
         Connection con = Conexion.getConexion();
         Producto tv = new Producto("Sony", "Smart tv", 1028, 10, true);
-        productoData produ = new productoData();
+        ProductoData produ = new ProductoData();
         //produ.guardarProducto(tv);
         //produ.modificarProducto(tv);
 
