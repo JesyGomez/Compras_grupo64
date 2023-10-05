@@ -263,6 +263,31 @@ public class ProductoView extends javax.swing.JInternalFrame {
     private void jbGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbGuardarActionPerformed
         // TODO add your handling code here:
         
+        try{
+
+        ProductoData produ = new ProductoData();
+        Producto nuevoProducto = new Producto();
+
+        String nombre= jtfNombre.getText();
+        String descripcion = jtfDescripcion.getText();
+        Double precio = Double.parseDouble(jtfPrecio.getText());
+        int cantDisponible = Integer.parseInt(jtfCantDisp.getText());
+        boolean estado = jcbEstado.isSelected(); /// EL METODO isSelected() marca true si el jcb esta tildado
+       
+        nuevoProducto.setNombreProducto(nombre);
+        nuevoProducto.setDescripcion(descripcion);
+        nuevoProducto.setPrecioActual(precio);
+        nuevoProducto.setStock(cantDisponible);
+        nuevoProducto.setEstado(estado);
+        
+        produ.guardarProducto(nuevoProducto);
+
+               
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "Error: Debe ingresar un código válido.", "Error de Entrada", JOptionPane.ERROR_MESSAGE);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Error inesperado: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
         
     }//GEN-LAST:event_jbGuardarActionPerformed
 
