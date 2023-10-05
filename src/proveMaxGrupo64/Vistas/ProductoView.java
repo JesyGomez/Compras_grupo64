@@ -5,6 +5,7 @@
  */
 package proveMaxGrupo64.Vistas;
 
+import java.awt.event.ItemEvent;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.time.ZoneId;
@@ -18,6 +19,7 @@ import proveMaxGrupo64.Entidades.Producto;
  * @author Windows 10 OS
  */
 public class ProductoView extends javax.swing.JInternalFrame {
+private boolean modoEdicion = false;
 
     /**
      * Creates new form ProductoView
@@ -40,7 +42,6 @@ public class ProductoView extends javax.swing.JInternalFrame {
         jLabel1 = new javax.swing.JLabel();
         jbNuevo = new javax.swing.JButton();
         jbGuardar = new javax.swing.JButton();
-        jbEditar = new javax.swing.JButton();
         jbEliminar = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -56,6 +57,7 @@ public class ProductoView extends javax.swing.JInternalFrame {
         jbSalir = new javax.swing.JButton();
         jcbEstado = new javax.swing.JCheckBox();
         jbBuscar = new javax.swing.JButton();
+        jtbEditar = new javax.swing.JToggleButton();
 
         setClosable(true);
 
@@ -75,9 +77,12 @@ public class ProductoView extends javax.swing.JInternalFrame {
             }
         });
 
-        jbEditar.setText("Editar");
-
         jbEliminar.setText("Eliminar");
+        jbEliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbEliminarActionPerformed(evt);
+            }
+        });
 
         jLabel2.setText("ID:");
 
@@ -102,6 +107,13 @@ public class ProductoView extends javax.swing.JInternalFrame {
         jbBuscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jbBuscarActionPerformed(evt);
+            }
+        });
+
+        jtbEditar.setText("Editar");
+        jtbEditar.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jtbEditarItemStateChanged(evt);
             }
         });
 
@@ -144,7 +156,7 @@ public class ProductoView extends javax.swing.JInternalFrame {
                                             .addComponent(jtfPrecio, javax.swing.GroupLayout.Alignment.LEADING)
                                             .addComponent(jbGuardar))
                                         .addGap(18, 18, 18)
-                                        .addComponent(jbEditar)
+                                        .addComponent(jtbEditar)
                                         .addGap(28, 28, 28)
                                         .addComponent(jbEliminar))
                                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -195,8 +207,8 @@ public class ProductoView extends javax.swing.JInternalFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jbNuevo)
                     .addComponent(jbGuardar)
-                    .addComponent(jbEditar)
-                    .addComponent(jbEliminar))
+                    .addComponent(jbEliminar)
+                    .addComponent(jtbEditar))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jbSalir)
                 .addGap(7, 7, 7))
@@ -228,8 +240,11 @@ public class ProductoView extends javax.swing.JInternalFrame {
 
     private void jbNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbNuevoActionPerformed
         // TODO add your handling code here:
+        verificarBotonEditar();
         limpiarCampos();
         habilitarCampos();
+        jbGuardar.setEnabled(true);
+        jtbEditar.setEnabled(false);
     }//GEN-LAST:event_jbNuevoActionPerformed
 
     private void jbBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBuscarActionPerformed
@@ -257,6 +272,9 @@ public class ProductoView extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(this, "Error: Para buscar por ID, debe ingresar numeros.", "Error de Entrada", JOptionPane.ERROR_MESSAGE);
         }
          deshabilitarCampos();
+         verificarBotonEditar();
+         jbGuardar.setEnabled(false);
+         jtbEditar.setEnabled(true);
         
     }//GEN-LAST:event_jbBuscarActionPerformed
 
@@ -281,6 +299,7 @@ public class ProductoView extends javax.swing.JInternalFrame {
         nuevoProducto.setEstado(estado);
         
         produ.guardarProducto(nuevoProducto);
+        limpiarCampos();
 
                
         } catch (NumberFormatException e) {
@@ -290,6 +309,44 @@ public class ProductoView extends javax.swing.JInternalFrame {
         }
         
     }//GEN-LAST:event_jbGuardarActionPerformed
+
+    private void jbEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbEliminarActionPerformed
+        // TODO add your handling code here:
+        
+         try {
+            int idAEliminar = Integer.parseInt(jtfID.getText());
+            ProductoData productoAEliminar = new ProductoData();
+
+            // Mostrar un cuadro de diálogo de confirmación para eliminar el alumno, para evitar accidentes.
+            int respuesta = JOptionPane.showConfirmDialog(this, "¿Estás seguro de que deseas eliminar este Producto?", "Confirmar Eliminación", JOptionPane.YES_NO_OPTION);
+
+            if (respuesta == JOptionPane.YES_OPTION) {
+                productoAEliminar.dadaDeBajaProducto(idAEliminar);
+                verificarBotonEditar();
+                limpiarCampos();
+            }
+
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "Error: Debe ingresar un código válido.", "Error de Entrada", JOptionPane.ERROR_MESSAGE);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Error inesperado: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_jbEliminarActionPerformed
+
+    private void jtbEditarItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jtbEditarItemStateChanged
+        // TODO add your handling code here:
+        if (evt.getStateChange() == ItemEvent.SELECTED) {
+            // El JToggleButton ha sido presionado, llama a habilitarCampos()
+            modoEdicion=true;
+            habilitarCampos();
+            jbGuardar.setEnabled(true);
+        } else {
+            // El JToggleButton ha sido desactivado, llama a desHabilitarCampos()
+            modoEdicion=false;
+            jbGuardar.setEnabled(false);
+            deshabilitarCampos();
+        }
+    }//GEN-LAST:event_jtbEditarItemStateChanged
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -302,12 +359,12 @@ public class ProductoView extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JButton jbBuscar;
-    private javax.swing.JButton jbEditar;
     private javax.swing.JButton jbEliminar;
     private javax.swing.JButton jbGuardar;
     private javax.swing.JButton jbNuevo;
     private javax.swing.JButton jbSalir;
     private javax.swing.JCheckBox jcbEstado;
+    private javax.swing.JToggleButton jtbEditar;
     private javax.swing.JTextField jtfCantDisp;
     private javax.swing.JTextField jtfDescripcion;
     private javax.swing.JTextField jtfID;
@@ -347,6 +404,15 @@ public class ProductoView extends javax.swing.JInternalFrame {
         jtfCantDisp.setEnabled(false);
         jcbEstado.setEnabled(false);
 
+    }
+    
+     private void verificarBotonEditar(){
+        
+        if (jtbEditar.isSelected()) {
+            jtbEditar.setSelected(false);
+            
+        }
+        
     }
 
 }
