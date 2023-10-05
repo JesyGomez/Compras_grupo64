@@ -5,7 +5,13 @@
  */
 package proveMaxGrupo64.Vistas;
 
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.util.Date;
 import javax.swing.JOptionPane;
+import proveMaxGrupo64.AccesoADatos.productoData;
+import proveMaxGrupo64.Entidades.Producto;
 
 /**
  *
@@ -18,7 +24,7 @@ public class ProductoView extends javax.swing.JInternalFrame {
      */
     public ProductoView() {
         initComponents();
-        deshabilitarCampos();
+        
     }
 
     /**
@@ -49,7 +55,7 @@ public class ProductoView extends javax.swing.JInternalFrame {
         jtfCantDisp = new javax.swing.JTextField();
         jbSalir = new javax.swing.JButton();
         jcbEstado = new javax.swing.JCheckBox();
-        jButton1 = new javax.swing.JButton();
+        jbBuscar = new javax.swing.JButton();
 
         setClosable(true);
 
@@ -87,7 +93,12 @@ public class ProductoView extends javax.swing.JInternalFrame {
             }
         });
 
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/32x32.png"))); // NOI18N
+        jbBuscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/32x32.png"))); // NOI18N
+        jbBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbBuscarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -137,7 +148,7 @@ public class ProductoView extends javax.swing.JInternalFrame {
                                     .addGroup(jPanel1Layout.createSequentialGroup()
                                         .addComponent(jtfID, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)))))))
+                                        .addComponent(jbBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)))))))
                 .addContainerGap(30, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -154,7 +165,7 @@ public class ProductoView extends javax.swing.JInternalFrame {
                         .addGap(42, 42, 42))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jbBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(2, 2, 2)))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
@@ -216,9 +227,36 @@ public class ProductoView extends javax.swing.JInternalFrame {
         habilitarCampos();
     }//GEN-LAST:event_jbNuevoActionPerformed
 
+    private void jbBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBuscarActionPerformed
+        // TODO add your handling code here:
+        
+         try {
+
+            int idProducto = Integer.parseInt(jtfID.getText());
+            productoData produ = new productoData(); 
+            Producto productoEncontrado = produ.buscarProductoPorId(idProducto);
+
+            if (productoEncontrado != null) {
+
+
+                jtfID.setText(Integer.toString(productoEncontrado.getIdProducto()));
+                jtfNombre.setText(productoEncontrado.getNombreProducto());
+                jtfDescripcion.setText(productoEncontrado.getDescripcion());
+                jtfPrecio.setText(Double.toString(productoEncontrado.getPrecioActual()));
+                jtfCantDisp.setText(Integer.toString(productoEncontrado.getStock()));
+                jcbEstado.setSelected(productoEncontrado.isEstado());
+
+            }
+        } catch (NumberFormatException e) {
+            // Manejo de excepciones si se produce un error de formato de número
+            JOptionPane.showMessageDialog(this, "Error: Para buscar por ID, debe ingresar numeros.", "Error de Entrada", JOptionPane.ERROR_MESSAGE);
+        }
+         deshabilitarCampos();
+        
+    }//GEN-LAST:event_jbBuscarActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -227,6 +265,7 @@ public class ProductoView extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JButton jbBuscar;
     private javax.swing.JButton jbEditar;
     private javax.swing.JButton jbEliminar;
     private javax.swing.JButton jbGuardar;
