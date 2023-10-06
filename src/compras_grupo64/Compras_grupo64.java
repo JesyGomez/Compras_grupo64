@@ -1,8 +1,10 @@
 package compras_grupo64;
 
 import java.sql.Connection;
+import proveMaxGrupo64.AccesoADatos.CompraData;
 import proveMaxGrupo64.AccesoADatos.Conexion;
 import proveMaxGrupo64.AccesoADatos.ProductoData;
+import proveMaxGrupo64.Entidades.Compra;
 import proveMaxGrupo64.Entidades.Producto;
 
 public class Compras_grupo64 {
@@ -10,10 +12,9 @@ public class Compras_grupo64 {
     public static void main(String[] args) {
         // TODO code application logic here
         Connection con = Conexion.getConexion();
-        Producto tv = new Producto("Sony", "Smart tv", 1028, 10, true);
+        //Producto tv = new Producto("DELL", "NoteBook", 600000, 2, true);
         ProductoData produ = new ProductoData();
         //produ.guardarProducto(tv);
-        //produ.modificarProducto(tv);
 
         //Producto productoEncontrado = produ.buscarProductoPorId(1);
         // if (productoEncontrado != null) {
@@ -36,6 +37,7 @@ public class Compras_grupo64 {
             System.out.println("nombre" + producto.getNombreProducto());
         }
         */
+    
     }
 
 }
