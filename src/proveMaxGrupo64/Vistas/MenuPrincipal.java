@@ -37,6 +37,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jMProductos = new javax.swing.JMenu();
         jMIngresoProducto = new javax.swing.JMenuItem();
         jMProveedores = new javax.swing.JMenu();
+        jMForProveedores = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -70,6 +71,15 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jMenuBar1.add(jMProductos);
 
         jMProveedores.setText("Proveedores");
+
+        jMForProveedores.setText("Formulario de proveedores");
+        jMForProveedores.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMForProveedoresActionPerformed(evt);
+            }
+        });
+        jMProveedores.add(jMForProveedores);
+
         jMenuBar1.add(jMProveedores);
 
         setJMenuBar(jMenuBar1);
@@ -98,6 +108,15 @@ public class MenuPrincipal extends javax.swing.JFrame {
         Escritorio.add(pv);
         Escritorio.moveToFront(pv);
     }//GEN-LAST:event_jMIngresoProductoActionPerformed
+
+    private void jMForProveedoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMForProveedoresActionPerformed
+        Escritorio.removeAll();
+        Escritorio.repaint();
+        ProveedorView prv = new ProveedorView();
+        prv.setVisible(true);
+        Escritorio.add(prv);
+        Escritorio.moveToFront(prv);
+    }//GEN-LAST:event_jMForProveedoresActionPerformed
 
     /**
      * @param args the command line arguments
@@ -138,6 +157,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JDesktopPane Escritorio;
     private javax.swing.JMenu jMAdmin;
     private javax.swing.JMenu jMCompras;
+    private javax.swing.JMenuItem jMForProveedores;
     private javax.swing.JMenuItem jMIngresoProducto;
     private javax.swing.JMenu jMProductos;
     private javax.swing.JMenu jMProveedores;
