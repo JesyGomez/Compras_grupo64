@@ -298,8 +298,19 @@ private boolean modoEdicion = false;
         nuevoProducto.setStock(cantDisponible);
         nuevoProducto.setEstado(estado);
         
-        produ.guardarProducto(nuevoProducto);
-        limpiarCampos();
+        
+        if (modoEdicion) {
+            int id = Integer.parseInt(jtfID.getText());
+            nuevoProducto.setIdProducto(id);
+            produ.modificarProducto(nuevoProducto);
+            verificarBotonEditar();
+            
+        } else {
+            produ.guardarProducto(nuevoProducto);
+            verificarBotonEditar();
+        }
+        
+        //limpiarCampos();
 
                
         } catch (NumberFormatException e) {
