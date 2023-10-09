@@ -1,6 +1,7 @@
 package compras_grupo64;
 
 import java.sql.Connection;
+import java.time.LocalDate;
 import proveMaxGrupo64.AccesoADatos.CompraData;
 import proveMaxGrupo64.AccesoADatos.Conexion;
 import proveMaxGrupo64.AccesoADatos.ProductoData;
@@ -14,6 +15,9 @@ public class Compras_grupo64 {
     public static void main(String[] args) {
         // TODO code application logic here
         Connection con = Conexion.getConexion();
+        //Compra comp = new Compra (0, proveedor, LocalDate.MIN);
+        CompraData compra = new CompraData();
+        //compra.registrarCompra(comp);
         //Producto tv = new Producto("DELL", "NoteBook", 600000, 2, true);
         ProductoData produ = new ProductoData();
         //produ.guardarProducto(tv);

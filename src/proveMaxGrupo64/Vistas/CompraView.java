@@ -5,9 +5,12 @@
  */
 package proveMaxGrupo64.Vistas;
 
+import java.time.LocalDate;
 import javax.swing.JOptionPane;
+import proveMaxGrupo64.AccesoADatos.CompraData;
 import proveMaxGrupo64.AccesoADatos.ProductoData;
 import proveMaxGrupo64.AccesoADatos.ProveedorData;
+import proveMaxGrupo64.Entidades.Compra;
 import proveMaxGrupo64.Entidades.Producto;
 import proveMaxGrupo64.Entidades.Proveedor;
 
@@ -74,6 +77,11 @@ public class CompraView extends javax.swing.JInternalFrame {
         jButton1.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         jButton1.setForeground(new java.awt.Color(255, 255, 255));
         jButton1.setText("Registrar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jButton2.setBackground(new java.awt.Color(0, 0, 204));
         jButton2.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
@@ -203,6 +211,33 @@ public class CompraView extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
         Proveedor proveSeleccionado = (Proveedor) jcbProveedor.getSelectedItem();
     }//GEN-LAST:event_jcbProveedorActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+                CompraData materiaData = new CompraData();
+
+        try {
+            String prodCompNueva = jcbProducto.getActionCommand();
+            String proveeCompraNueva = jcbProveedor.getActionCommand();
+            int cantidad = Integer.parseInt(jtCantidProdSol.getText());
+
+            // El año tiene que ser un número positivo
+            if (cantidad < 0) {
+                JOptionPane.showMessageDialog(this, "La cantidad debe ser un número positivo.");
+                return; 
+            }
+
+            Compra nuevaCompra = new Compra(ERROR, proveedor, LocalDate.MIN);
+
+            CompraData.registrarCompra();
+
+            jcbProducto.setText("");
+            jcbProveedor.setText("");
+            jtCantidad.setText("");
+        } catch (NumberFormatException ex) {
+            JOptionPane.showMessageDialog(this, "La cantidad debe ser un número válido.");
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

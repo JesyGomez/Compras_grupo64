@@ -9,6 +9,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
+import proveMaxGrupo64.Entidades.Compra;
 import proveMaxGrupo64.Entidades.Producto;
 import proveMaxGrupo64.Entidades.Proveedor;
 
@@ -19,6 +20,36 @@ public class CompraData {
     public CompraData() {
 
         con = Conexion.getConexion();
+    }
+    public static final int ERROR_SQL_COMPRA_DUPLICADA = 1062;
+
+    public void registrarCompra(Compra compra) {
+        String sql = "INSERT INTO compra (id_compra, id_proveedor, fechaCompra) VALUES (?, ?, ?)";
+
+        try {
+            PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+
+            ps.setInt(1, compra.getIdCompra());
+            ps.setInt(2, compra.getProveedor().getIdProveedor());
+            ps.setDate(3, Date.valueOf(compra.getFecha()));
+            ps.executeUpdate();
+
+            ResultSet rs = ps.getGeneratedKeys();
+            if (rs.next()) {
+                compra.setIdCompra(rs.getInt(1));
+                JOptionPane.showMessageDialog(null, "La compra fue Guardada exitosamente!");
+            }
+            ps.close();
+
+        } catch (SQLException ex) {
+            if (ex.getErrorCode() == ERROR_SQL_COMPRA_DUPLICADA) {
+                JOptionPane.showMessageDialog(null, "La Compra que intenta guardar, ya existe.");
+            } else {
+                JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Compra");
+            }
+
+        }
+
     }
 
     public List<Producto> obtenerProductosDeCompraEnFecha(Date fecha) {
@@ -124,6 +155,7 @@ public class CompraData {
         return proveedores;
     }
 //Aquellos productos que sean los más comprados entre fechas
+
     public List<Producto> obtenerProductosMasCompradosEntreFechas(Date fechaInicio, Date fechaFin, int numeroDeProductos) {
         List<Producto> productos = new ArrayList<>();
         String sql = "SELECT dc.id_producto, SUM(dc.cantidad) AS total_comprado "
@@ -149,28 +181,30 @@ public class CompraData {
         }
         return productos;
     }
+
     //Aquellos productos están por debajo del stock mínimo
     public List<Producto> obtenerProductosPorDebajoDelStockMinimo() {
         List<Producto> productos = new ArrayList<>();
         String sql = "SELECT * FROM Producto WHERE stock < 5";
         try {
             PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-            ResultSet rs = ps.executeQuery(); {
-            while (rs.next()) {
-                Producto producto = new Producto();
-                producto.setIdProducto(rs.getInt("id_producto"));
-                producto.setNombreProducto(rs.getString("nombreProducto"));
-                producto.setDescripcion(rs.getString("descripcion"));
-                producto.setPrecioActual(rs.getDouble("precioActual"));
-                producto.setStock(rs.getInt("stock"));
-                producto.setEstado(rs.getBoolean("estado"));
-                productos.add(producto);
+            ResultSet rs = ps.executeQuery();
+            {
+                while (rs.next()) {
+                    Producto producto = new Producto();
+                    producto.setIdProducto(rs.getInt("id_producto"));
+                    producto.setNombreProducto(rs.getString("nombreProducto"));
+                    producto.setDescripcion(rs.getString("descripcion"));
+                    producto.setPrecioActual(rs.getDouble("precioActual"));
+                    producto.setStock(rs.getInt("stock"));
+                    producto.setEstado(rs.getBoolean("estado"));
+                    productos.add(producto);
+                }
             }
-        }
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error al obtener productos por debajo del stock mínimo" + ex.getMessage());
         }
         return productos;
     }
-    
+
 }
