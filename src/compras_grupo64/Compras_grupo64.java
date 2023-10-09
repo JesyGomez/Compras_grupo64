@@ -4,8 +4,10 @@ import java.sql.Connection;
 import proveMaxGrupo64.AccesoADatos.CompraData;
 import proveMaxGrupo64.AccesoADatos.Conexion;
 import proveMaxGrupo64.AccesoADatos.ProductoData;
+import proveMaxGrupo64.AccesoADatos.ProveedorData;
 import proveMaxGrupo64.Entidades.Compra;
 import proveMaxGrupo64.Entidades.Producto;
+import proveMaxGrupo64.Entidades.Proveedor;
 
 public class Compras_grupo64 {
 
@@ -37,6 +39,14 @@ public class Compras_grupo64 {
             System.out.println("nombre" + producto.getNombreProducto());
         }
         */
+        
+        
+        Proveedor prieto = new Proveedor("3455", "Avenida Savio 1234", "3345987877");
+        ProveedorData prove = new ProveedorData();
+        //prove.guardarProveedor(prieto);
+        
+        
+        prove.modificarProveedor(prieto);
     
     }
 

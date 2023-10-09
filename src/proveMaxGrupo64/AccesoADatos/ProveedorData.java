@@ -48,7 +48,7 @@ public class ProveedorData {
     }
 
     public void modificarProveedor(Proveedor proveedor) {
-        String sql = "UPDATE proveedor SET id_proveedor = ?, razonSocial = ?, domicilio = ?, telefono = ? "
+        String sql = "UPDATE proveedor SET id_proveedor = ?, razonSocial = ?, domicilio = ?, telefono = ?"
                 + "WHERE id_proveedor = ?";
         try {
             PreparedStatement ps = con.prepareStatement(sql);
@@ -56,6 +56,8 @@ public class ProveedorData {
             ps.setString(2, proveedor.getRazonSocial());
             ps.setString(3, proveedor.getDomicilio());
             ps.setString(4, proveedor.getTelefono());
+            ps.setInt(5, proveedor.getIdProveedor());
+            
             int exito = ps.executeUpdate();
             if (exito == 1) {
                 JOptionPane.showMessageDialog(null, "Proveedor modificado exitosamente!");
