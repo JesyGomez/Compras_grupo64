@@ -6,6 +6,7 @@
 package proveMaxGrupo64.Vistas;
 
 import java.time.LocalDate;
+import java.util.Date;
 import javax.swing.JOptionPane;
 import proveMaxGrupo64.AccesoADatos.CompraData;
 import proveMaxGrupo64.AccesoADatos.ProductoData;
@@ -42,12 +43,12 @@ public class CompraView extends javax.swing.JInternalFrame {
         jlFecha = new javax.swing.JLabel();
         jtCantidProdSol = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        jbRegistrar = new javax.swing.JButton();
+        jbeliminar = new javax.swing.JButton();
         jbSalir = new javax.swing.JButton();
         jcbProducto = new javax.swing.JComboBox<>();
         jcbProveedor = new javax.swing.JComboBox<>();
-        jDateChooser1 = new com.toedter.calendar.JDateChooser();
+        jdFecha = new com.toedter.calendar.JDateChooser();
 
         setClosable(true);
 
@@ -73,20 +74,25 @@ public class CompraView extends javax.swing.JInternalFrame {
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setText("Proveedor:");
 
-        jButton1.setBackground(new java.awt.Color(0, 0, 204));
-        jButton1.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(255, 255, 255));
-        jButton1.setText("Registrar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        jbRegistrar.setBackground(new java.awt.Color(0, 0, 204));
+        jbRegistrar.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        jbRegistrar.setForeground(new java.awt.Color(255, 255, 255));
+        jbRegistrar.setText("Registrar");
+        jbRegistrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                jbRegistrarActionPerformed(evt);
             }
         });
 
-        jButton2.setBackground(new java.awt.Color(0, 0, 204));
-        jButton2.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        jButton2.setForeground(new java.awt.Color(255, 255, 255));
-        jButton2.setText("Eliminar");
+        jbeliminar.setBackground(new java.awt.Color(0, 0, 204));
+        jbeliminar.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        jbeliminar.setForeground(new java.awt.Color(255, 255, 255));
+        jbeliminar.setText("Eliminar");
+        jbeliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbeliminarActionPerformed(evt);
+            }
+        });
 
         jbSalir.setBackground(new java.awt.Color(0, 0, 204));
         jbSalir.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
@@ -127,7 +133,7 @@ public class CompraView extends javax.swing.JInternalFrame {
                                     .addComponent(jLabel3)))
                             .addGroup(jbEliminarLayout.createSequentialGroup()
                                 .addGap(15, 15, 15)
-                                .addComponent(jButton1)))
+                                .addComponent(jbRegistrar)))
                         .addGroup(jbEliminarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addGroup(jbEliminarLayout.createSequentialGroup()
                                 .addGap(28, 28, 28)
@@ -135,10 +141,10 @@ public class CompraView extends javax.swing.JInternalFrame {
                                     .addComponent(jtCantidProdSol)
                                     .addComponent(jcbProducto, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(jcbProveedor, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jDateChooser1, javax.swing.GroupLayout.DEFAULT_SIZE, 227, Short.MAX_VALUE)))
+                                    .addComponent(jdFecha, javax.swing.GroupLayout.DEFAULT_SIZE, 227, Short.MAX_VALUE)))
                             .addGroup(jbEliminarLayout.createSequentialGroup()
                                 .addGap(17, 17, 17)
-                                .addComponent(jButton2)
+                                .addComponent(jbeliminar)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jbSalir))))
                     .addGroup(jbEliminarLayout.createSequentialGroup()
@@ -168,11 +174,11 @@ public class CompraView extends javax.swing.JInternalFrame {
                 .addGap(26, 26, 26)
                 .addGroup(jbEliminarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jlFecha)
-                    .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jdFecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 47, Short.MAX_VALUE)
                 .addGroup(jbEliminarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2)
+                    .addComponent(jbRegistrar)
+                    .addComponent(jbeliminar)
                     .addComponent(jbSalir))
                 .addGap(24, 24, 24))
         );
@@ -212,46 +218,52 @@ public class CompraView extends javax.swing.JInternalFrame {
         Proveedor proveSeleccionado = (Proveedor) jcbProveedor.getSelectedItem();
     }//GEN-LAST:event_jcbProveedorActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void jbRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbRegistrarActionPerformed
         // TODO add your handling code here:
-                CompraData materiaData = new CompraData();
+        CompraData compraData = new CompraData();
 
         try {
             String prodCompNueva = jcbProducto.getActionCommand();
             String proveeCompraNueva = jcbProveedor.getActionCommand();
             int cantidad = Integer.parseInt(jtCantidProdSol.getText());
+            Date fecha = jdFecha.getDate();
+
 
             // El año tiene que ser un número positivo
             if (cantidad < 0) {
                 JOptionPane.showMessageDialog(this, "La cantidad debe ser un número positivo.");
-                return; 
+                return;
             }
 
-            Compra nuevaCompra = new Compra(ERROR, proveedor, LocalDate.MIN);
+            Compra nuevaCompra = new Compra(prodCompNueva,proveeCompraNueva,cantidad,fecha);
 
-            CompraData.registrarCompra();
+            compraData.registrarCompra(nuevaCompra);
 
-            jcbProducto.setText("");
-            jcbProveedor.setText("");
-            jtCantidad.setText("");
+            jcbProducto.setActionCommand("");
+            jcbProveedor.setActionCommand("");
+            jtCantidProdSol.setText("");
         } catch (NumberFormatException ex) {
             JOptionPane.showMessageDialog(this, "La cantidad debe ser un número válido.");
         }
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_jbRegistrarActionPerformed
+
+    private void jbeliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbeliminarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jbeliminarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private com.toedter.calendar.JDateChooser jDateChooser1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jbEliminar;
+    private javax.swing.JButton jbRegistrar;
     private javax.swing.JButton jbSalir;
+    private javax.swing.JButton jbeliminar;
     private javax.swing.JComboBox<Producto> jcbProducto;
     private javax.swing.JComboBox<Proveedor> jcbProveedor;
+    private com.toedter.calendar.JDateChooser jdFecha;
     private javax.swing.JLabel jlFecha;
     private javax.swing.JTextField jtCantidProdSol;
     // End of variables declaration//GEN-END:variables
@@ -261,9 +273,10 @@ public class CompraView extends javax.swing.JInternalFrame {
             jcbProducto.addItem(producto);
         }
     }
-    private void cargarProveedor(){
+
+    private void cargarProveedor() {
         ProveedorData prove = new ProveedorData();
-        for(Proveedor proveedor : prove.listarProveedores()){
+        for (Proveedor proveedor : prove.listarProveedores()) {
             jcbProveedor.addItem(proveedor);
         }
     }
