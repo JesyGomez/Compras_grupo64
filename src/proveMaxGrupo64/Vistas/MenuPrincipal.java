@@ -34,6 +34,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jMenuBar1 = new javax.swing.JMenuBar();
         jMAdmin = new javax.swing.JMenu();
         jMCompras = new javax.swing.JMenu();
+        jmRegistrarCompra = new javax.swing.JMenuItem();
         jMProductos = new javax.swing.JMenu();
         jMIngresoProducto = new javax.swing.JMenuItem();
         jMProveedores = new javax.swing.JMenu();
@@ -56,6 +57,15 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jMenuBar1.add(jMAdmin);
 
         jMCompras.setText("Compras");
+
+        jmRegistrarCompra.setText("Registrar Compras");
+        jmRegistrarCompra.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmRegistrarCompraActionPerformed(evt);
+            }
+        });
+        jMCompras.add(jmRegistrarCompra);
+
         jMenuBar1.add(jMCompras);
 
         jMProductos.setText("Productos");
@@ -118,6 +128,16 @@ public class MenuPrincipal extends javax.swing.JFrame {
         Escritorio.moveToFront(prv);
     }//GEN-LAST:event_jMForProveedoresActionPerformed
 
+    private void jmRegistrarCompraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmRegistrarCompraActionPerformed
+        
+        Escritorio.removeAll();
+        Escritorio.repaint();
+        CompraView cv = new CompraView();
+        cv.setVisible(true);
+        Escritorio.add(cv);
+        Escritorio.moveToFront(cv);
+    }//GEN-LAST:event_jmRegistrarCompraActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -162,5 +182,6 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenu jMProductos;
     private javax.swing.JMenu jMProveedores;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jmRegistrarCompra;
     // End of variables declaration//GEN-END:variables
 }
