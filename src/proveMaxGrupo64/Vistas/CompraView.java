@@ -336,15 +336,18 @@ public class CompraView extends javax.swing.JInternalFrame {
     }
     
     private void armarCabecera() {
-        modelo.addColumn("idMateria");
-        modelo.addColumn("nombre");
-        modelo.addColumn("Nota");
-        jtTablaMateria.setModel(modelo);
+        modelo.addColumn("idProducto");
+        modelo.addColumn("Nombre");
+        modelo.addColumn("Descripcion");
+        modelo.addColumn("Stock");
+        modelo.addColumn("Estado");
+        modelo.addColumn("Cantidad");
+        jtaListaProductos.setModel(modelo);
     }
 
     private void borrarFilas() {
 
-        int filas = jtTablaMateria.getRowCount() - 1;
+        int filas = jtaListaProductos.getRowCount() - 1;
         for (int f = filas; f >= 0; f--) {
             modelo.removeRow(f);
         }
