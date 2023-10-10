@@ -8,6 +8,7 @@ package proveMaxGrupo64.Vistas;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.Date;
+import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import proveMaxGrupo64.AccesoADatos.CompraData;
@@ -22,24 +23,23 @@ public class CompraView extends javax.swing.JInternalFrame {
     /**
      * Creates new form CompraView
      */
-    
     private DefaultTableModel modelo = new DefaultTableModel() {
         public boolean isCellEditable(int f, int c) {
 
-         
-            return false;}
+            return c == 5;
+        }
     };
-    
-        
+
     public CompraView() {
         initComponents();
+        this.setSize(750,650);
+        this.setTitle("Gestión de Compras");
         deshabilitarCampos();
         ProductoData produ = new ProductoData();
+        armarCabecera();
         cargarProductos();
         cargarProveedor();
     }
-    
-    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -68,7 +68,7 @@ public class CompraView extends javax.swing.JInternalFrame {
         jbGuardar = new javax.swing.JButton();
 
         setClosable(true);
-        setMaximizable(true);
+        setResizable(true);
 
         jpFondo.setBackground(new java.awt.Color(0, 0, 102));
         jpFondo.setPreferredSize(new java.awt.Dimension(700, 700));
@@ -157,35 +157,37 @@ public class CompraView extends javax.swing.JInternalFrame {
                         .addGroup(jpFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jbArmarCompra)
                             .addGroup(jpFondoLayout.createSequentialGroup()
-                                .addGap(91, 91, 91)
-                                .addComponent(jLabel1))
-                            .addGroup(jpFondoLayout.createSequentialGroup()
                                 .addComponent(jLabel2)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jtProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 227, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jpFondoLayout.createSequentialGroup()
-                                .addGroup(jpFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jlFecha)
-                                    .addComponent(jLabel5))
+                                .addComponent(jLabel5)
                                 .addGap(49, 49, 49)
                                 .addGroup(jpFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jcbProveedor, javax.swing.GroupLayout.PREFERRED_SIZE, 227, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jdFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 227, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addComponent(jcbProveedor, javax.swing.GroupLayout.PREFERRED_SIZE, 399, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jdFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(jpFondoLayout.createSequentialGroup()
                                 .addComponent(jLabel3)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(jtCantidProdSol, javax.swing.GroupLayout.PREFERRED_SIZE, 227, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addContainerGap(87, Short.MAX_VALUE))
                     .addGroup(jpFondoLayout.createSequentialGroup()
-                        .addGroup(jpFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 481, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(jpFondoLayout.createSequentialGroup()
-                                .addComponent(jbGuardar)
-                                .addGap(211, 211, 211)
-                                .addComponent(jbEliminar)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jbSalir)))
-                        .addGap(0, 134, Short.MAX_VALUE))))
+                        .addComponent(jbGuardar)
+                        .addGap(211, 211, 211)
+                        .addComponent(jbEliminar)
+                        .addGap(162, 162, 162)
+                        .addComponent(jbSalir)
+                        .addGap(0, 29, Short.MAX_VALUE))
+                    .addComponent(jScrollPane1)))
+            .addGroup(jpFondoLayout.createSequentialGroup()
+                .addGroup(jpFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jpFondoLayout.createSequentialGroup()
+                        .addGap(177, 177, 177)
+                        .addComponent(jLabel1))
+                    .addGroup(jpFondoLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jlFecha)))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         jpFondoLayout.setVerticalGroup(
             jpFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -195,13 +197,13 @@ public class CompraView extends javax.swing.JInternalFrame {
                 .addGroup(jpFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
                     .addComponent(jcbProveedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addGap(53, 53, 53)
                 .addGroup(jpFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jlFecha)
                     .addComponent(jdFecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addGap(19, 19, 19)
                 .addComponent(jbArmarCompra)
-                .addGap(69, 69, 69)
+                .addGap(33, 33, 33)
                 .addGroup(jpFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(jtProducto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -216,7 +218,7 @@ public class CompraView extends javax.swing.JInternalFrame {
                     .addComponent(jbEliminar)
                     .addComponent(jbSalir)
                     .addComponent(jbGuardar))
-                .addContainerGap(18, Short.MAX_VALUE))
+                .addContainerGap(16, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -224,13 +226,13 @@ public class CompraView extends javax.swing.JInternalFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jpFondo, javax.swing.GroupLayout.DEFAULT_SIZE, 621, Short.MAX_VALUE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addComponent(jpFondo, javax.swing.GroupLayout.DEFAULT_SIZE, 626, Short.MAX_VALUE)
+                .addGap(0, 15, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jpFondo, 602, 602, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jpFondo, javax.swing.GroupLayout.DEFAULT_SIZE, 602, Short.MAX_VALUE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -256,7 +258,7 @@ public class CompraView extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
         habilitarCampos();
         CompraData compraData = new CompraData();
-
+        llenarTabla();
         try {
             Proveedor proveeCompraNueva = (Proveedor) jcbProveedor.getSelectedItem();
             Date fechaN = jdFecha.getDate();
@@ -268,15 +270,12 @@ public class CompraView extends javax.swing.JInternalFrame {
 //                JOptionPane.showMessageDialog(this, "La cantidad debe ser un número positivo.");
 //                return;
 //            }
-            Compra nuevaCompra = new Compra(proveeCompraNueva, fecha);
-
-            compraData.registrarCompra(nuevaCompra);
-
+//            Compra nuevaCompra = new Compra(proveeCompraNueva, fecha);
             //jcbProducto.setActionCommand("");
-            jcbProveedor.setActionCommand("");
-            jtCantidProdSol.setText("");
+            //jcbProveedor.setActionCommand("");
+            //jtCantidProdSol.setText("");
         } catch (NumberFormatException ex) {
-            JOptionPane.showMessageDialog(this, "La cantidad debe ser un número válido.");
+            JOptionPane.showMessageDialog(this, "La fecha debe ser válida.");
         }
     }//GEN-LAST:event_jbArmarCompraActionPerformed
 
@@ -334,7 +333,7 @@ public class CompraView extends javax.swing.JInternalFrame {
         jbEliminar.setEnabled(true);
 
     }
-    
+
     private void armarCabecera() {
         modelo.addColumn("idProducto");
         modelo.addColumn("Nombre");
@@ -352,6 +351,34 @@ public class CompraView extends javax.swing.JInternalFrame {
             modelo.removeRow(f);
         }
     }
-    
-    
+
+    private void llenarTabla() {
+        // Obtén el proveedor y la fecha seleccionados
+        Proveedor proveedorSeleccionado = (Proveedor) jcbProveedor.getSelectedItem();
+        Date fechaSeleccionada = jdFecha.getDate();
+        String producASelec = jtProducto.getSelectedText();
+
+        // Verifica si se han seleccionado tanto un proveedor como una fecha
+        if (proveedorSeleccionado != null && fechaSeleccionada != null) {
+            // Convierte la fecha seleccionada de util.Date a LocalDate
+            LocalDate fecha = fechaSeleccionada.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+
+            // Obtén los productos asociados al proveedor y la fecha seleccionados
+            ProductoData productoData = new ProductoData();
+            List<Producto> productos = productoData.listarProductos();
+
+            // Limpia el modelo de la tabla antes de agregar nuevos datos
+            DefaultTableModel modelo = (DefaultTableModel) jtaListaProductos.getModel();
+            modelo.setRowCount(0);
+
+            // Llena la tabla con los productos asociados al proveedor y la fecha
+            for (Producto producto : productos) {
+                modelo.addRow(new Object[]{producto.getIdProducto(), producto.getNombreProducto(), producto.getDescripcion(), producto.getStock(), producto.isEstado()});
+            }
+        } else {
+            // Si no se ha seleccionado un proveedor o una fecha, muestra un mensaje de error
+            JOptionPane.showMessageDialog(this, "Por favor, seleccione un proveedor y una fecha antes de cargar los productos.");
+        }
+    }
+
 }
