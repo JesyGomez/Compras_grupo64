@@ -73,27 +73,34 @@ public class CompraView extends javax.swing.JInternalFrame {
         setResizable(true);
 
         jpFondo.setBackground(new java.awt.Color(0, 0, 102));
-        jpFondo.setPreferredSize(new java.awt.Dimension(700, 700));
+        jpFondo.setPreferredSize(new java.awt.Dimension(600, 500));
+        jpFondo.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("REGISTRO DE COMPRAS");
+        jpFondo.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(177, 0, -1, -1));
 
         jLabel2.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Producto a Solicitar:");
+        jpFondo.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 270, -1, -1));
 
         jLabel3.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("Cantidad:");
+        jpFondo.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 500, -1, -1));
 
         jlFecha.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         jlFecha.setForeground(new java.awt.Color(255, 255, 255));
         jlFecha.setText("Fecha:");
+        jpFondo.add(jlFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 150, -1, -1));
+        jpFondo.add(jtCantidProdSol, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 500, 227, -1));
 
         jLabel5.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setText("Proveedor:");
+        jpFondo.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(14, 33, -1, -1));
 
         jbArmarCompra.setBackground(new java.awt.Color(0, 0, 204));
         jbArmarCompra.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
@@ -104,6 +111,7 @@ public class CompraView extends javax.swing.JInternalFrame {
                 jbArmarCompraActionPerformed(evt);
             }
         });
+        jpFondo.add(jbArmarCompra, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 210, -1, -1));
 
         jbEliminar.setBackground(new java.awt.Color(0, 0, 204));
         jbEliminar.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
@@ -114,6 +122,7 @@ public class CompraView extends javax.swing.JInternalFrame {
                 jbEliminarActionPerformed(evt);
             }
         });
+        jpFondo.add(jbEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 560, -1, -1));
 
         jbSalir.setBackground(new java.awt.Color(0, 0, 204));
         jbSalir.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
@@ -124,14 +133,18 @@ public class CompraView extends javax.swing.JInternalFrame {
                 jbSalirActionPerformed(evt);
             }
         });
+        jpFondo.add(jbSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 560, -1, -1));
 
         jcbProveedor.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jcbProveedorActionPerformed(evt);
             }
         });
+        jpFondo.add(jcbProveedor, new org.netbeans.lib.awtextra.AbsoluteConstraints(132, 32, 399, -1));
 
         jdFecha.setDateFormatString("yyyy-MM-dd");
+        jpFondo.add(jdFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 140, 210, -1));
+        jpFondo.add(jtProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 270, 227, -1));
 
         jtaListaProductos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -146,7 +159,11 @@ public class CompraView extends javax.swing.JInternalFrame {
         ));
         jScrollPane1.setViewportView(jtaListaProductos);
 
+        jpFondo.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 310, 635, 164));
+
         jbGuardar.setText("Guardar");
+        jpFondo.add(jbGuardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 560, -1, -1));
+        jpFondo.add(jtIDProveedor, new org.netbeans.lib.awtextra.AbsoluteConstraints(132, 87, 161, -1));
 
         jlBuscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/32x32.png"))); // NOI18N
         jlBuscar.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -154,111 +171,17 @@ public class CompraView extends javax.swing.JInternalFrame {
                 jlBuscarMouseClicked(evt);
             }
         });
-
-        javax.swing.GroupLayout jpFondoLayout = new javax.swing.GroupLayout(jpFondo);
-        jpFondo.setLayout(jpFondoLayout);
-        jpFondoLayout.setHorizontalGroup(
-            jpFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jpFondoLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jpFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jpFondoLayout.createSequentialGroup()
-                        .addGroup(jpFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jbArmarCompra)
-                            .addGroup(jpFondoLayout.createSequentialGroup()
-                                .addComponent(jLabel2)
-                                .addGap(30, 30, 30)
-                                .addComponent(jtProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 227, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(16, 16, 16))
-                    .addComponent(jScrollPane1)
-                    .addGroup(jpFondoLayout.createSequentialGroup()
-                        .addGroup(jpFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jpFondoLayout.createSequentialGroup()
-                                .addGap(134, 134, 134)
-                                .addComponent(jdFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jpFondoLayout.createSequentialGroup()
-                                .addComponent(jbGuardar)
-                                .addGap(211, 211, 211)
-                                .addComponent(jbEliminar)
-                                .addGap(162, 162, 162)
-                                .addComponent(jbSalir)))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-            .addGroup(jpFondoLayout.createSequentialGroup()
-                .addGroup(jpFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jpFondoLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabel3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jtCantidProdSol, javax.swing.GroupLayout.PREFERRED_SIZE, 227, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jpFondoLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jlFecha))
-                    .addGroup(jpFondoLayout.createSequentialGroup()
-                        .addGap(14, 14, 14)
-                        .addComponent(jLabel5)
-                        .addGroup(jpFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jpFondoLayout.createSequentialGroup()
-                                .addGap(78, 78, 78)
-                                .addComponent(jLabel1))
-                            .addGroup(jpFondoLayout.createSequentialGroup()
-                                .addGap(33, 33, 33)
-                                .addGroup(jpFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jpFondoLayout.createSequentialGroup()
-                                        .addComponent(jtIDProveedor, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(49, 49, 49)
-                                        .addComponent(jlBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(jcbProveedor, javax.swing.GroupLayout.PREFERRED_SIZE, 399, javax.swing.GroupLayout.PREFERRED_SIZE))))))
-                .addGap(0, 95, Short.MAX_VALUE))
-        );
-        jpFondoLayout.setVerticalGroup(
-            jpFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jpFondoLayout.createSequentialGroup()
-                .addComponent(jLabel1)
-                .addGap(10, 10, 10)
-                .addGroup(jpFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel5)
-                    .addComponent(jcbProveedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(29, 29, 29)
-                .addGroup(jpFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jtIDProveedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jlBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 39, Short.MAX_VALUE)
-                .addGroup(jpFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jlFecha, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jdFecha, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(42, 42, 42)
-                .addComponent(jbArmarCompra)
-                .addGap(27, 27, 27)
-                .addGroup(jpFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(jtProducto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(27, 27, 27)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(26, 26, 26)
-                .addGroup(jpFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(jtCantidProdSol, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(41, 41, 41)
-                .addGroup(jpFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jbEliminar)
-                    .addComponent(jbSalir)
-                    .addComponent(jbGuardar))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
+        jpFondo.add(jlBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(342, 87, 36, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jpFondo, javax.swing.GroupLayout.DEFAULT_SIZE, 626, Short.MAX_VALUE)
-                .addGap(0, 15, Short.MAX_VALUE))
+            .addComponent(jpFondo, javax.swing.GroupLayout.DEFAULT_SIZE, 648, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jpFondo, javax.swing.GroupLayout.DEFAULT_SIZE, 636, Short.MAX_VALUE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(jpFondo, javax.swing.GroupLayout.DEFAULT_SIZE, 623, Short.MAX_VALUE)
         );
 
         pack();
