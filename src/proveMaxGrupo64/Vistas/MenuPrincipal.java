@@ -16,6 +16,8 @@ public class MenuPrincipal extends javax.swing.JFrame {
      */
     public MenuPrincipal() {
         initComponents();
+        this.setSize(1200,750);
+        //this.setExtendedState(this.MAXIMIZED_BOTH);
         Escritorio = new EscritorioModificado();
         this.setContentPane(Escritorio);
         setLocationRelativeTo(null);
@@ -47,11 +49,12 @@ public class MenuPrincipal extends javax.swing.JFrame {
         Escritorio.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jmConsultas.setText("Consultas");
-        jmConsultas.setPreferredSize(new java.awt.Dimension(100, 40));
+        jmConsultas.setPreferredSize(new java.awt.Dimension(150, 50));
         jMenuBar1.add(jmConsultas);
 
+        jMCompras.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/logoCOOM.png"))); // NOI18N
         jMCompras.setText("Compras");
-        jMCompras.setPreferredSize(new java.awt.Dimension(100, 40));
+        jMCompras.setPreferredSize(new java.awt.Dimension(150, 50));
 
         jmRegistrarCompra.setText("Registrar Compras");
         jmRegistrarCompra.addActionListener(new java.awt.event.ActionListener() {
@@ -64,7 +67,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jMenuBar1.add(jMCompras);
 
         jMProductos.setText("Productos");
-        jMProductos.setPreferredSize(new java.awt.Dimension(100, 40));
+        jMProductos.setPreferredSize(new java.awt.Dimension(150, 50));
 
         jMIngresoProducto.setText("Ingreso de Producto");
         jMIngresoProducto.addActionListener(new java.awt.event.ActionListener() {
@@ -77,6 +80,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jMenuBar1.add(jMProductos);
 
         jMProveedores.setText("Proveedores");
+        jMProveedores.setPreferredSize(new java.awt.Dimension(150, 50));
 
         jMForProveedores.setText("Formulario de proveedores");
         jMForProveedores.addActionListener(new java.awt.event.ActionListener() {
@@ -98,7 +102,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(Escritorio, javax.swing.GroupLayout.DEFAULT_SIZE, 466, Short.MAX_VALUE)
+            .addComponent(Escritorio, javax.swing.GroupLayout.DEFAULT_SIZE, 458, Short.MAX_VALUE)
         );
 
         pack();
