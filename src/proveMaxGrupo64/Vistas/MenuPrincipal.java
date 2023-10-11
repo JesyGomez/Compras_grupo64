@@ -33,7 +33,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
         Escritorio = new javax.swing.JDesktopPane();
         jMenuBar1 = new javax.swing.JMenuBar();
-        jMAdmin = new javax.swing.JMenu();
+        jmConsultas = new javax.swing.JMenu();
         jMCompras = new javax.swing.JMenu();
         jmRegistrarCompra = new javax.swing.JMenuItem();
         jMProductos = new javax.swing.JMenu();
@@ -43,13 +43,15 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        Escritorio.setPreferredSize(new java.awt.Dimension(1100, 640));
+        Escritorio.setPreferredSize(new java.awt.Dimension(1100, 645));
         Escritorio.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jMAdmin.setText("Administracion");
-        jMenuBar1.add(jMAdmin);
+        jmConsultas.setText("Consultas");
+        jmConsultas.setPreferredSize(new java.awt.Dimension(100, 40));
+        jMenuBar1.add(jmConsultas);
 
         jMCompras.setText("Compras");
+        jMCompras.setPreferredSize(new java.awt.Dimension(100, 40));
 
         jmRegistrarCompra.setText("Registrar Compras");
         jmRegistrarCompra.addActionListener(new java.awt.event.ActionListener() {
@@ -62,6 +64,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jMenuBar1.add(jMCompras);
 
         jMProductos.setText("Productos");
+        jMProductos.setPreferredSize(new java.awt.Dimension(100, 40));
 
         jMIngresoProducto.setText("Ingreso de Producto");
         jMIngresoProducto.addActionListener(new java.awt.event.ActionListener() {
@@ -95,7 +98,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(Escritorio, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(Escritorio, javax.swing.GroupLayout.DEFAULT_SIZE, 466, Short.MAX_VALUE)
         );
 
         pack();
@@ -168,13 +171,13 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JDesktopPane Escritorio;
-    private javax.swing.JMenu jMAdmin;
     private javax.swing.JMenu jMCompras;
     private javax.swing.JMenuItem jMForProveedores;
     private javax.swing.JMenuItem jMIngresoProducto;
     private javax.swing.JMenu jMProductos;
     private javax.swing.JMenu jMProveedores;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenu jmConsultas;
     private javax.swing.JMenuItem jmRegistrarCompra;
     // End of variables declaration//GEN-END:variables
 }
