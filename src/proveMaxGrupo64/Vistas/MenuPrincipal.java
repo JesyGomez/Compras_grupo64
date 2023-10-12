@@ -48,11 +48,12 @@ public class MenuPrincipal extends javax.swing.JFrame {
         Escritorio.setPreferredSize(new java.awt.Dimension(1100, 645));
         Escritorio.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        jmConsultas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/cuestionario.png"))); // NOI18N
         jmConsultas.setText("Consultas");
         jmConsultas.setPreferredSize(new java.awt.Dimension(150, 50));
         jMenuBar1.add(jmConsultas);
 
-        jMCompras.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/logoCOOM.png"))); // NOI18N
+        jMCompras.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/ComprasLogo.png"))); // NOI18N
         jMCompras.setText("Compras");
         jMCompras.setPreferredSize(new java.awt.Dimension(150, 50));
 
@@ -66,6 +67,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
         jMenuBar1.add(jMCompras);
 
+        jMProductos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/producDos.png"))); // NOI18N
         jMProductos.setText("Productos");
         jMProductos.setPreferredSize(new java.awt.Dimension(150, 50));
 
@@ -79,6 +81,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
         jMenuBar1.add(jMProductos);
 
+        jMProveedores.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/icono8.png"))); // NOI18N
         jMProveedores.setText("Proveedores");
         jMProveedores.setPreferredSize(new java.awt.Dimension(150, 50));
 
