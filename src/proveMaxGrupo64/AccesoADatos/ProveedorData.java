@@ -70,7 +70,7 @@ public class ProveedorData {
     }
 
     public void eliminarProveedor(int id) {
-        String sql = "UPDATE proveedor WHERE id_proveedor = ?";
+        String sql = "DELETE FROM proveedor WHERE id_proveedor = ?";
         try {
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setInt(1, id);

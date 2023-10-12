@@ -45,12 +45,13 @@ public class Compras_grupo64 {
         */
         
         
-        Proveedor prieto = new Proveedor("3455", "Avenida Savio 1234", "3345987877");
-        ProveedorData prove = new ProveedorData();
+        //Proveedor prieto = new Proveedor("3455", "Avenida Savio 1234", "3345987877");
+        //ProveedorData prove = new ProveedorData();
         //prove.guardarProveedor(prieto);
         
         
-        prove.modificarProveedor(prieto);
+        //prove.modificarProveedor(prieto);
+        //prove.eliminarProveedor(10);
     
     }
 
