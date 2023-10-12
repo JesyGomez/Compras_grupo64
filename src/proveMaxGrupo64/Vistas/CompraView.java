@@ -199,7 +199,7 @@ public class CompraView extends javax.swing.JInternalFrame {
 
     private void jcbProveedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbProveedorActionPerformed
         // TODO add your handling code here:
-                jcbProveedor.setSelectedItem("Seleccione Proveedor");
+        jcbProveedor.setSelectedItem("Seleccione Proveedor");
     }//GEN-LAST:event_jcbProveedorActionPerformed
 
     private void jbArmarCompraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbArmarCompraActionPerformed
@@ -208,8 +208,8 @@ public class CompraView extends javax.swing.JInternalFrame {
         CompraData compraData = new CompraData();
         llenarTabla();
         try {
-        String proveSeleccionado = jcbProveedor.getActionCommand();
-        Date fechaN = jdFecha.getDate();
+            String proveSeleccionado = jcbProveedor.getActionCommand();
+            Date fechaN = jdFecha.getDate();
 
             LocalDate fecha = fechaN.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
 
@@ -223,33 +223,33 @@ public class CompraView extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jbEliminarActionPerformed
 
     private void jlBuscarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jlBuscarMouseClicked
-    ProveedorData proveedorData = new ProveedorData();
-    try {
-        String idProveedorText = jtIDProveedor.getText().trim();
-        Proveedor proveedorEncontrado = null;
+        ProveedorData proveedorData = new ProveedorData();
+        try {
+            String idProveedorText = jtIDProveedor.getText().trim();
+            Proveedor proveedorEncontrado = null;
 
-        if (idProveedorText.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Por favor, ingrese un ID para buscar el proveedor.");
-            return;
-        } else {
-            int idProveedor = Integer.parseInt(idProveedorText);
-            proveedorEncontrado = proveedorData.buscarProveedor(idProveedor);
+            if (idProveedorText.isEmpty()) {
+                JOptionPane.showMessageDialog(this, "Por favor, ingrese un ID para buscar el proveedor.");
+                return;
+            } else {
+                int idProveedor = Integer.parseInt(idProveedorText);
+                proveedorEncontrado = proveedorData.buscarProveedor(idProveedor);
+            }
+
+            if (proveedorEncontrado != null) {
+                JOptionPane.showMessageDialog(this, "El proveedor se encontró en la lista.");
+                // Muestra el nombre del proveedor en el JComboBox
+                jcbProveedor.setSelectedItem(proveedorEncontrado.getRazonSocial());
+            } else {
+                // Si no se encuentra el proveedor, muestra un mensaje de error
+                JOptionPane.showMessageDialog(this, "Proveedor no encontrado.");
+                // Limpia el JComboBox si no se encuentra el proveedor
+                jcbProveedor.setSelectedItem(null);
+            }
+        } catch (NumberFormatException ex) {
+            JOptionPane.showMessageDialog(this, "El ID debe ser un número válido.");
         }
 
-        if (proveedorEncontrado != null) {
-            JOptionPane.showMessageDialog(this, "El proveedor se encontró en la lista.");
-            // Muestra el nombre del proveedor en el JComboBox
-            jcbProveedor.setSelectedItem(proveedorEncontrado.getRazonSocial());
-        } else {
-            // Si no se encuentra el proveedor, muestra un mensaje de error
-            JOptionPane.showMessageDialog(this, "Proveedor no encontrado.");
-            // Limpia el JComboBox si no se encuentra el proveedor
-            jcbProveedor.setSelectedItem(null);
-        }
-    } catch (NumberFormatException ex) {
-        JOptionPane.showMessageDialog(this, "El ID debe ser un número válido.");
-    }
-    
     }//GEN-LAST:event_jlBuscarMouseClicked
 
 
@@ -273,18 +273,20 @@ public class CompraView extends javax.swing.JInternalFrame {
     private javax.swing.JTextField jtProducto;
     private javax.swing.JTable jtaListaProductos;
     // End of variables declaration//GEN-END:variables
+
     private void cargarProductos() {
         ProductoData produ = new ProductoData();
         for (Producto producto : produ.listarProductos()) {
             //jcbProducto.addItem(producto);
         }
     }
-private void cargarProveedor() {
-    ProveedorData prove = new ProveedorData();
-    for (Proveedor proveedor : prove.listarProveedores()) {
-        jcbProveedor.addItem(proveedor.getRazonSocial());
+
+    private void cargarProveedor() {
+        ProveedorData prove = new ProveedorData();
+        for (Proveedor proveedor : prove.listarProveedores()) {
+            jcbProveedor.addItem(proveedor.getRazonSocial());
+        }
     }
-}
 
     private void deshabilitarCampos() {
 

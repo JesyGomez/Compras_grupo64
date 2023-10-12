@@ -23,6 +23,7 @@ public class DetalleCompraData {
 
     public static final int ERROR_SQL_DETALLE_COMPRA_DUPLICADA = 1062;
 
+    
     public void guardarDetalleCompra(DetalleCompra dc) {
 
         String sql = "INSERT INTO detallecompra(id_detalle, id_compra, id_producto, cantidad, precioCosto)"
@@ -57,7 +58,7 @@ public class DetalleCompraData {
 
     }
 
-    /*public DetalleCompra buscarDetalleCompraPorId(int id) {
+    public DetalleCompra buscarDetalleCompraPorId(int id) {
 
         String sql = "SELECT id_detalle, id_compra, id_producto, cantidad, precioCosto"
                 + " FROM detallecompra"
@@ -73,74 +74,39 @@ public class DetalleCompraData {
             if (rs.next()) {
                 detalleCompra = new DetalleCompra();
                 detalleCompra.setIdDetalle(id);
-                detalleCompra.getCompra().getIdCompra();
-                detalleCompra.setDescripcion(rs.getString("descripcion"));
-                detalleCompra.setPrecioActual(rs.getDouble("precioActual"));
-                detalleCompra.setStock(rs.getInt("stock"));
-                detalleCompra.setEstado(rs.getBoolean("estado"));
+                Compra cp = cd.buscarCompraPorId(rs.getInt("id_compra"));
+                detalleCompra.setCompra(cp);
+                Producto pro = pd.buscarProductoPorId(rs.getInt("id_producto"));
+                detalleCompra.setProducto(pro);
+                detalleCompra.setPrecioCosto(rs.getDouble("precioCosto"));
+                detalleCompra.setCantidad(rs.getInt("cantidad"));
 
-                if (!detalleCompra.isEstado()) {
-                    JOptionPane.showMessageDialog(null, "El producto se encuentra en la lista pero está Inactivo.");
-                }
             } else {
-                System.out.println("El Producto no se encontró en la lista.");
+                System.out.println("El Detalle de Compra no se encontró en la lista.");
             }
 
             ps.close();
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Producto.");
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Detalle de Compra.");
         }
 
         return detalleCompra;
     }
 
-    public Producto buscarProductoPorNombre(String nombre) {
-        String sql = "SELECT id_producto, nombre, descripcion, precioActual, stock, estado FROM producto WHERE nombre=?";
-        Producto producto = null;
+    
+    /*public void modificarDetalleCompra(DetalleCompra dc) {
 
-        try {
-            PreparedStatement ps = con.prepareStatement(sql);
-            ps.setString(1, nombre);
-            ResultSet rs = ps.executeQuery();
-
-            if (rs.next()) {
-                producto = new Producto();
-                int id = rs.getInt("id_producto");
-                producto.setIdProducto(id);
-                producto.setNombreProducto(nombre);
-                producto.setDescripcion(rs.getString("descripcion"));
-                producto.setPrecioActual(rs.getDouble("precioActual"));
-                producto.setStock(rs.getInt("stock"));
-                producto.setEstado(rs.getBoolean("estado"));
-
-                if (!producto.isEstado()) {
-                    JOptionPane.showMessageDialog(null, "El producto se encuentra en la lista pero está inactivo.");
-                }
-            } else {
-                JOptionPane.showMessageDialog(null, "El Producto no se encontró en la lista.");
-            }
-
-            ps.close();
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Producto.");
-        }
-
-        return producto;
-    }
-
-    public void modificarProducto(Producto producto) {
-
-        String sql = "UPDATE producto SET nombre = ?, descripcion = ?, precioActual = ?, stock = ?, estado = ?"
+        String sql = "UPDATE detallecompra SET nombre = ?, descripcion = ?, precioActual = ?, stock = ?, estado = ?"
                 + " WHERE id_producto = ?";
 
         try {
             PreparedStatement ps = con.prepareStatement(sql);
-            ps.setString(1, producto.getNombreProducto());
-            ps.setString(2, producto.getDescripcion());
-            ps.setDouble(3, producto.getPrecioActual());
-            ps.setInt(4, producto.getStock());
-            ps.setBoolean(5, producto.isEstado());
-            ps.setInt(6, producto.getIdProducto());
+            ps.setString(1, dc.getNombreProducto());
+            ps.setString(2, dc.getDescripcion());
+            ps.setDouble(3, dc.getPrecioActual());
+            ps.setInt(4, dc.getStock());
+            ps.setBoolean(5, dc.isEstado());
+            ps.setInt(6, dc.getIdProducto());
 
             int exito = ps.executeUpdate();
             if (exito == 1) {
@@ -212,5 +178,4 @@ public class DetalleCompraData {
         }
         return productos;
     }*/
-
 }

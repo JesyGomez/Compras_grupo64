@@ -4,9 +4,11 @@ import java.sql.Connection;
 import java.time.LocalDate;
 import proveMaxGrupo64.AccesoADatos.CompraData;
 import proveMaxGrupo64.AccesoADatos.Conexion;
+import proveMaxGrupo64.AccesoADatos.DetalleCompraData;
 import proveMaxGrupo64.AccesoADatos.ProductoData;
 import proveMaxGrupo64.AccesoADatos.ProveedorData;
 import proveMaxGrupo64.Entidades.Compra;
+import proveMaxGrupo64.Entidades.DetalleCompra;
 import proveMaxGrupo64.Entidades.Producto;
 import proveMaxGrupo64.Entidades.Proveedor;
 
@@ -42,17 +44,23 @@ public class Compras_grupo64 {
         for (Producto producto : produ.listarProductos()) {
             System.out.println("nombre" + producto.getNombreProducto());
         }
-        */
-        
-        
+         */
         //Proveedor prieto = new Proveedor("3455", "Avenida Savio 1234", "3345987877");
         //ProveedorData prove = new ProveedorData();
         //prove.guardarProveedor(prieto);
-        
-        
         //prove.modificarProveedor(prieto);
         //prove.eliminarProveedor(10);
-    
+//        Proveedor prove = new Proveedor(1, "Bazar S.A.", "Calle Pepita 123, Ciudad Marcos Paz", "123456789");
+//        Producto prod = produ.buscarProductoPorId(3);
+//        Compra cpr = new Compra(1, prove, LocalDate.MIN);
+        DetalleCompra dc = new DetalleCompra();
+        DetalleCompraData dcd = new DetalleCompraData();
+
+        dc = dcd.buscarDetalleCompraPorId(6);
+        System.out.println("ID " + dc.getIdDetalle() + " ID COMPRA " + dc.getCompra().getIdCompra() + " ID PRODUCTO "
+                + dc.getProducto().getIdProducto()
+                + " CANTIDAD " + dc.getCantidad() + " PRECIO COSTO " + dc.getPrecioCosto());
+
     }
 
 }

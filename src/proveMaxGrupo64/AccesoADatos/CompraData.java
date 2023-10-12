@@ -76,7 +76,7 @@ public class CompraData {
             for (Producto producto : productosSeleccionados) {
                 psDetalleCompra.setInt(1, idCompraGenerada);
                 psDetalleCompra.setInt(2, producto.getIdProducto());
- //               psDetalleCompra.setInt(3, producto.getCantidad.()); // La cantidad de productos seleccionados
+                //               psDetalleCompra.setInt(3, producto.getCantidad.()); // La cantidad de productos seleccionados
                 psDetalleCompra.executeUpdate();
             }
 
@@ -99,7 +99,6 @@ public class CompraData {
                 JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Compra");
             }
         }
-    
 
     }
 
@@ -256,6 +255,33 @@ public class CompraData {
             JOptionPane.showMessageDialog(null, "Error al obtener productos por debajo del stock mínimo" + ex.getMessage());
         }
         return productos;
+    }
+
+    public Compra buscarCompraPorId(int id) {
+
+        String sql = "SELECT id_compra, id_proveedor, fechaCompra FROM compra WHERE id_compra=?";
+        Compra compra = null;
+
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1, id);
+            ResultSet rs = ps.executeQuery();
+
+            if (rs.next()) {
+                compra = new Compra();
+                compra.setIdCompra(id);
+                compra.setFecha(rs.getDate("fechaCompra").toLocalDate());
+
+            } else {
+                System.out.println("El Producto no se encontró en la lista.");
+            }
+
+            ps.close();
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Producto.");
+        }
+
+        return compra;
     }
 
 }
