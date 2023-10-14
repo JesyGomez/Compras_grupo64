@@ -50,13 +50,16 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
         jmConsultas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/cuestionario.png"))); // NOI18N
         jmConsultas.setText("Consultas");
+        jmConsultas.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         jmConsultas.setPreferredSize(new java.awt.Dimension(150, 50));
         jMenuBar1.add(jmConsultas);
 
         jMCompras.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/ComprasLogo.png"))); // NOI18N
         jMCompras.setText("Compras");
+        jMCompras.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         jMCompras.setPreferredSize(new java.awt.Dimension(150, 50));
 
+        jmRegistrarCompra.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         jmRegistrarCompra.setText("Registrar Compras");
         jmRegistrarCompra.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -69,8 +72,10 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
         jMProductos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/producDos.png"))); // NOI18N
         jMProductos.setText("Productos");
+        jMProductos.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         jMProductos.setPreferredSize(new java.awt.Dimension(150, 50));
 
+        jMIngresoProducto.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         jMIngresoProducto.setText("Ingreso de Producto");
         jMIngresoProducto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -83,8 +88,10 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
         jMProveedores.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/icono8.png"))); // NOI18N
         jMProveedores.setText("Proveedores");
+        jMProveedores.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         jMProveedores.setPreferredSize(new java.awt.Dimension(150, 50));
 
+        jMForProveedores.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         jMForProveedores.setText("Formulario de proveedores");
         jMForProveedores.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

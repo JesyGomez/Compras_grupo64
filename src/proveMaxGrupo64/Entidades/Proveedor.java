@@ -1,6 +1,7 @@
 package proveMaxGrupo64.Entidades;
 
 public class Proveedor {
+
     private int idProveedor;
     private String razonSocial;
     private String domicilio;
@@ -20,6 +21,10 @@ public class Proveedor {
         this.razonSocial = razonSocial;
         this.domicilio = domicilio;
         this.telefono = telefono;
+    }
+
+    public Proveedor(int idProveedor) {
+        this.idProveedor = idProveedor;
     }
 
     public int getIdProveedor() {

@@ -15,6 +15,7 @@ import proveMaxGrupo64.AccesoADatos.CompraData;
 import proveMaxGrupo64.AccesoADatos.ProductoData;
 import proveMaxGrupo64.AccesoADatos.ProveedorData;
 import proveMaxGrupo64.Entidades.Compra;
+import proveMaxGrupo64.Entidades.DetalleCompra;
 import proveMaxGrupo64.Entidades.Producto;
 import proveMaxGrupo64.Entidades.Proveedor;
 
@@ -36,9 +37,11 @@ public class CompraView extends javax.swing.JInternalFrame {
         this.setTitle("Gestión de Compras");
         deshabilitarCampos();
         ProductoData produ = new ProductoData();
+        CompraData compra = new CompraData();
+        DetalleCompra detacom = new DetalleCompra();
         armarCabecera();
-        cargarProductos();
         cargarProveedor();
+        cargarProductos();
     }
 
     /**
@@ -62,12 +65,16 @@ public class CompraView extends javax.swing.JInternalFrame {
         jbSalir = new javax.swing.JButton();
         jcbProveedor = new javax.swing.JComboBox<>();
         jdFecha = new com.toedter.calendar.JDateChooser();
-        jtProducto = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         jtaListaProductos = new javax.swing.JTable();
         jbGuardar = new javax.swing.JButton();
         jtIDProveedor = new javax.swing.JTextField();
-        jlBuscar = new javax.swing.JLabel();
+        jlBuscarIdProveedor = new javax.swing.JLabel();
+        jcbProducto = new javax.swing.JComboBox<>();
+        jbModificarCompra = new javax.swing.JButton();
+        jLabel4 = new javax.swing.JLabel();
+        jtIdCompra = new javax.swing.JTextField();
+        jlBuscarIdCompra = new javax.swing.JLabel();
 
         setClosable(true);
         setResizable(true);
@@ -84,18 +91,18 @@ public class CompraView extends javax.swing.JInternalFrame {
         jLabel2.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Producto a Solicitar:");
-        jpFondo.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 270, -1, -1));
+        jpFondo.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 280, -1, -1));
 
         jLabel3.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("Cantidad:");
-        jpFondo.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 500, -1, -1));
+        jpFondo.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 280, -1, -1));
 
         jlFecha.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         jlFecha.setForeground(new java.awt.Color(255, 255, 255));
         jlFecha.setText("Fecha:");
-        jpFondo.add(jlFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 150, -1, -1));
-        jpFondo.add(jtCantidProdSol, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 500, 227, -1));
+        jpFondo.add(jlFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 90, -1, -1));
+        jpFondo.add(jtCantidProdSol, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 280, 80, -1));
 
         jLabel5.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
@@ -111,7 +118,7 @@ public class CompraView extends javax.swing.JInternalFrame {
                 jbArmarCompraActionPerformed(evt);
             }
         });
-        jpFondo.add(jbArmarCompra, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 210, -1, -1));
+        jpFondo.add(jbArmarCompra, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 120, -1, -1));
 
         jbEliminar.setBackground(new java.awt.Color(0, 0, 204));
         jbEliminar.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
@@ -135,6 +142,7 @@ public class CompraView extends javax.swing.JInternalFrame {
         });
         jpFondo.add(jbSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 560, -1, -1));
 
+        jcbProveedor.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione un proveedor:" }));
         jcbProveedor.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jcbProveedorActionPerformed(evt);
@@ -143,8 +151,7 @@ public class CompraView extends javax.swing.JInternalFrame {
         jpFondo.add(jcbProveedor, new org.netbeans.lib.awtextra.AbsoluteConstraints(132, 32, 399, -1));
 
         jdFecha.setDateFormatString("yyyy-MM-dd");
-        jpFondo.add(jdFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 140, 210, -1));
-        jpFondo.add(jtProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 270, 227, -1));
+        jpFondo.add(jdFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 90, 210, -1));
 
         jtaListaProductos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -159,25 +166,60 @@ public class CompraView extends javax.swing.JInternalFrame {
         ));
         jScrollPane1.setViewportView(jtaListaProductos);
 
-        jpFondo.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 310, 635, 164));
+        jpFondo.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 360, 635, 164));
 
         jbGuardar.setText("Guardar");
         jpFondo.add(jbGuardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 560, -1, -1));
-        jpFondo.add(jtIDProveedor, new org.netbeans.lib.awtextra.AbsoluteConstraints(132, 87, 161, -1));
+        jpFondo.add(jtIDProveedor, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 30, 80, -1));
 
-        jlBuscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/32x32.png"))); // NOI18N
-        jlBuscar.addMouseListener(new java.awt.event.MouseAdapter() {
+        jlBuscarIdProveedor.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/32x32.png"))); // NOI18N
+        jlBuscarIdProveedor.setText("ID Proveedor");
+        jlBuscarIdProveedor.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jlBuscarMouseClicked(evt);
+                jlBuscarIdProveedorMouseClicked(evt);
             }
         });
-        jpFondo.add(jlBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(342, 87, 36, -1));
+        jpFondo.add(jlBuscarIdProveedor, new org.netbeans.lib.awtextra.AbsoluteConstraints(646, 30, 120, -1));
+
+        jcbProducto.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione un Producto:" }));
+        jcbProducto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jcbProductoActionPerformed(evt);
+            }
+        });
+        jpFondo.add(jcbProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 280, 240, -1));
+
+        jbModificarCompra.setBackground(new java.awt.Color(0, 0, 204));
+        jbModificarCompra.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        jbModificarCompra.setForeground(new java.awt.Color(255, 255, 255));
+        jbModificarCompra.setText("Modificar");
+        jbModificarCompra.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbModificarCompraActionPerformed(evt);
+            }
+        });
+        jpFondo.add(jbModificarCompra, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 210, -1, -1));
+
+        jLabel4.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel4.setText("ID de Compra:");
+        jpFondo.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 190, -1, -1));
+        jpFondo.add(jtIdCompra, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 190, 140, -1));
+
+        jlBuscarIdCompra.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/32x32.png"))); // NOI18N
+        jlBuscarIdCompra.setText("jLabel6");
+        jlBuscarIdCompra.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jlBuscarIdCompraMouseClicked(evt);
+            }
+        });
+        jpFondo.add(jlBuscarIdCompra, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 190, 40, 30));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jpFondo, javax.swing.GroupLayout.DEFAULT_SIZE, 648, Short.MAX_VALUE)
+            .addComponent(jpFondo, javax.swing.GroupLayout.DEFAULT_SIZE, 793, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -199,7 +241,7 @@ public class CompraView extends javax.swing.JInternalFrame {
 
     private void jcbProveedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbProveedorActionPerformed
         // TODO add your handling code here:
-        jcbProveedor.setSelectedItem("Seleccione Proveedor");
+        jcbProveedor.getSelectedItem();
     }//GEN-LAST:event_jcbProveedorActionPerformed
 
     private void jbArmarCompraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbArmarCompraActionPerformed
@@ -208,7 +250,7 @@ public class CompraView extends javax.swing.JInternalFrame {
         CompraData compraData = new CompraData();
         llenarTabla();
         try {
-            String proveSeleccionado = jcbProveedor.getActionCommand();
+            String proveSeleccionado = (String) jcbProveedor.getSelectedItem();
             Date fechaN = jdFecha.getDate();
 
             LocalDate fecha = fechaN.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
@@ -222,15 +264,67 @@ public class CompraView extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jbEliminarActionPerformed
 
-    private void jlBuscarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jlBuscarMouseClicked
+    private void jcbProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbProductoActionPerformed
+        cargarProductos();
+    }//GEN-LAST:event_jcbProductoActionPerformed
+
+    private void jbModificarCompraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbModificarCompraActionPerformed
+// Obtiene el proveedor seleccionado del JComboBox
+        Proveedor proveedor = (Proveedor) jcbProveedor.getSelectedItem();
+        String idCompra = jtIdCompra.getText().trim();
+        CompraData compraData = new CompraData();
+        Compra compraEncontrada = compraData.buscarCompraPorId(WIDTH);
+
+        if (compraEncontrada != null) {
+            // Modifica los atributos de compraEncontrada según sea necesario
+            compraEncontrada.setProveedor(proveedor);
+            // Modifica la fecha de la compra si el usuario ingresó una nueva fecha
+            // compraEncontrada.setFecha(fechaSeleccionada); // Usa la fecha seleccionada por el usuario
+
+            // Llama al método modificarCompra() con la compraEncontrada modificada
+            compraData.modificarCompra(compraEncontrada);
+            JOptionPane.showMessageDialog(null, "Compra modificada correctamente.");
+        } else {
+            JOptionPane.showMessageDialog(null, "Compra no encontrada.");
+        }
+//
+//        try {
+////            String proveSeleccionado = jcbProveedor.getActionCommand();
+////            int idProveedor = Integer.parseInt(jtIDProveedor.getText());
+////            Date fechaN = jdFecha.getDate();
+//            int idCompra = Integer.parseInt(jtIdCompra.getText());
+//
+//            Compra ModificarCompra = new Compra(prove, LocalDate.MIN);
+//            JOptionPane.showMessageDialog(null, "Probando...." + ModificarCompra);
+//            // Crear una instancia de Proveedor con los datos modificados
+//            // Mostrar un cuadro de diálogo de confirmación
+////            int confirmacion = JOptionPane.showConfirmDialog(this, "¿Seguro desea realizar este cambio en la compra?", "Confirmar Modificación", JOptionPane.YES_NO_OPTION);
+////
+////            if (confirmacion == JOptionPane.YES_OPTION) {
+//            // El usuario ha confirmado, entonces realizamos la modificación del proveedor
+//            compra.modificarCompra(ModificarCompra);
+//            //}
+//        } catch (NumberFormatException ex) {
+//            JOptionPane.showMessageDialog(this, "El ID debe ser un número válido.");
+//        }
+
+    }//GEN-LAST:event_jbModificarCompraActionPerformed
+
+    private void jlBuscarIdProveedorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jlBuscarIdProveedorMouseClicked
+
         ProveedorData proveedorData = new ProveedorData();
         try {
             String idProveedorText = jtIDProveedor.getText().trim();
             Proveedor proveedorEncontrado = null;
-
+            if (!idProveedorText.isEmpty()) {
+                int idProvee = Integer.parseInt(idProveedorText);
+                if (idProvee <= 0) {
+                    JOptionPane.showMessageDialog(this, "El ID debe ser un número mayor a cero (0)");
+                    return;
+                }
+            }
             if (idProveedorText.isEmpty()) {
                 JOptionPane.showMessageDialog(this, "Por favor, ingrese un ID para buscar el proveedor.");
-                return;
             } else {
                 int idProveedor = Integer.parseInt(idProveedorText);
                 proveedorEncontrado = proveedorData.buscarProveedor(idProveedor);
@@ -249,28 +343,73 @@ public class CompraView extends javax.swing.JInternalFrame {
         } catch (NumberFormatException ex) {
             JOptionPane.showMessageDialog(this, "El ID debe ser un número válido.");
         }
+    }//GEN-LAST:event_jlBuscarIdProveedorMouseClicked
 
-    }//GEN-LAST:event_jlBuscarMouseClicked
+    private void jlBuscarIdCompraMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jlBuscarIdCompraMouseClicked
+        CompraData compraData = new CompraData();
+        try {
+            String idCompra = jtIdCompra.getText().trim();
+            Compra compraEncontrada = null;
+            if (!idCompra.isEmpty()) {
+                int idComp = Integer.parseInt(idCompra);
+                if (idComp <= 0) {
+                    JOptionPane.showMessageDialog(this, "El ID debe ser un número mayor a cero (0)");
+                    return;
+                }
+            }
+            if (idCompra.isEmpty()) {
+                JOptionPane.showMessageDialog(this, "Por favor, ingrese un ID para buscar la compra.");
+
+            } else {
+                int idComp = Integer.parseInt(idCompra);
+                compraEncontrada = compraData.buscarCompraPorId(idComp);
+            }
+
+            if (compraEncontrada != null) {
+                JOptionPane.showMessageDialog(this, "La compra se encontró en la lista." + compraEncontrada);
+                // Configura el JComboBox con el proveedor de la compra encontrada
+                jtIDProveedor.setText(String.valueOf(compraEncontrada.getProveedor().getIdProveedor()));
+
+                // Configura el JDateChooser con la fecha de la compra encontrada
+                Date fechaUtil = Date.from(compraEncontrada.getFecha().atStartOfDay().atZone(ZoneId.systemDefault()).toInstant());
+                jdFecha.setDate(fechaUtil);
+            } else {
+                // Si no se encuentra la compra, muestra un mensaje de error
+                JOptionPane.showMessageDialog(this, "La compra no se ha encontrado.");
+
+                // Limpia el JComboBox y el JDateChooser si no se encuentra la compra
+                jtIDProveedor.setText(null);
+                jdFecha.setDate(null);
+
+            }
+        } catch (NumberFormatException ex) {
+            JOptionPane.showMessageDialog(this, "El ID debe ser un número válido.");
+        }
+    }//GEN-LAST:event_jlBuscarIdCompraMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton jbArmarCompra;
     private javax.swing.JButton jbEliminar;
     private javax.swing.JButton jbGuardar;
+    private javax.swing.JButton jbModificarCompra;
     private javax.swing.JButton jbSalir;
+    private javax.swing.JComboBox<String> jcbProducto;
     private javax.swing.JComboBox<String> jcbProveedor;
     private com.toedter.calendar.JDateChooser jdFecha;
-    private javax.swing.JLabel jlBuscar;
+    private javax.swing.JLabel jlBuscarIdCompra;
+    private javax.swing.JLabel jlBuscarIdProveedor;
     private javax.swing.JLabel jlFecha;
     private javax.swing.JPanel jpFondo;
     private javax.swing.JTextField jtCantidProdSol;
     private javax.swing.JTextField jtIDProveedor;
-    private javax.swing.JTextField jtProducto;
+    private javax.swing.JTextField jtIdCompra;
     private javax.swing.JTable jtaListaProductos;
     // End of variables declaration//GEN-END:variables
 
@@ -291,7 +430,7 @@ public class CompraView extends javax.swing.JInternalFrame {
     private void deshabilitarCampos() {
 
         jtaListaProductos.setEnabled(false);
-        jtProducto.setEnabled(false);
+        jcbProducto.setEnabled(false);
         jbGuardar.setEnabled(false);
         jbEliminar.setEnabled(false);
 
@@ -300,7 +439,7 @@ public class CompraView extends javax.swing.JInternalFrame {
     private void habilitarCampos() {
 
         jtaListaProductos.setEnabled(true);
-        jtProducto.setEnabled(true);
+        jcbProducto.setEnabled(true);
         jbGuardar.setEnabled(true);
         jbEliminar.setEnabled(true);
 
@@ -328,7 +467,7 @@ public class CompraView extends javax.swing.JInternalFrame {
         // Obtén el proveedor y la fecha seleccionados
         String proveedorSeleccionado = jcbProveedor.getActionCommand();
         Date fechaSeleccionada = jdFecha.getDate();
-        String producASelec = jtProducto.getSelectedText();
+        String producASelec = jcbProducto.getActionCommand();
 
         // Verifica si se han seleccionado tanto un proveedor como una fecha
         if (proveedorSeleccionado != null && fechaSeleccionada != null) {
@@ -353,4 +492,13 @@ public class CompraView extends javax.swing.JInternalFrame {
         }
     }
 
+    private boolean validar(String valor) {
+        try {
+            int num = Integer.parseInt(valor);
+            return true;
+
+        } catch (NumberFormatException e) {
+            return false;
+        }
+    }
 }
