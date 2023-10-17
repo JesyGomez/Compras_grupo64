@@ -24,82 +24,82 @@ public class CompraData {
     }
     public static final int ERROR_SQL_COMPRA_DUPLICADA = 1062;
 
-//    public void registrarCompra(Compra compra) {
-//        String sql = "INSERT INTO compra (id_compra, id_proveedor, fechaCompra) VALUES (?, ?, ?)";
-//
-//        try {
-//            PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-//
-//            ps.setInt(1, compra.getIdCompra());
-//            ps.setInt(2, compra.getProveedor().getIdProveedor());
-//            ps.setDate(3, Date.valueOf(compra.getFecha()));
-//            ps.executeUpdate();
-//
-//            ResultSet rs = ps.getGeneratedKeys();
-//            if (rs.next()) {
-//                compra.setIdCompra(rs.getInt(1));
-//                JOptionPane.showMessageDialog(null, "La compra fue Guardada exitosamente!");
-//            }
-//            ps.close();
-//
-//        } catch (SQLException ex) {
-//            if (ex.getErrorCode() == ERROR_SQL_COMPRA_DUPLICADA) {
-//                JOptionPane.showMessageDialog(null, "La Compra que intenta guardar, ya existe.");
-//            } else {
-//                JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Compra");
-//            }
-//
-//        }
-    // Método para registrar una compra con productos seleccionados
-    public void registrarCompra(Compra compra, List<Producto> productosSeleccionados) {
-        String sqlCompra = "INSERT INTO compra (id_compra, id_proveedor, fechaCompra) VALUES (?, ?, ?)";
-        String sqlDetalleCompra = "INSERT INTO detalle_compra (id_compra, id_producto, cantidad) VALUES (?, ?, ?)";
+    public void registrarCompra(Compra compra) {
+        String sql = "INSERT INTO compra (id_compra, id_proveedor, fechaCompra) VALUES (?, ?, ?)";
 
         try {
-            con.setAutoCommit(false);
+            PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 
-            // Registrar la compra
-            PreparedStatement psCompra = con.prepareStatement(sqlCompra, Statement.RETURN_GENERATED_KEYS);
-            psCompra.setInt(1, compra.getIdCompra());
-            psCompra.setInt(2, compra.getProveedor().getIdProveedor());
-            psCompra.setDate(3, Date.valueOf(compra.getFecha()));
-            psCompra.executeUpdate();
+            ps.setInt(1, compra.getIdCompra());
+            ps.setInt(2, compra.getProveedor().getIdProveedor());
+            ps.setDate(3, Date.valueOf(compra.getFecha()));
+            ps.executeUpdate();
 
-            // Obtener el ID de la compra generada
-            ResultSet rsCompra = psCompra.getGeneratedKeys();
-            int idCompraGenerada = 0;
-            if (rsCompra.next()) {
-                idCompraGenerada = rsCompra.getInt(1);
+            ResultSet rs = ps.getGeneratedKeys();
+            if (rs.next()) {
+                compra.setIdCompra(rs.getInt(1));
+                JOptionPane.showMessageDialog(null, "La compra fue Guardada exitosamente!");
             }
-
-            // Registrar los productos seleccionados en la compra
-            PreparedStatement psDetalleCompra = con.prepareStatement(sqlDetalleCompra);
-            for (Producto producto : productosSeleccionados) {
-                psDetalleCompra.setInt(1, idCompraGenerada);
-                psDetalleCompra.setInt(2, producto.getIdProducto());
-                //psDetalleCompra.setInt(3, producto.getCantidad.()); // La cantidad de productos seleccionados
-                psDetalleCompra.executeUpdate();
-            }
-
-            con.commit();
-            con.setAutoCommit(true);
-
-            JOptionPane.showMessageDialog(null, "La compra fue Guardada exitosamente!");
+            ps.close();
 
         } catch (SQLException ex) {
-            try {
-                con.rollback();
-                con.setAutoCommit(true);
-            } catch (SQLException rollbackEx) {
-                rollbackEx.printStackTrace(); // Manejar el error al hacer rollback
-            }
-
             if (ex.getErrorCode() == ERROR_SQL_COMPRA_DUPLICADA) {
                 JOptionPane.showMessageDialog(null, "La Compra que intenta guardar, ya existe.");
             } else {
                 JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Compra");
             }
+
         }
+    // Método para registrar una compra con productos seleccionados
+//    public void registrarCompra(Compra compra, List<Producto> productosSeleccionados) {
+//        String sqlCompra = "INSERT INTO compra (id_compra, id_proveedor, fechaCompra) VALUES (?, ?, ?)";
+//        String sqlDetalleCompra = "INSERT INTO detalle_compra (id_compra, id_producto, cantidad) VALUES (?, ?, ?)";
+//
+//        try {
+//            con.setAutoCommit(false);
+//
+//            // Registrar la compra
+//            PreparedStatement psCompra = con.prepareStatement(sqlCompra, Statement.RETURN_GENERATED_KEYS);
+//            psCompra.setInt(1, compra.getIdCompra());
+//            psCompra.setInt(2, compra.getProveedor().getIdProveedor());
+//            psCompra.setDate(3, Date.valueOf(compra.getFecha()));
+//            psCompra.executeUpdate();
+//
+//            // Obtener el ID de la compra generada
+//            ResultSet rsCompra = psCompra.getGeneratedKeys();
+//            int idCompraGenerada = 0;
+//            if (rsCompra.next()) {
+//                idCompraGenerada = rsCompra.getInt(1);
+//            }
+//
+//            // Registrar los productos seleccionados en la compra
+//            PreparedStatement psDetalleCompra = con.prepareStatement(sqlDetalleCompra);
+//            for (Producto producto : productosSeleccionados) {
+//                psDetalleCompra.setInt(1, idCompraGenerada);
+//                psDetalleCompra.setInt(2, producto.getIdProducto());
+//                //psDetalleCompra.setInt(3, producto.getCantidad.()); // La cantidad de productos seleccionados
+//                psDetalleCompra.executeUpdate();
+//            }
+//
+//            con.commit();
+//            con.setAutoCommit(true);
+//
+//            JOptionPane.showMessageDialog(null, "La compra fue Guardada exitosamente!");
+//
+//        } catch (SQLException ex) {
+//            try {
+//                con.rollback();
+//                con.setAutoCommit(true);
+//            } catch (SQLException rollbackEx) {
+//                rollbackEx.printStackTrace(); // Manejar el error al hacer rollback
+//            }
+//
+//            if (ex.getErrorCode() == ERROR_SQL_COMPRA_DUPLICADA) {
+//                JOptionPane.showMessageDialog(null, "La Compra que intenta guardar, ya existe.");
+//            } else {
+//                JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Compra");
+//            }
+//        }
 
     }
 
@@ -118,6 +118,22 @@ public class CompraData {
             }
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error al modificar la compra: " + ex.getMessage());
+        }
+    }
+
+    public void eliminarCompra(int idCompra) {
+        String sql = "DELETE FROM compra WHERE id_compra = ?";
+        try (PreparedStatement ps = con.prepareStatement(sql)) {
+            ps.setInt(1, idCompra);
+
+            int exito = ps.executeUpdate();
+            if (exito == 1) {
+                JOptionPane.showMessageDialog(null, "Compra eliminada exitosamente!");
+            } else {
+                JOptionPane.showMessageDialog(null, "No se pudo eliminar la compra.");
+            }
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al eliminar la compra: " + ex.getMessage());
         }
     }
 
@@ -277,29 +293,29 @@ public class CompraData {
     }
 
     public Compra buscarCompraPorId(int id) {
-    String sql = "SELECT * FROM compra WHERE id_compra = ?";
-    Compra compra = null;
+        String sql = "SELECT * FROM compra WHERE id_compra = ?";
+        Compra compra = null;
 
-    try (PreparedStatement ps = con.prepareStatement(sql)) {
-        ps.setInt(1, id);
-        ResultSet rs = ps.executeQuery();
+        try (PreparedStatement ps = con.prepareStatement(sql)) {
+            ps.setInt(1, id);
+            ResultSet rs = ps.executeQuery();
 
-        if (rs.next()) {
-            int idProveedor = rs.getInt("id_proveedor");
-            LocalDate fechaCompra = rs.getDate("fechaCompra").toLocalDate();
+            if (rs.next()) {
+                int idProveedor = rs.getInt("id_proveedor");
+                LocalDate fechaCompra = rs.getDate("fechaCompra").toLocalDate();
 
-            // Crear un objeto Proveedor con el id_proveedor
-            Proveedor proveedor = new Proveedor(idProveedor);
+                // Crear un objeto Proveedor con el id_proveedor
+                Proveedor proveedor = new Proveedor(idProveedor);
 
-            // Crear un objeto Compra con los datos recuperados de la base de datos
-            compra = new Compra(id, proveedor, fechaCompra);
+                // Crear un objeto Compra con los datos recuperados de la base de datos
+                compra = new Compra(id, proveedor, fechaCompra);
+            }
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al buscar la compra: " + ex.getMessage());
         }
-    } catch (SQLException ex) {
-        JOptionPane.showMessageDialog(null, "Error al buscar la compra: " + ex.getMessage());
-    }
 
-    return compra;
-}
+        return compra;
+    }
 
 //        String sql = "SELECT id_compra, id_proveedor, fechaCompra FROM compra WHERE id_compra=?";
 //        Compra compra = null;
@@ -325,7 +341,6 @@ public class CompraData {
 //
 //        return compra;
 //    }
-
     public List<Compra> obtenerCompras() {
         List<Compra> compras = new ArrayList<>();
         String sql = "SELECT * FROM compra";

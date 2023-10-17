@@ -33,7 +33,7 @@ public class CompraView extends javax.swing.JInternalFrame {
 
     public CompraView() {
         initComponents();
-        this.setSize(750, 650);
+        this.setSize(701, 650);
         this.setTitle("Gestión de Compras");
         deshabilitarCampos();
         ProductoData produ = new ProductoData();
@@ -70,11 +70,11 @@ public class CompraView extends javax.swing.JInternalFrame {
         jbGuardar = new javax.swing.JButton();
         jtIDProveedor = new javax.swing.JTextField();
         jlBuscarIdProveedor = new javax.swing.JLabel();
-        jcbProducto = new javax.swing.JComboBox<>();
         jbModificarCompra = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
         jtIdCompra = new javax.swing.JTextField();
         jlBuscarIdCompra = new javax.swing.JLabel();
+        jtProducPorNombre = new javax.swing.JTextField();
 
         setClosable(true);
         setResizable(true);
@@ -96,13 +96,13 @@ public class CompraView extends javax.swing.JInternalFrame {
         jLabel3.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("Cantidad:");
-        jpFondo.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 280, -1, -1));
+        jpFondo.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 280, -1, -1));
 
         jlFecha.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         jlFecha.setForeground(new java.awt.Color(255, 255, 255));
         jlFecha.setText("Fecha:");
         jpFondo.add(jlFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 90, -1, -1));
-        jpFondo.add(jtCantidProdSol, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 280, 80, -1));
+        jpFondo.add(jtCantidProdSol, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 280, 80, -1));
 
         jLabel5.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
@@ -166,12 +166,14 @@ public class CompraView extends javax.swing.JInternalFrame {
         ));
         jScrollPane1.setViewportView(jtaListaProductos);
 
-        jpFondo.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 360, 635, 164));
+        jpFondo.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 360, 670, 164));
 
         jbGuardar.setText("Guardar");
         jpFondo.add(jbGuardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 560, -1, -1));
-        jpFondo.add(jtIDProveedor, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 30, 80, -1));
+        jpFondo.add(jtIDProveedor, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 30, 110, -1));
 
+        jlBuscarIdProveedor.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        jlBuscarIdProveedor.setForeground(new java.awt.Color(255, 255, 255));
         jlBuscarIdProveedor.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/32x32.png"))); // NOI18N
         jlBuscarIdProveedor.setText("ID Proveedor");
         jlBuscarIdProveedor.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -179,15 +181,7 @@ public class CompraView extends javax.swing.JInternalFrame {
                 jlBuscarIdProveedorMouseClicked(evt);
             }
         });
-        jpFondo.add(jlBuscarIdProveedor, new org.netbeans.lib.awtextra.AbsoluteConstraints(646, 30, 120, -1));
-
-        jcbProducto.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione un Producto:" }));
-        jcbProducto.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jcbProductoActionPerformed(evt);
-            }
-        });
-        jpFondo.add(jcbProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 280, 240, -1));
+        jpFondo.add(jlBuscarIdProveedor, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 70, 120, -1));
 
         jbModificarCompra.setBackground(new java.awt.Color(0, 0, 204));
         jbModificarCompra.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
@@ -215,11 +209,18 @@ public class CompraView extends javax.swing.JInternalFrame {
         });
         jpFondo.add(jlBuscarIdCompra, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 190, 40, 30));
 
+        jtProducPorNombre.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jtProducPorNombreKeyReleased(evt);
+            }
+        });
+        jpFondo.add(jtProducPorNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 280, 250, -1));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jpFondo, javax.swing.GroupLayout.DEFAULT_SIZE, 793, Short.MAX_VALUE)
+            .addComponent(jpFondo, javax.swing.GroupLayout.DEFAULT_SIZE, 699, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -263,10 +264,6 @@ public class CompraView extends javax.swing.JInternalFrame {
     private void jbEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbEliminarActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jbEliminarActionPerformed
-
-    private void jcbProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbProductoActionPerformed
-        cargarProductos();
-    }//GEN-LAST:event_jcbProductoActionPerformed
 
     private void jbModificarCompraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbModificarCompraActionPerformed
 // Obtiene el proveedor seleccionado del JComboBox
@@ -387,6 +384,19 @@ public class CompraView extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_jlBuscarIdCompraMouseClicked
 
+    private void jtProducPorNombreKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtProducPorNombreKeyReleased
+        // TODO add your handling code here:
+
+        String nombreBuscado = jtProducPorNombre.getText();
+
+        // Llama al método buscarProductoPorNombre en ProductoData para obtener los productos
+        ProductoData productoData = new ProductoData();
+        List<Producto> productosEncontrados = productoData.buscarProductoPorNombre(nombreBuscado);
+
+        // Llena la tabla con los productos encontrados
+        llenarTablaProductos(productosEncontrados);
+    }//GEN-LAST:event_jtProducPorNombreKeyReleased
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
@@ -400,7 +410,6 @@ public class CompraView extends javax.swing.JInternalFrame {
     private javax.swing.JButton jbGuardar;
     private javax.swing.JButton jbModificarCompra;
     private javax.swing.JButton jbSalir;
-    private javax.swing.JComboBox<String> jcbProducto;
     private javax.swing.JComboBox<String> jcbProveedor;
     private com.toedter.calendar.JDateChooser jdFecha;
     private javax.swing.JLabel jlBuscarIdCompra;
@@ -410,6 +419,7 @@ public class CompraView extends javax.swing.JInternalFrame {
     private javax.swing.JTextField jtCantidProdSol;
     private javax.swing.JTextField jtIDProveedor;
     private javax.swing.JTextField jtIdCompra;
+    private javax.swing.JTextField jtProducPorNombre;
     private javax.swing.JTable jtaListaProductos;
     // End of variables declaration//GEN-END:variables
 
@@ -430,7 +440,7 @@ public class CompraView extends javax.swing.JInternalFrame {
     private void deshabilitarCampos() {
 
         jtaListaProductos.setEnabled(false);
-        jcbProducto.setEnabled(false);
+        jtProducPorNombre.setEnabled(false);
         jbGuardar.setEnabled(false);
         jbEliminar.setEnabled(false);
 
@@ -439,7 +449,7 @@ public class CompraView extends javax.swing.JInternalFrame {
     private void habilitarCampos() {
 
         jtaListaProductos.setEnabled(true);
-        jcbProducto.setEnabled(true);
+        jtProducPorNombre.setEnabled(true);
         jbGuardar.setEnabled(true);
         jbEliminar.setEnabled(true);
 
@@ -467,7 +477,7 @@ public class CompraView extends javax.swing.JInternalFrame {
         // Obtén el proveedor y la fecha seleccionados
         String proveedorSeleccionado = jcbProveedor.getActionCommand();
         Date fechaSeleccionada = jdFecha.getDate();
-        String producASelec = jcbProducto.getActionCommand();
+        String producASelec = jtProducPorNombre.getSelectedText();
 
         // Verifica si se han seleccionado tanto un proveedor como una fecha
         if (proveedorSeleccionado != null && fechaSeleccionada != null) {
@@ -489,6 +499,17 @@ public class CompraView extends javax.swing.JInternalFrame {
         } else {
             // Si no se ha seleccionado un proveedor o una fecha, muestra un mensaje de error
             JOptionPane.showMessageDialog(this, "Por favor, seleccione un proveedor y una fecha antes de cargar los productos.");
+        }
+    }
+
+    private void llenarTablaProductos(List<Producto> productos) {
+        // Limpia el modelo de la tabla antes de agregar nuevos datos
+        DefaultTableModel modelo = (DefaultTableModel) jtaListaProductos.getModel();
+        modelo.setRowCount(0);
+
+        // Llena la tabla con los productos obtenidos
+        for (Producto producto : productos) {
+            modelo.addRow(new Object[]{producto.getIdProducto(), producto.getNombreProducto(), producto.getDescripcion(), producto.getStock(), producto.isEstado()});
         }
     }
 

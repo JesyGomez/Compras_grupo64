@@ -91,41 +91,71 @@ public Producto buscarProductoPorId(int id) {
 
     return producto;
 }
-
-public Producto buscarProductoPorNombre(String nombre) {
+public List<Producto> buscarProductoPorNombre(String nombre) {
     String sql = "SELECT id_producto, nombre, descripcion, precioActual, stock, estado FROM producto WHERE nombre=?";
-    Producto producto = null;
+    List<Producto> productos = new ArrayList<>();
 
     try {
         PreparedStatement ps = con.prepareStatement(sql);
         ps.setString(1, nombre);
         ResultSet rs = ps.executeQuery();
 
-        if (rs.next()) {
-            producto = new Producto();
-            int id = rs.getInt("id_producto");
-            producto.setIdProducto(id);
-            producto.setNombreProducto(nombre);
+        while (rs.next()) {
+            Producto producto = new Producto();
+            producto.setIdProducto(rs.getInt("id_producto"));
+            producto.setNombreProducto(rs.getString("nombre"));
             producto.setDescripcion(rs.getString("descripcion"));
             producto.setPrecioActual(rs.getDouble("precioActual"));
             producto.setStock(rs.getInt("stock"));
             producto.setEstado(rs.getBoolean("estado"));
 
-
-            if (!producto.isEstado()) {
-                JOptionPane.showMessageDialog(null, "El producto se encuentra en la lista pero está inactivo.");
+            if (producto.isEstado() && producto.getNombreProducto().startsWith(nombre)) {
+                productos.add(producto);
             }
-        } else {
-            JOptionPane.showMessageDialog(null, "El Producto no se encontró en la lista.");
         }
-        
+
         ps.close();
     } catch (SQLException ex) {
         JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Producto.");
     }
 
-    return producto;
+    return productos;
 }
+
+//public Producto buscarProductoPorNombre(String nombre) {
+//    String sql = "SELECT id_producto, nombre, descripcion, precioActual, stock, estado FROM producto WHERE nombre=?";
+//    Producto producto = null;
+//
+//    try {
+//        PreparedStatement ps = con.prepareStatement(sql);
+//        ps.setString(1, nombre);
+//        ResultSet rs = ps.executeQuery();
+//
+//        if (rs.next()) {
+//            producto = new Producto();
+//            int id = rs.getInt("id_producto");
+//            producto.setIdProducto(id);
+//            producto.setNombreProducto(nombre);
+//            producto.setDescripcion(rs.getString("descripcion"));
+//            producto.setPrecioActual(rs.getDouble("precioActual"));
+//            producto.setStock(rs.getInt("stock"));
+//            producto.setEstado(rs.getBoolean("estado"));
+//
+//
+//            if (!producto.isEstado()) {
+//                JOptionPane.showMessageDialog(null, "El producto se encuentra en la lista pero está inactivo.");
+//            }
+//        } else {
+//            JOptionPane.showMessageDialog(null, "El Producto no se encontró en la lista.");
+//        }
+//        
+//        ps.close();
+//    } catch (SQLException ex) {
+//        JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Producto.");
+//    }
+//
+//    return producto;
+//}
     public void modificarProducto(Producto producto) {
         
         String sql = "UPDATE producto SET nombre = ?, descripcion = ?, precioActual = ?, stock = ?, estado = ?"
