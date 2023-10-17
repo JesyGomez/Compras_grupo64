@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package proveMaxGrupo64.Vistas;
 
 import java.time.LocalDate;
@@ -263,48 +259,24 @@ public class CompraView extends javax.swing.JInternalFrame {
 
     private void jbEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbEliminarActionPerformed
         // TODO add your handling code here:
+        CompraData compra = new CompraData();
+        int idCompra = Integer.parseInt(jtIdCompra.getText());
+        compra.eliminarCompra(idCompra);
     }//GEN-LAST:event_jbEliminarActionPerformed
 
     private void jbModificarCompraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbModificarCompraActionPerformed
-// Obtiene el proveedor seleccionado del JComboBox
-        Proveedor proveedor = (Proveedor) jcbProveedor.getSelectedItem();
         String idCompra = jtIdCompra.getText().trim();
         CompraData compraData = new CompraData();
-        Compra compraEncontrada = compraData.buscarCompraPorId(WIDTH);
+        Compra compraEncontrada = compraData.buscarCompraPorId(Integer.parseInt(idCompra));
 
         if (compraEncontrada != null) {
-            // Modifica los atributos de compraEncontrada según sea necesario
-            compraEncontrada.setProveedor(proveedor);
-            // Modifica la fecha de la compra si el usuario ingresó una nueva fecha
-            // compraEncontrada.setFecha(fechaSeleccionada); // Usa la fecha seleccionada por el usuario
+            jcbProveedor.setSelectedItem(null);
+            jdFecha.setDate(null);
 
-            // Llama al método modificarCompra() con la compraEncontrada modificada
-            compraData.modificarCompra(compraEncontrada);
             JOptionPane.showMessageDialog(null, "Compra modificada correctamente.");
         } else {
             JOptionPane.showMessageDialog(null, "Compra no encontrada.");
         }
-//
-//        try {
-////            String proveSeleccionado = jcbProveedor.getActionCommand();
-////            int idProveedor = Integer.parseInt(jtIDProveedor.getText());
-////            Date fechaN = jdFecha.getDate();
-//            int idCompra = Integer.parseInt(jtIdCompra.getText());
-//
-//            Compra ModificarCompra = new Compra(prove, LocalDate.MIN);
-//            JOptionPane.showMessageDialog(null, "Probando...." + ModificarCompra);
-//            // Crear una instancia de Proveedor con los datos modificados
-//            // Mostrar un cuadro de diálogo de confirmación
-////            int confirmacion = JOptionPane.showConfirmDialog(this, "¿Seguro desea realizar este cambio en la compra?", "Confirmar Modificación", JOptionPane.YES_NO_OPTION);
-////
-////            if (confirmacion == JOptionPane.YES_OPTION) {
-//            // El usuario ha confirmado, entonces realizamos la modificación del proveedor
-//            compra.modificarCompra(ModificarCompra);
-//            //}
-//        } catch (NumberFormatException ex) {
-//            JOptionPane.showMessageDialog(this, "El ID debe ser un número válido.");
-//        }
-
     }//GEN-LAST:event_jbModificarCompraActionPerformed
 
     private void jlBuscarIdProveedorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jlBuscarIdProveedorMouseClicked
