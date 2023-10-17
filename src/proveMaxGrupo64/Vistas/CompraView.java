@@ -1,6 +1,7 @@
 
 package proveMaxGrupo64.Vistas;
 
+import java.awt.Color;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.Date;
@@ -66,7 +67,7 @@ public class CompraView extends javax.swing.JInternalFrame {
         jbGuardar = new javax.swing.JButton();
         jtIDProveedor = new javax.swing.JTextField();
         jlBuscarIdProveedor = new javax.swing.JLabel();
-        jbModificarCompra = new javax.swing.JButton();
+        jbLimpiarCompra = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
         jtIdCompra = new javax.swing.JTextField();
         jlBuscarIdCompra = new javax.swing.JLabel();
@@ -119,7 +120,7 @@ public class CompraView extends javax.swing.JInternalFrame {
         jbEliminar.setBackground(new java.awt.Color(0, 0, 204));
         jbEliminar.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         jbEliminar.setForeground(new java.awt.Color(255, 255, 255));
-        jbEliminar.setText("Eliminar");
+        jbEliminar.setText("Cerrar Compra");
         jbEliminar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jbEliminarActionPerformed(evt);
@@ -179,16 +180,16 @@ public class CompraView extends javax.swing.JInternalFrame {
         });
         jpFondo.add(jlBuscarIdProveedor, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 70, 120, -1));
 
-        jbModificarCompra.setBackground(new java.awt.Color(0, 0, 204));
-        jbModificarCompra.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        jbModificarCompra.setForeground(new java.awt.Color(255, 255, 255));
-        jbModificarCompra.setText("Modificar");
-        jbModificarCompra.addActionListener(new java.awt.event.ActionListener() {
+        jbLimpiarCompra.setBackground(new java.awt.Color(0, 0, 204));
+        jbLimpiarCompra.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        jbLimpiarCompra.setForeground(new java.awt.Color(255, 255, 255));
+        jbLimpiarCompra.setText("Limpiar");
+        jbLimpiarCompra.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jbModificarCompraActionPerformed(evt);
+                jbLimpiarCompraActionPerformed(evt);
             }
         });
-        jpFondo.add(jbModificarCompra, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 210, -1, -1));
+        jpFondo.add(jbLimpiarCompra, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 210, -1, -1));
 
         jLabel4.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
@@ -264,7 +265,7 @@ public class CompraView extends javax.swing.JInternalFrame {
         compra.eliminarCompra(idCompra);
     }//GEN-LAST:event_jbEliminarActionPerformed
 
-    private void jbModificarCompraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbModificarCompraActionPerformed
+    private void jbLimpiarCompraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbLimpiarCompraActionPerformed
         String idCompra = jtIdCompra.getText().trim();
         CompraData compraData = new CompraData();
         Compra compraEncontrada = compraData.buscarCompraPorId(Integer.parseInt(idCompra));
@@ -272,12 +273,13 @@ public class CompraView extends javax.swing.JInternalFrame {
         if (compraEncontrada != null) {
             jcbProveedor.setSelectedItem(null);
             jdFecha.setDate(null);
+            jtIDProveedor.setText("");
+            jtIdCompra.setText("");
 
-            JOptionPane.showMessageDialog(null, "Compra modificada correctamente.");
         } else {
             JOptionPane.showMessageDialog(null, "Compra no encontrada.");
         }
-    }//GEN-LAST:event_jbModificarCompraActionPerformed
+    }//GEN-LAST:event_jbLimpiarCompraActionPerformed
 
     private void jlBuscarIdProveedorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jlBuscarIdProveedorMouseClicked
 
@@ -380,7 +382,7 @@ public class CompraView extends javax.swing.JInternalFrame {
     private javax.swing.JButton jbArmarCompra;
     private javax.swing.JButton jbEliminar;
     private javax.swing.JButton jbGuardar;
-    private javax.swing.JButton jbModificarCompra;
+    private javax.swing.JButton jbLimpiarCompra;
     private javax.swing.JButton jbSalir;
     private javax.swing.JComboBox<String> jcbProveedor;
     private com.toedter.calendar.JDateChooser jdFecha;
