@@ -1,13 +1,13 @@
 package proveMaxGrupo64.Vistas;
 
-public class Consultas extends javax.swing.JInternalFrame {
+public class ConsultasView extends javax.swing.JInternalFrame {
 
     /**
      * Creates new form Consultas
      */
-    public Consultas() {
+    public ConsultasView() {
         initComponents();
-        this.setSize(750, 650);
+        this.setSize(665, 382);
         this.setTitle("Consultas");
     }
 
@@ -32,37 +32,40 @@ public class Consultas extends javax.swing.JInternalFrame {
         setClosable(true);
         setMaximizable(true);
 
+        jpFondo.setBackground(new java.awt.Color(0, 0, 102));
+
         jlConsultas.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+        jlConsultas.setForeground(new java.awt.Color(255, 255, 255));
         jlConsultas.setText("CONSULTAR");
 
-        jbProductosPorCompra.setBackground(new java.awt.Color(0, 102, 204));
+        jbProductosPorCompra.setBackground(new java.awt.Color(255, 255, 255));
         jbProductosPorCompra.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        jbProductosPorCompra.setForeground(new java.awt.Color(255, 255, 255));
+        jbProductosPorCompra.setForeground(new java.awt.Color(0, 0, 0));
         jbProductosPorCompra.setText("Productos de una Compra");
 
-        jbProveedoresPorProducto.setBackground(new java.awt.Color(0, 102, 204));
+        jbProveedoresPorProducto.setBackground(new java.awt.Color(255, 255, 255));
         jbProveedoresPorProducto.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        jbProveedoresPorProducto.setForeground(new java.awt.Color(255, 255, 255));
+        jbProveedoresPorProducto.setForeground(new java.awt.Color(0, 0, 0));
         jbProveedoresPorProducto.setText("Proveedores por Producto");
 
-        jbComprasProveedor.setBackground(new java.awt.Color(0, 102, 204));
+        jbComprasProveedor.setBackground(new java.awt.Color(255, 255, 255));
         jbComprasProveedor.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        jbComprasProveedor.setForeground(new java.awt.Color(255, 255, 255));
+        jbComprasProveedor.setForeground(new java.awt.Color(0, 0, 0));
         jbComprasProveedor.setText("Compras a un Proveedor");
 
-        jbProductosMasComprados.setBackground(new java.awt.Color(0, 102, 204));
+        jbProductosMasComprados.setBackground(new java.awt.Color(255, 255, 255));
         jbProductosMasComprados.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        jbProductosMasComprados.setForeground(new java.awt.Color(255, 255, 255));
+        jbProductosMasComprados.setForeground(new java.awt.Color(0, 0, 0));
         jbProductosMasComprados.setText("Productos Más Comprados");
 
-        jbProductosMenorStock.setBackground(new java.awt.Color(0, 102, 204));
+        jbProductosMenorStock.setBackground(new java.awt.Color(255, 255, 255));
         jbProductosMenorStock.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        jbProductosMenorStock.setForeground(new java.awt.Color(255, 255, 255));
+        jbProductosMenorStock.setForeground(new java.awt.Color(0, 0, 0));
         jbProductosMenorStock.setText("Productos de Menor Stock");
 
-        jbProductosCompra.setBackground(new java.awt.Color(0, 102, 204));
+        jbProductosCompra.setBackground(new java.awt.Color(255, 255, 255));
         jbProductosCompra.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        jbProductosCompra.setForeground(new java.awt.Color(255, 255, 255));
+        jbProductosCompra.setForeground(new java.awt.Color(0, 0, 0));
         jbProductosCompra.setText("Productos de una Compra");
 
         javax.swing.GroupLayout jpFondoLayout = new javax.swing.GroupLayout(jpFondo);
@@ -70,27 +73,29 @@ public class Consultas extends javax.swing.JInternalFrame {
         jpFondoLayout.setHorizontalGroup(
             jpFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jpFondoLayout.createSequentialGroup()
-                .addGap(29, 29, 29)
-                .addGroup(jpFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jpFondoLayout.createSequentialGroup()
-                        .addComponent(jbProductosCompra)
-                        .addGap(234, 234, 234))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jpFondoLayout.createSequentialGroup()
-                        .addComponent(jbProveedoresPorProducto)
-                        .addGap(18, 18, 18)
-                        .addComponent(jbProductosMasComprados)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jpFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jbProductosMenorStock)
-                    .addComponent(jbProductosPorCompra))
-                .addGap(17, 17, 17))
-            .addGroup(jpFondoLayout.createSequentialGroup()
-                .addGap(243, 243, 243)
-                .addGroup(jpFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jbComprasProveedor)
                     .addGroup(jpFondoLayout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addComponent(jlConsultas, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(29, 29, 29)
+                        .addGroup(jpFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(jpFondoLayout.createSequentialGroup()
+                                .addComponent(jbProductosCompra)
+                                .addGap(234, 234, 234))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jpFondoLayout.createSequentialGroup()
+                                .addComponent(jbProveedoresPorProducto)
+                                .addGap(18, 18, 18)
+                                .addComponent(jbProductosMasComprados))))
+                    .addGroup(jpFondoLayout.createSequentialGroup()
+                        .addGap(243, 243, 243)
+                        .addGroup(jpFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jpFondoLayout.createSequentialGroup()
+                                .addGap(18, 18, 18)
+                                .addComponent(jlConsultas, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jpFondoLayout.createSequentialGroup()
+                                .addComponent(jbComprasProveedor)
+                                .addGap(30, 30, 30)
+                                .addGroup(jpFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jbProductosMenorStock)
+                                    .addComponent(jbProductosPorCompra))))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jpFondoLayout.setVerticalGroup(

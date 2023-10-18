@@ -157,7 +157,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         // TODO add your handling code here:
        Escritorio.removeAll();
         Escritorio.repaint();
-        Consultas consultas = new Consultas();
+        ConsultasView consultas = new ConsultasView();
         consultas.setVisible(true);
         Escritorio.add(consultas);
         Escritorio.moveToFront(consultas);
