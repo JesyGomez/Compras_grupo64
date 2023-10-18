@@ -165,6 +165,7 @@ public class CompraView extends javax.swing.JInternalFrame {
 
         jpFondo.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 360, 670, 164));
 
+        jbGuardar.setBackground(new java.awt.Color(0, 0, 204));
         jbGuardar.setText("Guardar");
         jpFondo.add(jbGuardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 560, -1, -1));
         jpFondo.add(jtIDProveedor, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 30, 110, -1));

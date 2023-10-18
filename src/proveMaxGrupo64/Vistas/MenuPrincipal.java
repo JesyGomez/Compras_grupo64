@@ -52,6 +52,11 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jmConsultas.setText("Consultas");
         jmConsultas.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         jmConsultas.setPreferredSize(new java.awt.Dimension(150, 50));
+        jmConsultas.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jmConsultasMouseClicked(evt);
+            }
+        });
         jMenuBar1.add(jmConsultas);
 
         jMCompras.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/ComprasLogo.png"))); // NOI18N
@@ -147,6 +152,17 @@ public class MenuPrincipal extends javax.swing.JFrame {
         Escritorio.add(cv);
         Escritorio.moveToFront(cv);
     }//GEN-LAST:event_jmRegistrarCompraActionPerformed
+
+    private void jmConsultasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jmConsultasMouseClicked
+        // TODO add your handling code here:
+       Escritorio.removeAll();
+        Escritorio.repaint();
+        Consultas consultas = new Consultas();
+        consultas.setVisible(true);
+        Escritorio.add(consultas);
+        Escritorio.moveToFront(consultas);
+
+    }//GEN-LAST:event_jmConsultasMouseClicked
 
     /**
      * @param args the command line arguments
