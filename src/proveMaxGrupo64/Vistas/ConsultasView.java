@@ -7,7 +7,7 @@ public class ConsultasView extends javax.swing.JInternalFrame {
      */
     public ConsultasView() {
         initComponents();
-        this.setSize(665, 382);
+        this.setSize(665, 400);
         this.setTitle("Consultas");
     }
 
@@ -73,30 +73,26 @@ public class ConsultasView extends javax.swing.JInternalFrame {
         jpFondoLayout.setHorizontalGroup(
             jpFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jpFondoLayout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(jpFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jpFondoLayout.createSequentialGroup()
-                        .addGap(29, 29, 29)
-                        .addGroup(jpFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(jpFondoLayout.createSequentialGroup()
-                                .addComponent(jbProductosCompra)
-                                .addGap(234, 234, 234))
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jpFondoLayout.createSequentialGroup()
-                                .addComponent(jbProveedoresPorProducto)
-                                .addGap(18, 18, 18)
-                                .addComponent(jbProductosMasComprados))))
-                    .addGroup(jpFondoLayout.createSequentialGroup()
-                        .addGap(243, 243, 243)
+                        .addComponent(jbProductosCompra)
                         .addGroup(jpFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jpFondoLayout.createSequentialGroup()
-                                .addGap(18, 18, 18)
+                                .addGap(67, 67, 67)
                                 .addComponent(jlConsultas, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jpFondoLayout.createSequentialGroup()
-                                .addComponent(jbComprasProveedor)
                                 .addGap(30, 30, 30)
+                                .addComponent(jbProductosMasComprados)
+                                .addGap(39, 39, 39)
                                 .addGroup(jpFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jbProductosMenorStock)
-                                    .addComponent(jbProductosPorCompra))))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                    .addComponent(jbProductosPorCompra)))))
+                    .addGroup(jpFondoLayout.createSequentialGroup()
+                        .addComponent(jbProveedoresPorProducto)
+                        .addGap(41, 41, 41)
+                        .addComponent(jbComprasProveedor)))
+                .addGap(17, 18, Short.MAX_VALUE))
         );
         jpFondoLayout.setVerticalGroup(
             jpFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
