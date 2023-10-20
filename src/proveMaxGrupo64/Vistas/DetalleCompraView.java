@@ -12,7 +12,9 @@ import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import proveMaxGrupo64.AccesoADatos.CompraData;
+import proveMaxGrupo64.AccesoADatos.DetalleCompraData;
 import proveMaxGrupo64.AccesoADatos.ProductoData;
+import proveMaxGrupo64.Entidades.DetalleCompra;
 import proveMaxGrupo64.Entidades.Producto;
 
 /**
@@ -20,7 +22,8 @@ import proveMaxGrupo64.Entidades.Producto;
  * @author Windows 10 OS
  */
 public class DetalleCompraView extends javax.swing.JInternalFrame {
-
+     
+    private DetalleCompraData detaData;
     private DefaultTableModel modelo = new DefaultTableModel() {
         public boolean isCellEditable(int f, int c) {
 
@@ -53,6 +56,7 @@ public class DetalleCompraView extends javax.swing.JInternalFrame {
         jtIDDetalleCompra = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         jtIDProveedor = new javax.swing.JTextField();
+        jBModificar = new javax.swing.JButton();
 
         jLabel1.setText("DETALLE DE COMPRA");
 
@@ -77,6 +81,13 @@ public class DetalleCompraView extends javax.swing.JInternalFrame {
 
         jLabel5.setText("ID Proveedor:");
 
+        jBModificar.setText("Modificar");
+        jBModificar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBModificarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jpFondoLayout = new javax.swing.GroupLayout(jpFondo);
         jpFondo.setLayout(jpFondoLayout);
         jpFondoLayout.setHorizontalGroup(
@@ -99,18 +110,23 @@ public class DetalleCompraView extends javax.swing.JInternalFrame {
                 .addContainerGap()
                 .addGroup(jpFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jpFondoLayout.createSequentialGroup()
-                        .addComponent(jLabel2)
+                        .addGroup(jpFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jpFondoLayout.createSequentialGroup()
+                                .addComponent(jLabel2)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jtIDCompra, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jLabel5))
+                            .addGroup(jpFondoLayout.createSequentialGroup()
+                                .addComponent(jLabel3)
+                                .addGap(18, 18, 18)
+                                .addComponent(jtIDDetalleCompra, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jtIDCompra, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel5))
+                        .addComponent(jtIDProveedor, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(17, 17, 17))
                     .addGroup(jpFondoLayout.createSequentialGroup()
-                        .addComponent(jLabel3)
-                        .addGap(18, 18, 18)
-                        .addComponent(jtIDDetalleCompra, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jtIDProveedor, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(17, 17, 17))
+                        .addComponent(jBModificar)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         jpFondoLayout.setVerticalGroup(
             jpFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -131,7 +147,9 @@ public class DetalleCompraView extends javax.swing.JInternalFrame {
                 .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(161, Short.MAX_VALUE))
+                .addGap(35, 35, 35)
+                .addComponent(jBModificar)
+                .addContainerGap(94, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -153,8 +171,38 @@ public class DetalleCompraView extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jBModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBModificarActionPerformed
+        // TODO add your handling code here:
+        
+         int filaSeleccinada = jtaListaProductos.getSelectedRow();
+         if (filaSeleccinada != -1) {
+            int idDetalle= (Integer) jtaListaProductos.getValueAt(filaSeleccinada, 0);
+
+          Integer nuevaCantidad = obtenerNuevaCantidad();
+            if (nuevaCantidad != null) {
+                
+                if (nuevaCantidad >= 0 ) {
+                    jtaListaProductos.setValueAt(nuevaCantidad, filaSeleccinada, 3);
+                    detaData.actualizarcantidad(idDetalle, nuevaCantidad);
+                   
+                } else {
+                    // Si la nota no está en rango válido se muestra un mensaje de error 
+                    JOptionPane.showMessageDialog(null, "La cantidad debe ser mayor a 0.", "Error", JOptionPane.ERROR_MESSAGE);
+                }
+            }
+        
+        
+        
+        
+        
+        
+        
+       
+    }//GEN-LAST:event_jBModificarActionPerformed
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jBModificar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -175,5 +223,35 @@ public class DetalleCompraView extends javax.swing.JInternalFrame {
         }
     }
     
-   
+     private void armarCabecera() {
+        modelo.addColumn("Id.DetalleCompras");
+        modelo.addColumn("Id.Compra");
+        modelo.addColumn("Id.Producto");
+        modelo.addColumn("Cantidad");
+        modelo.addColumn("PrecioCosto");
+        jtaListaProductos.setModel(modelo);
+    }
+
+    private void borrarFilas() {
+
+        int filas =   jtaListaProductos.getRowCount() - 1;
+        for (int f = filas; f >= 0; f--) {
+            modelo.removeRow(f);
+        }
+    }
+    
+      private Integer  obtenerNuevaCantidad() {
+        String input = JOptionPane.showInputDialog("Ingrese la nueva Cantidad:");
+        if (input != null) {
+            try {
+                return Integer.parseInt(input);
+                  //return Double.parseDouble(input);
+            } catch (NumberFormatException e) {
+                JOptionPane.showMessageDialog(null, "La entrada no es un número válido.", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+        // Devolvemos null para indicar que no se ingresó una nueva o se canceló la operación
+        return null;
+    }
+    
 }

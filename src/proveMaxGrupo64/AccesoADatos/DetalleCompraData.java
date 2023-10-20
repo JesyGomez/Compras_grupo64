@@ -5,6 +5,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import proveMaxGrupo64.Entidades.Compra;
 import proveMaxGrupo64.Entidades.DetalleCompra;
@@ -91,7 +93,86 @@ public class DetalleCompraData {
         }
 
         return detalleCompra;
+    }  
+      
+      public void modificarDetalleCompra(DetalleCompra deta){
+      
+         String sql= "UPDATE detallecompra SET id_compra = ?, id_producto = ?,cantidad = ?, precioCosto = ?"
+                 + " WHERE  id_detalle = ?";
+      
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+            
+            ps.setInt(1, deta.getCompra().getIdCompra() );
+            ps.setInt(2, deta.getProducto().getIdProducto());
+            ps.setInt(3, deta.getCantidad());
+            ps.setDouble(4, deta.getPrecioCosto());
+            ps.setInt(5, deta.getIdDetalle());
+            int exito = ps.executeUpdate();
+            if (exito == 1) {
+                JOptionPane.showMessageDialog(null, "Detalle de Compra Modificada");
+
+            }
+            
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Detalle de Compras");
+        }
+      
+      
+      }
+       public void actualizarcantidad(int idDetalle, int cantidad) {
+        String sql = "UPDATE  detallecompra SET cantidad = ? WHERE  idDetalle = ?";
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1,cantidad );
+            ps.setInt(2, idDetalle);
+             
+            
+            int filas = ps.executeUpdate();
+            if (filas > 0) {
+                JOptionPane.showMessageDialog(null, "Nota Actualizada");
+            }
+            ps.close();
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al acceder a la Tabla");
+        }
     }
+
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+       public void actualizarNota(int idAlumno, int idMateria, double nota) {
+        String sql = "UPDATE inscripcion SET nota = ? WHERE idAlumno = ? AND idMateria = ?";
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setDouble(1, nota);
+            ps.setInt(2, idAlumno);
+            ps.setDouble(3, idMateria);
+            int filas = ps.executeUpdate();
+            if (filas > 0) {
+                JOptionPane.showMessageDialog(null, "Nota Actualizada");
+            }
+            ps.close();
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al acceder a la Tabla");
+        }
+    }
+
+      
+      
+      
+      
+      
+    
+  
 
     
     /*public void modificarDetalleCompra(DetalleCompra dc) {
