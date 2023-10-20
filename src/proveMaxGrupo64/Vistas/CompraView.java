@@ -53,7 +53,7 @@ public class CompraView extends javax.swing.JInternalFrame {
         jpFondo = new javax.swing.JPanel();
         jlFecha = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        jbArmarCompra = new javax.swing.JButton();
+        jbRegistrarCompra = new javax.swing.JButton();
         jcbProveedor = new javax.swing.JComboBox<>();
         jdFecha = new com.toedter.calendar.JDateChooser();
         jbGuardar = new javax.swing.JButton();
@@ -67,6 +67,7 @@ public class CompraView extends javax.swing.JInternalFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
+        Escritorio3 = new javax.swing.JDesktopPane();
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jtaListaProductos = new javax.swing.JTable();
@@ -75,7 +76,7 @@ public class CompraView extends javax.swing.JInternalFrame {
         jLabel3 = new javax.swing.JLabel();
         jtCantidProdSol = new javax.swing.JTextField();
         jbSalir = new javax.swing.JButton();
-        jbEliminar = new javax.swing.JButton();
+        jbCerrarCompra = new javax.swing.JButton();
         jLabel7 = new javax.swing.JLabel();
 
         setClosable(true);
@@ -95,16 +96,16 @@ public class CompraView extends javax.swing.JInternalFrame {
         jLabel5.setText("Razón Social:");
         jpFondo.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 350, -1, -1));
 
-        jbArmarCompra.setBackground(new java.awt.Color(0, 0, 204));
-        jbArmarCompra.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        jbArmarCompra.setForeground(new java.awt.Color(255, 255, 255));
-        jbArmarCompra.setText("Registrar Compra");
-        jbArmarCompra.addActionListener(new java.awt.event.ActionListener() {
+        jbRegistrarCompra.setBackground(new java.awt.Color(0, 0, 204));
+        jbRegistrarCompra.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        jbRegistrarCompra.setForeground(new java.awt.Color(255, 255, 255));
+        jbRegistrarCompra.setText("Registrar Compra");
+        jbRegistrarCompra.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jbArmarCompraActionPerformed(evt);
+                jbRegistrarCompraActionPerformed(evt);
             }
         });
-        jpFondo.add(jbArmarCompra, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 520, -1, -1));
+        jpFondo.add(jbRegistrarCompra, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 520, -1, -1));
 
         jcbProveedor.setBackground(new java.awt.Color(255, 255, 255));
         jcbProveedor.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
@@ -221,13 +222,13 @@ public class CompraView extends javax.swing.JInternalFrame {
             }
         });
 
-        jbEliminar.setBackground(new java.awt.Color(0, 0, 204));
-        jbEliminar.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        jbEliminar.setForeground(new java.awt.Color(255, 255, 255));
-        jbEliminar.setText("Cerrar Compra");
-        jbEliminar.addActionListener(new java.awt.event.ActionListener() {
+        jbCerrarCompra.setBackground(new java.awt.Color(0, 0, 204));
+        jbCerrarCompra.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        jbCerrarCompra.setForeground(new java.awt.Color(255, 255, 255));
+        jbCerrarCompra.setText("Cerrar Compra");
+        jbCerrarCompra.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jbEliminarActionPerformed(evt);
+                jbCerrarCompraActionPerformed(evt);
             }
         });
 
@@ -244,7 +245,7 @@ public class CompraView extends javax.swing.JInternalFrame {
                 .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addGap(110, 110, 110)
-                .addComponent(jbEliminar)
+                .addComponent(jbCerrarCompra)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jbSalir)
                 .addGap(78, 78, 78))
@@ -269,7 +270,7 @@ public class CompraView extends javax.swing.JInternalFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addGap(25, 25, 25)
                 .addComponent(jLabel7)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 59, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(jtProducPorNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -282,8 +283,31 @@ public class CompraView extends javax.swing.JInternalFrame {
                 .addGap(101, 101, 101)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jbSalir)
-                    .addComponent(jbEliminar))
+                    .addComponent(jbCerrarCompra))
                 .addGap(22, 22, 22))
+        );
+
+        Escritorio3.setLayer(jPanel1, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        javax.swing.GroupLayout Escritorio3Layout = new javax.swing.GroupLayout(Escritorio3);
+        Escritorio3.setLayout(Escritorio3Layout);
+        Escritorio3Layout.setHorizontalGroup(
+            Escritorio3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 682, Short.MAX_VALUE)
+            .addGroup(Escritorio3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(Escritorio3Layout.createSequentialGroup()
+                    .addContainerGap()
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addContainerGap()))
+        );
+        Escritorio3Layout.setVerticalGroup(
+            Escritorio3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 572, Short.MAX_VALUE)
+            .addGroup(Escritorio3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(Escritorio3Layout.createSequentialGroup()
+                    .addContainerGap()
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addContainerGap()))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -292,16 +316,20 @@ public class CompraView extends javax.swing.JInternalFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jpFondo, javax.swing.GroupLayout.PREFERRED_SIZE, 509, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+                .addContainerGap(682, Short.MAX_VALUE))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                    .addContainerGap(503, Short.MAX_VALUE)
+                    .addComponent(Escritorio3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap()))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jpFondo, javax.swing.GroupLayout.DEFAULT_SIZE, 575, Short.MAX_VALUE)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+            .addComponent(jpFondo, javax.swing.GroupLayout.DEFAULT_SIZE, 578, Short.MAX_VALUE)
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addComponent(Escritorio3)
+                    .addContainerGap()))
         );
 
         pack();
@@ -322,9 +350,10 @@ public class CompraView extends javax.swing.JInternalFrame {
         jcbProveedor.getSelectedItem();
     }//GEN-LAST:event_jcbProveedorActionPerformed
 
-    private void jbArmarCompraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbArmarCompraActionPerformed
+    private void jbRegistrarCompraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbRegistrarCompraActionPerformed
         // TODO add your handling code here:
         habilitarCampos();
+        deshabilitarCamposCompra();
         CompraData compraData = new CompraData();
         llenarTabla();
         try {
@@ -336,14 +365,15 @@ public class CompraView extends javax.swing.JInternalFrame {
         } catch (NumberFormatException ex) {
             JOptionPane.showMessageDialog(this, "La fecha debe ser válida.");
         }
-    }//GEN-LAST:event_jbArmarCompraActionPerformed
+    }//GEN-LAST:event_jbRegistrarCompraActionPerformed
 
-    private void jbEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbEliminarActionPerformed
+    private void jbCerrarCompraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbCerrarCompraActionPerformed
         // TODO add your handling code here:
-        CompraData compra = new CompraData();
-        int idCompra = Integer.parseInt(jtIdCompra.getText());
-        compra.eliminarCompra(idCompra);
-    }//GEN-LAST:event_jbEliminarActionPerformed
+        DetalleCompraView dcv = new DetalleCompraView();
+        dcv.setVisible(true);
+        Escritorio3.add(dcv);
+        Escritorio3.moveToFront(dcv);
+    }//GEN-LAST:event_jbCerrarCompraActionPerformed
 
     private void jbLimpiarCompraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbLimpiarCompraActionPerformed
         String idCompra = jtIdCompra.getText().trim();
@@ -440,7 +470,8 @@ public class CompraView extends javax.swing.JInternalFrame {
 
     private void jtProducPorNombreKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtProducPorNombreKeyReleased
         // TODO add your handling code here:
-
+        
+        
         String nombreBuscado = jtProducPorNombre.getText();
 
         // Llama al método buscarProductoPorNombre en ProductoData para obtener los productos
@@ -453,6 +484,7 @@ public class CompraView extends javax.swing.JInternalFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JDesktopPane Escritorio3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -464,10 +496,10 @@ public class CompraView extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JButton jbArmarCompra;
-    private javax.swing.JButton jbEliminar;
+    private javax.swing.JButton jbCerrarCompra;
     private javax.swing.JButton jbGuardar;
     private javax.swing.JButton jbLimpiarCompra;
+    private javax.swing.JButton jbRegistrarCompra;
     private javax.swing.JButton jbSalir;
     private javax.swing.JComboBox<String> jcbProveedor;
     private com.toedter.calendar.JDateChooser jdFecha;
@@ -501,7 +533,7 @@ public class CompraView extends javax.swing.JInternalFrame {
         jtaListaProductos.setEnabled(false);
         jtProducPorNombre.setEnabled(false);
         jbGuardar.setEnabled(false);
-        jbEliminar.setEnabled(false);
+        jbCerrarCompra.setEnabled(false);
 
     }
 
@@ -510,7 +542,7 @@ public class CompraView extends javax.swing.JInternalFrame {
         jtaListaProductos.setEnabled(true);
         jtProducPorNombre.setEnabled(true);
         jbGuardar.setEnabled(true);
-        jbEliminar.setEnabled(true);
+        jbCerrarCompra.setEnabled(true);
 
     }
 
@@ -563,11 +595,14 @@ public class CompraView extends javax.swing.JInternalFrame {
 
     private void llenarTablaProductos(List<Producto> productos) {
         // Limpia el modelo de la tabla antes de agregar nuevos datos
+        
         DefaultTableModel modelo = (DefaultTableModel) jtaListaProductos.getModel();
         modelo.setRowCount(0);
 
         // Llena la tabla con los productos obtenidos
+        
         for (Producto producto : productos) {
+            
             modelo.addRow(new Object[]{producto.getIdProducto(), producto.getNombreProducto(), producto.getDescripcion(), producto.getStock(), producto.isEstado()});
         }
     }
@@ -580,5 +615,31 @@ public class CompraView extends javax.swing.JInternalFrame {
         } catch (NumberFormatException e) {
             return false;
         }
+    }
+    
+    private void deshabilitarCamposCompra() {
+
+        jdFecha.setEnabled(false);
+        jtIdCompra.setEnabled(false);
+        jtIDProveedor.setEnabled(false);
+        jcbProveedor.setEnabled(false);
+        jbGuardar.setEnabled(false);
+        jbRegistrarCompra.setEnabled(false);
+        jbLimpiarCompra.setEnabled(false);
+        jlBuscarIdCompra.setEnabled(false);
+        jlBuscarIdProveedor.setEnabled(false);
+
+    }
+
+    private void habilitarCamposCompra() {
+
+        jdFecha.setEnabled(true);
+        jtIdCompra.setEnabled(true);
+        jtIDProveedor.setEnabled(true);
+        jcbProveedor.setEnabled(true);
+        jbGuardar.setEnabled(true);
+        jbRegistrarCompra.setEnabled(true);
+        jbLimpiarCompra.setEnabled(true);
+
     }
 }

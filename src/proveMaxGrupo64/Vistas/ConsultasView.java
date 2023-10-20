@@ -8,8 +8,8 @@ public class ConsultasView extends javax.swing.JInternalFrame {
     public ConsultasView() {
         initComponents();
         this.setSize(665, 400);
-       // Escri = new EscritorioModificado();
-
+        //Escritorio2 = new EscritorioModificado();
+        
         this.setTitle("Consultas");
     }
 
@@ -22,6 +22,7 @@ public class ConsultasView extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        Escritorio2 = new javax.swing.JDesktopPane();
         jpFondo = new javax.swing.JPanel();
         jlConsultas = new javax.swing.JLabel();
         jbProductosPorCompra = new javax.swing.JButton();
@@ -80,8 +81,12 @@ public class ConsultasView extends javax.swing.JInternalFrame {
         jpFondoLayout.setHorizontalGroup(
             jpFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jpFondoLayout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(jpFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jpFondoLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jbProveedoresPorProducto)
+                        .addGap(41, 41, 41)
+                        .addComponent(jbComprasProveedor))
                     .addGroup(jpFondoLayout.createSequentialGroup()
                         .addComponent(jbProductosCompra)
                         .addGroup(jpFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -94,19 +99,15 @@ public class ConsultasView extends javax.swing.JInternalFrame {
                                 .addGap(39, 39, 39)
                                 .addGroup(jpFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jbProductosMenorStock)
-                                    .addComponent(jbProductosPorCompra)))))
-                    .addGroup(jpFondoLayout.createSequentialGroup()
-                        .addComponent(jbProveedoresPorProducto)
-                        .addGap(41, 41, 41)
-                        .addComponent(jbComprasProveedor)))
-                .addGap(17, 18, Short.MAX_VALUE))
+                                    .addComponent(jbProductosPorCompra))))))
+                .addGap(17, 24, Short.MAX_VALUE))
         );
         jpFondoLayout.setVerticalGroup(
             jpFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jpFondoLayout.createSequentialGroup()
                 .addGap(23, 23, 23)
                 .addComponent(jlConsultas)
-                .addGap(57, 57, 57)
+                .addGap(61, 61, 61)
                 .addGroup(jpFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jbProductosCompra, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jbComprasProveedor, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -116,18 +117,41 @@ public class ConsultasView extends javax.swing.JInternalFrame {
                     .addComponent(jbProveedoresPorProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jbProductosMasComprados, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jbProductosMenorStock, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(66, Short.MAX_VALUE))
+                .addContainerGap(62, Short.MAX_VALUE))
+        );
+
+        Escritorio2.setLayer(jpFondo, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        javax.swing.GroupLayout Escritorio2Layout = new javax.swing.GroupLayout(Escritorio2);
+        Escritorio2.setLayout(Escritorio2Layout);
+        Escritorio2Layout.setHorizontalGroup(
+            Escritorio2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 664, Short.MAX_VALUE)
+            .addGroup(Escritorio2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(Escritorio2Layout.createSequentialGroup()
+                    .addContainerGap()
+                    .addComponent(jpFondo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addContainerGap()))
+        );
+        Escritorio2Layout.setVerticalGroup(
+            Escritorio2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 360, Short.MAX_VALUE)
+            .addGroup(Escritorio2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(Escritorio2Layout.createSequentialGroup()
+                    .addContainerGap()
+                    .addComponent(jpFondo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addContainerGap()))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jpFondo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(Escritorio2, javax.swing.GroupLayout.Alignment.TRAILING)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jpFondo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(Escritorio2, javax.swing.GroupLayout.Alignment.TRAILING)
         );
 
         pack();
@@ -135,17 +159,18 @@ public class ConsultasView extends javax.swing.JInternalFrame {
 
     private void jbProductosCompraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbProductosCompraActionPerformed
         // TODO add your handling code here:
-        Escritorio.removeAll();
-        Escritorio.repaint();
+        
+        
         ProducCompraPorFecha ppc = new ProducCompraPorFecha();
         ppc.setVisible(true);
-        Escritorio.add(ppc);
-        Escritorio.moveToFront(ppc);
+        Escritorio2.add(ppc);
+        Escritorio2.moveToFront(ppc);
 
     }//GEN-LAST:event_jbProductosCompraActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JDesktopPane Escritorio2;
     private javax.swing.JButton jbComprasProveedor;
     private javax.swing.JButton jbProductosCompra;
     private javax.swing.JButton jbProductosMasComprados;
