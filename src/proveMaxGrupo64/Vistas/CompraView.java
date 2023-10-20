@@ -30,7 +30,7 @@ public class CompraView extends javax.swing.JInternalFrame {
 
     public CompraView() {
         initComponents();
-        this.setSize(701, 650);
+        this.setSize(1200, 650);
         this.setTitle("Gestión de Compras");
         deshabilitarCampos();
         ProductoData produ = new ProductoData();
@@ -51,19 +51,11 @@ public class CompraView extends javax.swing.JInternalFrame {
     private void initComponents() {
 
         jpFondo = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
         jlFecha = new javax.swing.JLabel();
-        jtCantidProdSol = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         jbArmarCompra = new javax.swing.JButton();
-        jbEliminar = new javax.swing.JButton();
-        jbSalir = new javax.swing.JButton();
         jcbProveedor = new javax.swing.JComboBox<>();
         jdFecha = new com.toedter.calendar.JDateChooser();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jtaListaProductos = new javax.swing.JTable();
         jbGuardar = new javax.swing.JButton();
         jtIDProveedor = new javax.swing.JTextField();
         jlBuscarIdProveedor = new javax.swing.JLabel();
@@ -71,7 +63,20 @@ public class CompraView extends javax.swing.JInternalFrame {
         jLabel4 = new javax.swing.JLabel();
         jtIdCompra = new javax.swing.JTextField();
         jlBuscarIdCompra = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jtaListaProductos = new javax.swing.JTable();
+        jLabel2 = new javax.swing.JLabel();
         jtProducPorNombre = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
+        jtCantidProdSol = new javax.swing.JTextField();
+        jbSalir = new javax.swing.JButton();
+        jbEliminar = new javax.swing.JButton();
+        jLabel7 = new javax.swing.JLabel();
 
         setClosable(true);
         setResizable(true);
@@ -80,75 +85,104 @@ public class CompraView extends javax.swing.JInternalFrame {
         jpFondo.setPreferredSize(new java.awt.Dimension(600, 500));
         jpFondo.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel1.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setText("REGISTRO DE COMPRAS");
-        jpFondo.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(177, 0, -1, -1));
-
-        jLabel2.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel2.setText("Producto a Solicitar:");
-        jpFondo.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 280, -1, -1));
-
-        jLabel3.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel3.setText("Cantidad:");
-        jpFondo.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 280, -1, -1));
-
         jlFecha.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         jlFecha.setForeground(new java.awt.Color(255, 255, 255));
         jlFecha.setText("Fecha:");
-        jpFondo.add(jlFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 90, -1, -1));
-        jpFondo.add(jtCantidProdSol, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 280, 80, -1));
+        jpFondo.add(jlFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 130, -1, -1));
 
         jLabel5.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel5.setText("Proveedor:");
-        jpFondo.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(14, 33, -1, -1));
+        jLabel5.setText("Razón Social:");
+        jpFondo.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 350, -1, -1));
 
         jbArmarCompra.setBackground(new java.awt.Color(0, 0, 204));
         jbArmarCompra.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         jbArmarCompra.setForeground(new java.awt.Color(255, 255, 255));
-        jbArmarCompra.setText("Armar Compra");
+        jbArmarCompra.setText("Registrar Compra");
         jbArmarCompra.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jbArmarCompraActionPerformed(evt);
             }
         });
-        jpFondo.add(jbArmarCompra, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 120, -1, -1));
+        jpFondo.add(jbArmarCompra, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 520, -1, -1));
 
-        jbEliminar.setBackground(new java.awt.Color(0, 0, 204));
-        jbEliminar.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        jbEliminar.setForeground(new java.awt.Color(255, 255, 255));
-        jbEliminar.setText("Cerrar Compra");
-        jbEliminar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jbEliminarActionPerformed(evt);
-            }
-        });
-        jpFondo.add(jbEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 560, -1, -1));
-
-        jbSalir.setBackground(new java.awt.Color(0, 0, 204));
-        jbSalir.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        jbSalir.setForeground(new java.awt.Color(255, 255, 255));
-        jbSalir.setText("Salir");
-        jbSalir.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jbSalirActionPerformed(evt);
-            }
-        });
-        jpFondo.add(jbSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 560, -1, -1));
-
+        jcbProveedor.setBackground(new java.awt.Color(255, 255, 255));
+        jcbProveedor.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        jcbProveedor.setForeground(new java.awt.Color(0, 0, 0));
         jcbProveedor.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione un proveedor:" }));
         jcbProveedor.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jcbProveedorActionPerformed(evt);
             }
         });
-        jpFondo.add(jcbProveedor, new org.netbeans.lib.awtextra.AbsoluteConstraints(132, 32, 399, -1));
+        jpFondo.add(jcbProveedor, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 400, 390, -1));
 
         jdFecha.setDateFormatString("yyyy-MM-dd");
-        jpFondo.add(jdFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 90, 210, -1));
+        jpFondo.add(jdFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 130, 210, 29));
+
+        jbGuardar.setBackground(new java.awt.Color(0, 0, 204));
+        jbGuardar.setText("Guardar");
+        jpFondo.add(jbGuardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 520, -1, -1));
+        jpFondo.add(jtIDProveedor, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 220, 110, -1));
+
+        jlBuscarIdProveedor.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        jlBuscarIdProveedor.setForeground(new java.awt.Color(255, 255, 255));
+        jlBuscarIdProveedor.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/32x32.png"))); // NOI18N
+        jlBuscarIdProveedor.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jlBuscarIdProveedorMouseClicked(evt);
+            }
+        });
+        jpFondo.add(jlBuscarIdProveedor, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 220, 50, -1));
+
+        jbLimpiarCompra.setBackground(new java.awt.Color(0, 0, 204));
+        jbLimpiarCompra.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        jbLimpiarCompra.setForeground(new java.awt.Color(255, 255, 255));
+        jbLimpiarCompra.setText("Limpiar");
+        jbLimpiarCompra.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbLimpiarCompraActionPerformed(evt);
+            }
+        });
+        jpFondo.add(jbLimpiarCompra, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 520, -1, -1));
+
+        jLabel4.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel4.setText("ID de Compra:");
+        jpFondo.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 210, -1, -1));
+        jpFondo.add(jtIdCompra, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 170, 110, -1));
+
+        jlBuscarIdCompra.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/32x32.png"))); // NOI18N
+        jlBuscarIdCompra.setText("jLabel6");
+        jlBuscarIdCompra.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jlBuscarIdCompraMouseClicked(evt);
+            }
+        });
+        jpFondo.add(jlBuscarIdCompra, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 240, 40, 30));
+
+        jLabel6.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel6.setText("Consulta de Compra");
+        jpFondo.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 130, -1, -1));
+
+        jLabel1.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel1.setText("REGISTRO DE COMPRAS");
+        jpFondo.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+
+        jLabel8.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+        jLabel8.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel8.setText("Ingrese los datos para Generar Compra");
+        jpFondo.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 50, -1, -1));
+
+        jLabel9.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        jLabel9.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel9.setText("ID de Proveedor");
+        jpFondo.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 270, -1, -1));
+
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.setForeground(new java.awt.Color(0, 0, 204));
 
         jtaListaProductos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -163,66 +197,111 @@ public class CompraView extends javax.swing.JInternalFrame {
         ));
         jScrollPane1.setViewportView(jtaListaProductos);
 
-        jpFondo.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 360, 670, 164));
-
-        jbGuardar.setBackground(new java.awt.Color(0, 0, 204));
-        jbGuardar.setText("Guardar");
-        jpFondo.add(jbGuardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 560, -1, -1));
-        jpFondo.add(jtIDProveedor, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 30, 110, -1));
-
-        jlBuscarIdProveedor.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        jlBuscarIdProveedor.setForeground(new java.awt.Color(255, 255, 255));
-        jlBuscarIdProveedor.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/32x32.png"))); // NOI18N
-        jlBuscarIdProveedor.setText("ID Proveedor");
-        jlBuscarIdProveedor.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jlBuscarIdProveedorMouseClicked(evt);
-            }
-        });
-        jpFondo.add(jlBuscarIdProveedor, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 70, 120, -1));
-
-        jbLimpiarCompra.setBackground(new java.awt.Color(0, 0, 204));
-        jbLimpiarCompra.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        jbLimpiarCompra.setForeground(new java.awt.Color(255, 255, 255));
-        jbLimpiarCompra.setText("Limpiar");
-        jbLimpiarCompra.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jbLimpiarCompraActionPerformed(evt);
-            }
-        });
-        jpFondo.add(jbLimpiarCompra, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 210, -1, -1));
-
-        jLabel4.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel4.setText("ID de Compra:");
-        jpFondo.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 190, -1, -1));
-        jpFondo.add(jtIdCompra, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 190, 140, -1));
-
-        jlBuscarIdCompra.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/32x32.png"))); // NOI18N
-        jlBuscarIdCompra.setText("jLabel6");
-        jlBuscarIdCompra.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jlBuscarIdCompraMouseClicked(evt);
-            }
-        });
-        jpFondo.add(jlBuscarIdCompra, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 190, 40, 30));
+        jLabel2.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel2.setText("Producto a Solicitar:");
 
         jtProducPorNombre.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 jtProducPorNombreKeyReleased(evt);
             }
         });
-        jpFondo.add(jtProducPorNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 280, 250, -1));
+
+        jLabel3.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel3.setText("Cantidad:");
+
+        jbSalir.setBackground(new java.awt.Color(0, 0, 204));
+        jbSalir.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        jbSalir.setForeground(new java.awt.Color(255, 255, 255));
+        jbSalir.setText("Salir");
+        jbSalir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbSalirActionPerformed(evt);
+            }
+        });
+
+        jbEliminar.setBackground(new java.awt.Color(0, 0, 204));
+        jbEliminar.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        jbEliminar.setForeground(new java.awt.Color(255, 255, 255));
+        jbEliminar.setText("Cerrar Compra");
+        jbEliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbEliminarActionPerformed(evt);
+            }
+        });
+
+        jLabel7.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel7.setText("Selección de Productos");
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 670, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGap(110, 110, 110)
+                .addComponent(jbEliminar)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jbSalir)
+                .addGap(78, 78, 78))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(16, 16, 16)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel3))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jtCantidProdSol, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jtProducPorNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(310, 310, 310)
+                        .addComponent(jLabel7)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGap(25, 25, 25)
+                .addComponent(jLabel7)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(jtProducPorNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(49, 49, 49)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(jtCantidProdSol, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(49, 49, 49)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(101, 101, 101)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jbSalir)
+                    .addComponent(jbEliminar))
+                .addGap(22, 22, 22))
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jpFondo, javax.swing.GroupLayout.DEFAULT_SIZE, 699, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jpFondo, javax.swing.GroupLayout.PREFERRED_SIZE, 509, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jpFondo, javax.swing.GroupLayout.DEFAULT_SIZE, 623, Short.MAX_VALUE)
+            .addComponent(jpFondo, javax.swing.GroupLayout.DEFAULT_SIZE, 575, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         pack();
@@ -379,6 +458,11 @@ public class CompraView extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton jbArmarCompra;
     private javax.swing.JButton jbEliminar;

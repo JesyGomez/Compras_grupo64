@@ -191,6 +191,9 @@
             </Property>
             <Property name="text" type="java.lang.String" value="Productos de una Compra"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbProductosCompraActionPerformed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>

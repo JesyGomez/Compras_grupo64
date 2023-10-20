@@ -8,6 +8,8 @@ public class ConsultasView extends javax.swing.JInternalFrame {
     public ConsultasView() {
         initComponents();
         this.setSize(665, 400);
+       // Escri = new EscritorioModificado();
+
         this.setTitle("Consultas");
     }
 
@@ -67,6 +69,11 @@ public class ConsultasView extends javax.swing.JInternalFrame {
         jbProductosCompra.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         jbProductosCompra.setForeground(new java.awt.Color(0, 0, 0));
         jbProductosCompra.setText("Productos de una Compra");
+        jbProductosCompra.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbProductosCompraActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jpFondoLayout = new javax.swing.GroupLayout(jpFondo);
         jpFondo.setLayout(jpFondoLayout);
@@ -125,6 +132,17 @@ public class ConsultasView extends javax.swing.JInternalFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jbProductosCompraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbProductosCompraActionPerformed
+        // TODO add your handling code here:
+        Escritorio.removeAll();
+        Escritorio.repaint();
+        ProducCompraPorFecha ppc = new ProducCompraPorFecha();
+        ppc.setVisible(true);
+        Escritorio.add(ppc);
+        Escritorio.moveToFront(ppc);
+
+    }//GEN-LAST:event_jbProductosCompraActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
