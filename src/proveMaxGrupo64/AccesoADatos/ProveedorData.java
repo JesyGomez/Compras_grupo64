@@ -154,5 +154,25 @@ public class ProveedorData {
         }
         return proveedores;
     }
+    public List<Proveedor> contarComprasProveedor(Proveedor proveedor) {
+        List<Proveedor> compras = new ArrayList<>();
+        String sql = "SELECT * FROM compra WHERE id_Proveedor = ?";
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1, proveedor.getIdProveedor());
+            try (ResultSet rs = ps.executeQuery()) {
+                while (rs.next()) {
+                    Proveedor proveedorEncontrado = new Proveedor();
+                proveedorEncontrado.setIdProveedor(rs.getInt("id_Proveedor"));
+                // Obtener y asignar más detalles del proveedor según tus necesidades
+
+                proveedor.getIdProveedor();
+                }
+            }
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al obtener compras del proveedor: " + ex.getMessage());
+        }
+        return compras;
+    }
 
 }

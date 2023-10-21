@@ -1,20 +1,32 @@
-
 package proveMaxGrupo64.Vistas;
 
+import com.toedter.calendar.JDateChooser;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
+import java.util.Date;
+import java.util.List;
 import javax.swing.table.DefaultTableModel;
+import proveMaxGrupo64.AccesoADatos.CompraData;
+import proveMaxGrupo64.AccesoADatos.ProductoData;
+import proveMaxGrupo64.Entidades.Producto;
 
 public class ProducCompraPorFecha extends javax.swing.JInternalFrame {
+
     private DefaultTableModel modelo = new DefaultTableModel() {
         public boolean isCellEditable(int f, int c) {
             return false;
         }
     };
+
     /**
      * Creates new form ProducCompraPorFecha
      */
     public ProducCompraPorFecha() {
         initComponents();
+        this.setSize(665, 400);
+        this.setTitle("Compras por fecha");
         armarCabecera();
+        cargarProductos();
 
     }
 
@@ -29,18 +41,26 @@ public class ProducCompraPorFecha extends javax.swing.JInternalFrame {
 
         jpEscritorio = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jDateChooser1 = new com.toedter.calendar.JDateChooser();
+        jdFechaSolicitada = new com.toedter.calendar.JDateChooser();
         jScrollPane1 = new javax.swing.JScrollPane();
         jtListaProductos = new javax.swing.JTable();
 
         setClosable(true);
+        setPreferredSize(new java.awt.Dimension(600, 400));
 
         jpEscritorio.setBackground(new java.awt.Color(0, 0, 153));
+        jpEscritorio.setPreferredSize(new java.awt.Dimension(500, 400));
 
         jLabel1.setBackground(new java.awt.Color(0, 0, 0));
-        jLabel1.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Productos comprados en Fecha:");
+
+        jdFechaSolicitada.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                jdFechaSolicitadaPropertyChange(evt);
+            }
+        });
 
         jtListaProductos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -66,8 +86,8 @@ public class ProducCompraPorFecha extends javax.swing.JInternalFrame {
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 342, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jpEscritorioLayout.createSequentialGroup()
                         .addGap(190, 190, 190)
-                        .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(126, Short.MAX_VALUE))
+                        .addComponent(jdFechaSolicitada, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(123, Short.MAX_VALUE))
             .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING)
         );
         jpEscritorioLayout.setVerticalGroup(
@@ -75,48 +95,81 @@ public class ProducCompraPorFecha extends javax.swing.JInternalFrame {
             .addGroup(jpEscritorioLayout.createSequentialGroup()
                 .addComponent(jLabel1)
                 .addGap(18, 18, 18)
-                .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 256, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addComponent(jdFechaSolicitada, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 54, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(21, 21, 21))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jpEscritorio, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jpEscritorio, javax.swing.GroupLayout.DEFAULT_SIZE, 582, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jpEscritorio, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jpEscritorio, javax.swing.GroupLayout.DEFAULT_SIZE, 387, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jdFechaSolicitadaPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jdFechaSolicitadaPropertyChange
+        // TODO add your handling code here:
+ if ("date".equals(evt.getPropertyName())) {
+        Date selectedDate = jdFechaSolicitada.getDate();
+        if (selectedDate != null) {
+            // Convertir la fecha de util.Date a java.sql.Date si es necesario
+            java.sql.Date sqlDate = new java.sql.Date(selectedDate.getTime());
+            
+            CompraData compraData = new CompraData(); 
+            List<Producto> productos = compraData.obtenerProductosDeCompraEnFecha(sqlDate);
+            
+            borrarFilas();
+            
+            DefaultTableModel modelo = (DefaultTableModel) jtListaProductos.getModel();
+            for (Producto producto : productos) {
+                modelo.addRow(new Object[]{
+                    producto.getIdProducto(),
+                    producto.getNombreProducto(),
+                    producto.getDescripcion(),
+                    producto.getStock(),
+                    producto.isEstado() ? "Activo" : "Inactivo",
+                    producto.getPrecioActual()
+                });
+            }
+        }
+    }//GEN-LAST:event_jdFechaSolicitadaPropertyChange
 
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private com.toedter.calendar.JDateChooser jDateChooser1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private com.toedter.calendar.JDateChooser jdFechaSolicitada;
     private javax.swing.JPanel jpEscritorio;
     private javax.swing.JTable jtListaProductos;
     // End of variables declaration//GEN-END:variables
     private void armarCabecera() {
-        modelo.addColumn("idProducto");
+        modelo.addColumn("id_producto");
         modelo.addColumn("Nombre");
-        modelo.addColumn("Descripcion");
+        modelo.addColumn("Descripción");
+        modelo.addColumn("Precio Actual");
         modelo.addColumn("Stock");
         modelo.addColumn("Estado");
-        modelo.addColumn("Cantidad");
         jtListaProductos.setModel(modelo);
     }
-    private void borrarFilas(){
-        int filas=jtListaProductos.getRowCount()-1;
-        for (int f=filas; f >=0; f--) {
+   private void cargarProductos() {
+        ProductoData produ = new ProductoData();
+        for (Producto producto : produ.listarProductos()) {
+            //jcbProducto.addItem(producto);
+        }
+    }
+    private void borrarFilas() {
+        int filas = jtListaProductos.getRowCount() - 1;
+        for (int f = filas; f >= 0; f--) {
             modelo.removeRow(f);
         }
     }
-
 }
+

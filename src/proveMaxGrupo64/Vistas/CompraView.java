@@ -124,6 +124,12 @@ public class CompraView extends javax.swing.JInternalFrame {
         jbGuardar.setBackground(new java.awt.Color(0, 0, 204));
         jbGuardar.setText("Guardar");
         jpFondo.add(jbGuardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 520, -1, -1));
+
+        jtIDProveedor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jtIDProveedorActionPerformed(evt);
+            }
+        });
         jpFondo.add(jtIDProveedor, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 220, 110, -1));
 
         jlBuscarIdProveedor.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
@@ -481,6 +487,10 @@ public class CompraView extends javax.swing.JInternalFrame {
         // Llena la tabla con los productos encontrados
         llenarTablaProductos(productosEncontrados);
     }//GEN-LAST:event_jtProducPorNombreKeyReleased
+
+    private void jtIDProveedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtIDProveedorActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jtIDProveedorActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

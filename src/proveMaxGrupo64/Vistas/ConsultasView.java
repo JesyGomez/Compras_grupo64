@@ -8,8 +8,6 @@ public class ConsultasView extends javax.swing.JInternalFrame {
     public ConsultasView() {
         initComponents();
         this.setSize(665, 400);
-        //Escritorio2 = new EscritorioModificado();
-        
         this.setTitle("Consultas");
     }
 
@@ -55,6 +53,11 @@ public class ConsultasView extends javax.swing.JInternalFrame {
         jbComprasProveedor.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         jbComprasProveedor.setForeground(new java.awt.Color(0, 0, 0));
         jbComprasProveedor.setText("Compras a un Proveedor");
+        jbComprasProveedor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbComprasProveedorActionPerformed(evt);
+            }
+        });
 
         jbProductosMasComprados.setBackground(new java.awt.Color(255, 255, 255));
         jbProductosMasComprados.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
@@ -167,6 +170,15 @@ public class ConsultasView extends javax.swing.JInternalFrame {
         Escritorio2.moveToFront(ppc);
 
     }//GEN-LAST:event_jbProductosCompraActionPerformed
+
+    private void jbComprasProveedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbComprasProveedorActionPerformed
+        // TODO add your handling code here:
+        ComprasaUnProveedor cxp = new ComprasaUnProveedor();
+        cxp.setVisible(true);
+        Escritorio2.add(cxp);
+        Escritorio2.moveToFront(cxp);
+
+    }//GEN-LAST:event_jbComprasProveedorActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

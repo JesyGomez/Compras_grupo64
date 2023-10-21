@@ -1,5 +1,6 @@
 package proveMaxGrupo64.Entidades;
 
+import java.sql.Date;
 import java.time.LocalDate;
 
 public class Compra {
@@ -42,8 +43,8 @@ public class Compra {
         return fecha;
     }
 
-    public void setFecha(LocalDate fecha) {
-        this.fecha = fecha;
+    public void setFecha(Date fecha) {
+        this.fecha = fecha.toLocalDate();
     }
 
     @Override
