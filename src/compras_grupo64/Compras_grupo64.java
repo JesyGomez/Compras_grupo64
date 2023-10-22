@@ -19,6 +19,8 @@ public class Compras_grupo64 {
         Connection con = Conexion.getConexion();
         //Compra comp = new Compra (0, proveedor, LocalDate.MIN);
         CompraData compra = new CompraData();
+        compra.contarComprasPorRazonSocial("Bazar S.A.");
+        System.out.println(compra);
         //compra.registrarCompra(comp);
         //Producto tv = new Producto("DELL", "NoteBook", 600000, 2, true);
         ProductoData produ = new ProductoData();
@@ -53,14 +55,14 @@ public class Compras_grupo64 {
 //        Proveedor prove = new Proveedor(1, "Bazar S.A.", "Calle Pepita 123, Ciudad Marcos Paz", "123456789");
 //        Producto prod = produ.buscarProductoPorId(3);
 //        Compra cpr = new Compra(1, prove, LocalDate.MIN);
-        DetalleCompra dc = new DetalleCompra();
-        DetalleCompraData dcd = new DetalleCompraData();
-
-        dc = dcd.buscarDetalleCompraPorId(6);
-        System.out.println("ID " + dc.getIdDetalle() + " ID COMPRA " + dc.getCompra().getIdCompra() + " ID PRODUCTO "
-                + dc.getProducto().getIdProducto()
-                + " CANTIDAD " + dc.getCantidad() + " PRECIO COSTO " + dc.getPrecioCosto());
-
+//        DetalleCompra dc = new DetalleCompra();
+//        DetalleCompraData dcd = new DetalleCompraData();
+//
+//        dc = dcd.buscarDetalleCompraPorId(6);
+//        System.out.println("ID " + dc.getIdDetalle() + " ID COMPRA " + dc.getCompra().getIdCompra() + " ID PRODUCTO "
+//                + dc.getProducto().getIdProducto()
+//                + " CANTIDAD " + dc.getCantidad() + " PRECIO COSTO " + dc.getPrecioCosto());
+//
     }
 
 }

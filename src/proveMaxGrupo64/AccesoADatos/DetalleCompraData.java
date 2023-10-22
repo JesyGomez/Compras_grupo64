@@ -5,6 +5,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -165,14 +167,33 @@ public class DetalleCompraData {
             JOptionPane.showMessageDialog(null, "Error al acceder a la Tabla");
         }
     }
+ public List<DetalleCompra> listarDetallesCompra() {
+        String sql = "SELECT id_detalle, id_compra, id_producto, cantidad, precioCosto FROM detallecompra";
+        List<DetalleCompra> detallesCompra = new ArrayList<>();
 
-      
-      
-      
-      
-      
-    
-  
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                DetalleCompra detalleCompra = new DetalleCompra();
+                detalleCompra.setIdDetalle(rs.getInt("id_detalle"));
+                //detalleCompra.setIdCompra(rs.getInt("id_compra"));
+                //detalleCompra.setIdProducto(rs.getInt("id_producto"));
+                detalleCompra.setCantidad(rs.getInt("cantidad"));
+                detalleCompra.setPrecioCosto(rs.getDouble("precioCosto"));
+
+                detallesCompra.add(detalleCompra);
+            }
+
+            ps.close();
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Detalle de Compra");
+        }
+
+        return detallesCompra;
+    }
+
 
     
     /*public void modificarDetalleCompra(DetalleCompra dc) {

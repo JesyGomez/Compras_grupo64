@@ -150,6 +150,9 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="Productos de una Compra"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbProductosPorCompraActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JButton" name="jbProveedoresPorProducto">
               <Properties>
@@ -164,6 +167,9 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="Proveedores por Producto"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbProveedoresPorProductoActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JButton" name="jbComprasProveedor">
               <Properties>
@@ -195,6 +201,9 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="Productos M&#xe1;s Comprados"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbProductosMasCompradosActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JButton" name="jbProductosMenorStock">
               <Properties>
@@ -209,6 +218,9 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="Productos de Menor Stock"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbProductosMenorStockActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JButton" name="jbProductosCompra">
               <Properties>

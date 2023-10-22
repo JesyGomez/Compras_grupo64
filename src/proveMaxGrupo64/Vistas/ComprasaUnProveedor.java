@@ -1,22 +1,14 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package proveMaxGrupo64.Vistas;
 
 import java.util.List;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import proveMaxGrupo64.AccesoADatos.CompraData;
 import proveMaxGrupo64.AccesoADatos.ProveedorData;
 import proveMaxGrupo64.Entidades.Compra;
 import proveMaxGrupo64.Entidades.Proveedor;
 
-/**
- *
- * @author Julia
- */
 public class ComprasaUnProveedor extends javax.swing.JInternalFrame {
 
     /**
@@ -24,7 +16,7 @@ public class ComprasaUnProveedor extends javax.swing.JInternalFrame {
      */
     public ComprasaUnProveedor() {
         initComponents();
-        this.setSize(600, 350);
+        this.setSize(500, 450);
         this.setTitle("Compras por Proveedor");
     }
 
@@ -46,20 +38,23 @@ public class ComprasaUnProveedor extends javax.swing.JInternalFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jtComprasPorProveedor = new javax.swing.JTable();
         jtProveedorBuscado = new javax.swing.JTextField();
+        jbBuscarPorNombre = new javax.swing.JButton();
+        jbNuevaConsulta = new javax.swing.JButton();
 
+        setBackground(new java.awt.Color(0, 0, 153));
         setClosable(true);
+        setMaximizable(true);
+        setPreferredSize(new java.awt.Dimension(500, 450));
+
+        jPanel1.setBackground(new java.awt.Color(0, 0, 153));
+        jPanel1.setForeground(new java.awt.Color(255, 255, 255));
+        jPanel1.setPreferredSize(new java.awt.Dimension(500, 450));
 
         jLabel1.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         jLabel1.setText("Compras por Proveedor");
 
         jLabel2.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         jLabel2.setText("Seleccione Proveedor por ID:");
-
-        jtIDProveedor.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jtIDProveedorActionPerformed(evt);
-            }
-        });
 
         jbBuscarProveedor.setBackground(new java.awt.Color(255, 255, 255));
         jbBuscarProveedor.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
@@ -83,32 +78,36 @@ public class ComprasaUnProveedor extends javax.swing.JInternalFrame {
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jtIDProveedor, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(35, 35, 35)
+                .addGap(31, 31, 31)
                 .addComponent(jbBuscarProveedor)
                 .addGap(16, 16, 16))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(100, 100, 100)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jLabel3)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(jLabel3))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(132, 132, 132)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(169, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1)
-                .addGap(34, 34, 34)
+                .addGap(21, 21, 21)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(jtIDProveedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jbBuscarProveedor))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
-                .addComponent(jLabel3))
+                .addGap(18, 18, 18)
+                .addComponent(jLabel3)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
+
+        jScrollPane1.setBackground(new java.awt.Color(0, 0, 153));
+        jScrollPane1.setForeground(new java.awt.Color(255, 255, 255));
 
         jtComprasPorProveedor.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -134,28 +133,63 @@ public class ComprasaUnProveedor extends javax.swing.JInternalFrame {
             }
         });
 
+        jbBuscarPorNombre.setBackground(new java.awt.Color(255, 255, 255));
+        jbBuscarPorNombre.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        jbBuscarPorNombre.setForeground(new java.awt.Color(0, 0, 0));
+        jbBuscarPorNombre.setText("Buscar");
+        jbBuscarPorNombre.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbBuscarPorNombreActionPerformed(evt);
+            }
+        });
+
+        jbNuevaConsulta.setBackground(new java.awt.Color(255, 255, 255));
+        jbNuevaConsulta.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        jbNuevaConsulta.setForeground(new java.awt.Color(0, 0, 0));
+        jbNuevaConsulta.setText("Nueva Consulta");
+        jbNuevaConsulta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbNuevaConsultaActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 498, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 463, Short.MAX_VALUE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jtProveedorBuscado, javax.swing.GroupLayout.PREFERRED_SIZE, 293, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 486, Short.MAX_VALUE)
                 .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jbNuevaConsulta)
+                .addGap(179, 179, 179))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(16, 16, 16)
+                .addComponent(jtProveedorBuscado, javax.swing.GroupLayout.PREFERRED_SIZE, 293, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jbBuscarPorNombre)
+                .addGap(15, 15, 15))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(26, 26, 26)
-                .addComponent(jtProveedorBuscado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(37, 37, 37)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 144, Short.MAX_VALUE)
+                        .addGap(3, 3, 3)
+                        .addComponent(jtProveedorBuscado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(0, 133, Short.MAX_VALUE)
+                        .addComponent(jbBuscarPorNombre)
+                        .addGap(17, 17, 17)))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jbNuevaConsulta)
+                .addGap(57, 57, 57))
         );
 
         pack();
@@ -166,49 +200,70 @@ public class ComprasaUnProveedor extends javax.swing.JInternalFrame {
 
     }//GEN-LAST:event_jtProveedorBuscadoKeyReleased
 
-    private void jtProveedorBuscadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtProveedorBuscadoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jtProveedorBuscadoActionPerformed
-
-    private void jtIDProveedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtIDProveedorActionPerformed
-        // TODO add your handling code here:
-        String idProveedor = jtIDProveedor.getText();
-        Proveedor proveedor = new Proveedor();
-        proveedor.setIdProveedor(Integer.parseInt(idProveedor));
-
-        CompraData compraData = new CompraData();
-        //List<Compra> proveedorEncontrado = compraData.contarComprasProveedor(proveedor);
-
-    }//GEN-LAST:event_jtIDProveedorActionPerformed
-
     private void jbBuscarProveedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBuscarProveedorActionPerformed
-        // TODO add your handling code here:
-        String idProveedorTexto = jtIDProveedor.getText();
-        int idProveedor = Integer.parseInt(idProveedorTexto);
+        String idProvee = jtIDProveedor.getText();
+        int idProveedor = Integer.parseInt(idProvee);
 
-        // Crear un objeto Proveedor con el ID ingresado
+        // Creo un objeto Proveedor con el ID ingresado
         Proveedor proveedor = new Proveedor();
         proveedor.setIdProveedor(idProveedor);
 
-        // Obtener la lista de compras del proveedor
         CompraData compraData = new CompraData();
         List<Compra> comprasProveedor = compraData.contarComprasProveedor(proveedor);
-
-        // Crear el modelo de la tabla
+ 
         DefaultTableModel modelo = new DefaultTableModel();
         modelo.addColumn("ID Compra");
         modelo.addColumn("Fecha Compra");
         for (Compra compra : comprasProveedor) {
             modelo.addRow(new Object[]{
                 compra.getIdCompra(),
-                compra.getFecha(), // Agrega más datos de la compra o del proveedor según tus necesidades.
-            });
+                compra.getFecha(),});
         }
 
-        // Establecer el modelo en la tabla
         jtComprasPorProveedor.setModel(modelo);
-
     }//GEN-LAST:event_jbBuscarProveedorActionPerformed
+
+    private void jbBuscarPorNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBuscarPorNombreActionPerformed
+        // TODO add your handling code here:
+        String proveedorBuscado = jtProveedorBuscado.getText();
+
+    // Llama al método que cuenta las compras por razonSocial
+    int numCompras = contarComprasPorRazonSocial(proveedorBuscado);
+
+    // Muestra el número de compras en un JOptionPane
+    JOptionPane.showMessageDialog(this, "Número de compras realizadas al proveedor " + proveedorBuscado + ": " + numCompras, "Número de Compras", JOptionPane.INFORMATION_MESSAGE);
+
+    // Llena la tabla con los datos de las compras del proveedor
+    llenarTablaComprasPorProveedor(proveedorBuscado);
+//        String Proveedorbuscado = jtProveedorBuscado.getText();
+//        CompraData provee = new CompraData();
+//        List<Compra> comprasProveedor = provee.contarComprasPorRazonSocial(Proveedorbuscado);
+//
+//        DefaultTableModel modelo = new DefaultTableModel();
+//        modelo.addColumn("ID Compra");
+//        modelo.addColumn("Fecha Compra");
+//        for (Compra compra : comprasProveedor) {
+//            modelo.addRow(new Object[]{
+//                compra.getIdCompra(),
+//                compra.getFecha(),});
+//        }
+//
+//        jtComprasPorProveedor.setModel(modelo);
+    }//GEN-LAST:event_jbBuscarPorNombreActionPerformed
+
+    private void jbNuevaConsultaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbNuevaConsultaActionPerformed
+        // TODO add your handling code here:
+        jtIDProveedor.setText("");
+        jtProveedorBuscado.setText("");
+
+        // Limpiar tabla
+        DefaultTableModel modelo = (DefaultTableModel) jtComprasPorProveedor.getModel();
+        modelo.setRowCount(0);
+    }//GEN-LAST:event_jbNuevaConsultaActionPerformed
+
+    private void jtProveedorBuscadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtProveedorBuscadoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jtProveedorBuscadoActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -217,9 +272,42 @@ public class ComprasaUnProveedor extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JButton jbBuscarPorNombre;
     private javax.swing.JButton jbBuscarProveedor;
+    private javax.swing.JButton jbNuevaConsulta;
     private javax.swing.JTable jtComprasPorProveedor;
     private javax.swing.JTextField jtIDProveedor;
     private javax.swing.JTextField jtProveedorBuscado;
     // End of variables declaration//GEN-END:variables
+
+private int contarComprasPorRazonSocial(String razonSocial) {
+    String sql = "SELECT COUNT(*) AS veces_compradas FROM compra WHERE id_proveedor = ?;";
+    int numCompras = 0;
+    try {
+        // Lógica para ejecutar la consulta y obtener el resultado
+        // Puedes usar un PreparedStatement para evitar la inyección SQL
+        // y configurar el parámetro con el valor de razonSocial
+    } catch (Exception e) {
+        // Manejo de excepciones
+    }
+    return numCompras;
+}
+
+private void llenarTablaComprasPorProveedor(String razonSocial) {
+    CompraData provee = new CompraData();
+    List<Compra> comprasProveedor = provee.contarComprasPorRazonSocial(razonSocial);
+
+    DefaultTableModel modelo = new DefaultTableModel();
+    modelo.addColumn("ID Compra");
+    modelo.addColumn("Fecha Compra");
+
+    // Agrega las filas a la tabla
+    for (Compra compra : comprasProveedor) {
+        modelo.addRow(new Object[]{
+            compra.getIdCompra(),
+            compra.getFecha()
+        });
+    }
+    jtComprasPorProveedor.setModel(modelo);
+}
 }

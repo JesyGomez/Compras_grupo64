@@ -107,12 +107,12 @@ public class ProveedorData {
         return proveedor;
     }
 
-    public Proveedor buscarProveedorPorRazonSocial(int razon) {
+    public Proveedor buscarProveedorPorRazonSocial(String razonSocial) {
         String sql = "SELECT id_proveedor, razonSocial, domicilio, telefono FROM proveedor WHERE razonSocial = ?";
         Proveedor proveedor = null;
         try {
             PreparedStatement ps = con.prepareStatement(sql);
-            ps.setInt(1, razon);
+            ps.setString(1, razonSocial);
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
                 proveedor = new Proveedor();

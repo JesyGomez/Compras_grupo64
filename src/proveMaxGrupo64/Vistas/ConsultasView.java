@@ -43,11 +43,21 @@ public class ConsultasView extends javax.swing.JInternalFrame {
         jbProductosPorCompra.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         jbProductosPorCompra.setForeground(new java.awt.Color(0, 0, 0));
         jbProductosPorCompra.setText("Productos de una Compra");
+        jbProductosPorCompra.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbProductosPorCompraActionPerformed(evt);
+            }
+        });
 
         jbProveedoresPorProducto.setBackground(new java.awt.Color(255, 255, 255));
         jbProveedoresPorProducto.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         jbProveedoresPorProducto.setForeground(new java.awt.Color(0, 0, 0));
         jbProveedoresPorProducto.setText("Proveedores por Producto");
+        jbProveedoresPorProducto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbProveedoresPorProductoActionPerformed(evt);
+            }
+        });
 
         jbComprasProveedor.setBackground(new java.awt.Color(255, 255, 255));
         jbComprasProveedor.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
@@ -63,11 +73,21 @@ public class ConsultasView extends javax.swing.JInternalFrame {
         jbProductosMasComprados.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         jbProductosMasComprados.setForeground(new java.awt.Color(0, 0, 0));
         jbProductosMasComprados.setText("Productos Más Comprados");
+        jbProductosMasComprados.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbProductosMasCompradosActionPerformed(evt);
+            }
+        });
 
         jbProductosMenorStock.setBackground(new java.awt.Color(255, 255, 255));
         jbProductosMenorStock.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         jbProductosMenorStock.setForeground(new java.awt.Color(0, 0, 0));
         jbProductosMenorStock.setText("Productos de Menor Stock");
+        jbProductosMenorStock.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbProductosMenorStockActionPerformed(evt);
+            }
+        });
 
         jbProductosCompra.setBackground(new java.awt.Color(255, 255, 255));
         jbProductosCompra.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
@@ -162,8 +182,7 @@ public class ConsultasView extends javax.swing.JInternalFrame {
 
     private void jbProductosCompraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbProductosCompraActionPerformed
         // TODO add your handling code here:
-        
-        
+
         ProducCompraPorFecha ppc = new ProducCompraPorFecha();
         ppc.setVisible(true);
         Escritorio2.add(ppc);
@@ -179,6 +198,41 @@ public class ConsultasView extends javax.swing.JInternalFrame {
         Escritorio2.moveToFront(cxp);
 
     }//GEN-LAST:event_jbComprasProveedorActionPerformed
+
+    private void jbProductosPorCompraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbProductosPorCompraActionPerformed
+        // TODO add your handling code here:
+        ProductosdeUnaCompra ppc = new ProductosdeUnaCompra();
+        ppc.setVisible(true);
+        Escritorio2.add(ppc);
+        Escritorio2.moveToFront(ppc);
+
+    }//GEN-LAST:event_jbProductosPorCompraActionPerformed
+
+    private void jbProveedoresPorProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbProveedoresPorProductoActionPerformed
+        ProveePorProducto ppp = new ProveePorProducto();
+        ppp.setVisible(true);
+        Escritorio2.add(ppp);
+        Escritorio2.moveToFront(ppp);
+
+    }//GEN-LAST:event_jbProveedoresPorProductoActionPerformed
+
+    private void jbProductosMasCompradosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbProductosMasCompradosActionPerformed
+        // TODO add your handling code here:
+        ProductosMasComprados pmc = new ProductosMasComprados();
+        pmc.setVisible(true);
+        Escritorio2.add(pmc);
+        Escritorio2.moveToFront(pmc);
+
+    }//GEN-LAST:event_jbProductosMasCompradosActionPerformed
+
+    private void jbProductosMenorStockActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbProductosMenorStockActionPerformed
+        // TODO add your handling code here:
+        ProductosdeMenorStock pms = new ProductosdeMenorStock();
+        pms.setVisible(true);
+        Escritorio2.add(pms);
+        Escritorio2.moveToFront(pms);
+
+    }//GEN-LAST:event_jbProductosMenorStockActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
