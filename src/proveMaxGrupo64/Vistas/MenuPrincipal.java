@@ -81,7 +81,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jMProductos.setPreferredSize(new java.awt.Dimension(150, 50));
 
         jMIngresoProducto.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        jMIngresoProducto.setText("Ingreso de Producto");
+        jMIngresoProducto.setText("Registro de Productos");
         jMIngresoProducto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMIngresoProductoActionPerformed(evt);
