@@ -460,7 +460,6 @@ public class CompraData {
                 int cantidad = rsCompras.getInt("cantidad");
                 double precioCosto = rsCompras.getDouble("precioCosto");
 
-                // Aquí puedes crear objetos Compra y hacer lo que necesites con ellos
                 Compra compra = new Compra();
                 compras.add(compra);
             }
@@ -471,26 +470,23 @@ public class CompraData {
         return compras;
     }
 
-    public int contarComprasPorRazonSocial(int numCompras) {
-        String sql = "SELECT COUNT(*) AS num_compras FROM compra c "
-                + "JOIN proveedor p ON c.id_proveedor = p.id_proveedor "
-                + "WHERE p.razonSocial = ?";
-        int cantidadVeces = 0;
-        try (PreparedStatement ps = con.prepareStatement(sql)) {
-            ps.setInt(1, cantidadVeces);
-            ResultSet rsCompras = ps.executeQuery();
-            ResultSet rs = ps.executeQuery();
+public void contarVecesComprasPorRazonSocial(String razonSocial) {
+    String sql = "SELECT COUNT(*) AS num_compras FROM compra c "
+            + "JOIN proveedor p ON c.id_proveedor = p.id_proveedor "
+            + "WHERE p.razonSocial = ?";
+    int numCompras = 0;
+    try (PreparedStatement ps = con.prepareStatement(sql)) {
+        ps.setString(1, razonSocial);
+        ResultSet rsCompras = ps.executeQuery();
 
-            if (rs.next()) {
-                numCompras = rs.getInt("num_compras");
-                JOptionPane.showMessageDialog(null, "La cantidad de veces que se la ha comprado a este proveedor es/son: " + numCompras);
-            }
-        } catch (Exception ex) {
-            // Manejar la excepción adecuadamente
-            JOptionPane.showMessageDialog(null, "Error al obtener compras del proveedor: " + ex.getMessage());
+        if (rsCompras.next()) {
+            numCompras = rsCompras.getInt("num_compras");
+            JOptionPane.showMessageDialog(null, "La cantidad de veces que se le ha comprado a este proveedor es/son: " + numCompras);
         }
-
-        return numCompras;
+    } catch (Exception ex) {
+        // Manejar la excepción adecuadamente
+        JOptionPane.showMessageDialog(null, "Error al obtener compras del proveedor: " + ex.getMessage());
     }
+}
 
 }

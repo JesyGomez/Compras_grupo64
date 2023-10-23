@@ -226,29 +226,34 @@ public class ComprasaUnProveedor extends javax.swing.JInternalFrame {
     private void jbBuscarPorNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBuscarPorNombreActionPerformed
         // TODO add your handling code here:
         String proveedorBuscado = jtProveedorBuscado.getText();
+        CompraData provee = new CompraData();
 
     // Llama al método que cuenta las compras por razonSocial
-    int numCompras = contarComprasPorRazonSocial(proveedorBuscado);
+provee.contarVecesComprasPorRazonSocial(proveedorBuscado);
 
-    // Muestra el número de compras en un JOptionPane
-    JOptionPane.showMessageDialog(this, "Número de compras realizadas al proveedor " + proveedorBuscado + ": " + numCompras, "Número de Compras", JOptionPane.INFORMATION_MESSAGE);
-
-    // Llena la tabla con los datos de las compras del proveedor
-    llenarTablaComprasPorProveedor(proveedorBuscado);
+//
+//    // Llama al método que cuenta las compras por razonSocial
+//    int numCompras = contarComprasPorRazonSocial(proveedorBuscado);
+//
+//    // Muestra el número de compras en un JOptionPane
+//    JOptionPane.showMessageDialog(this, "Número de compras realizadas al proveedor " + proveedorBuscado + ": " + numCompras, "Número de Compras", JOptionPane.INFORMATION_MESSAGE);
+//
+//    // Llena la tabla con los datos de las compras del proveedor
+//    llenarTablaComprasPorProveedor(proveedorBuscado);
 //        String Proveedorbuscado = jtProveedorBuscado.getText();
 //        CompraData provee = new CompraData();
-//        List<Compra> comprasProveedor = provee.contarComprasPorRazonSocial(Proveedorbuscado);
+        List<Compra> comprasProveedor = provee.contarComprasPorRazonSocial(proveedorBuscado);
 //
-//        DefaultTableModel modelo = new DefaultTableModel();
-//        modelo.addColumn("ID Compra");
-//        modelo.addColumn("Fecha Compra");
-//        for (Compra compra : comprasProveedor) {
-//            modelo.addRow(new Object[]{
-//                compra.getIdCompra(),
-//                compra.getFecha(),});
-//        }
-//
-//        jtComprasPorProveedor.setModel(modelo);
+        DefaultTableModel modelo = new DefaultTableModel();
+        modelo.addColumn("ID Compra");
+        modelo.addColumn("Fecha Compra");
+        for (Compra compra : comprasProveedor) {
+            modelo.addRow(new Object[]{
+                compra.getIdCompra(),
+                compra.getFecha(),});
+        }
+
+        jtComprasPorProveedor.setModel(modelo);
     }//GEN-LAST:event_jbBuscarPorNombreActionPerformed
 
     private void jbNuevaConsultaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbNuevaConsultaActionPerformed
@@ -281,7 +286,7 @@ public class ComprasaUnProveedor extends javax.swing.JInternalFrame {
     // End of variables declaration//GEN-END:variables
 
 private int contarComprasPorRazonSocial(String razonSocial) {
-    String sql = "SELECT COUNT(*) AS veces_compradas FROM compra WHERE id_proveedor = ?;";
+    String sql = "SELECT COUNT(*) AS veces_compradas FROM compra WHERE razonSocial = ?;";
     int numCompras = 0;
     try {
         // Lógica para ejecutar la consulta y obtener el resultado
