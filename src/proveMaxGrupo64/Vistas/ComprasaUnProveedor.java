@@ -239,7 +239,7 @@ provee.contarVecesComprasPorRazonSocial(proveedorBuscado);
 //    JOptionPane.showMessageDialog(this, "Número de compras realizadas al proveedor " + proveedorBuscado + ": " + numCompras, "Número de Compras", JOptionPane.INFORMATION_MESSAGE);
 //
 //    // Llena la tabla con los datos de las compras del proveedor
-//    llenarTablaComprasPorProveedor(proveedorBuscado);
+    llenarTablaComprasPorProveedor(proveedorBuscado);
 //        String Proveedorbuscado = jtProveedorBuscado.getText();
 //        CompraData provee = new CompraData();
         List<Compra> comprasProveedor = provee.contarComprasPorRazonSocial(proveedorBuscado);
@@ -285,18 +285,6 @@ provee.contarVecesComprasPorRazonSocial(proveedorBuscado);
     private javax.swing.JTextField jtProveedorBuscado;
     // End of variables declaration//GEN-END:variables
 
-private int contarComprasPorRazonSocial(String razonSocial) {
-    String sql = "SELECT COUNT(*) AS veces_compradas FROM compra WHERE razonSocial = ?;";
-    int numCompras = 0;
-    try {
-        // Lógica para ejecutar la consulta y obtener el resultado
-        // Puedes usar un PreparedStatement para evitar la inyección SQL
-        // y configurar el parámetro con el valor de razonSocial
-    } catch (Exception e) {
-        // Manejo de excepciones
-    }
-    return numCompras;
-}
 
 private void llenarTablaComprasPorProveedor(String razonSocial) {
     CompraData provee = new CompraData();
