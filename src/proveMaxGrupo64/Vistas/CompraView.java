@@ -24,7 +24,7 @@ public class CompraView extends javax.swing.JInternalFrame {
     private DefaultTableModel modelo = new DefaultTableModel() {
         public boolean isCellEditable(int f, int c) {
 
-            return c == 5;
+            return c == 6;
         }
     };
 
@@ -384,9 +384,8 @@ public class CompraView extends javax.swing.JInternalFrame {
     private void jbLimpiarCompraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbLimpiarCompraActionPerformed
         String idCompra = jtIdCompra.getText().trim();
         CompraData compraData = new CompraData();
-        Compra compraEncontrada = compraData.buscarCompraPorId(Integer.parseInt(idCompra));
 
-        if (compraEncontrada != null) {
+        if (idCompra != null) {
             jcbProveedor.setSelectedItem(null);
             jdFecha.setDate(null);
             jtIDProveedor.setText("");
@@ -562,6 +561,7 @@ public class CompraView extends javax.swing.JInternalFrame {
         modelo.addColumn("Descripcion");
         modelo.addColumn("Stock");
         modelo.addColumn("Estado");
+        modelo.addColumn("Precio Actual");
         modelo.addColumn("Cantidad");
         jtaListaProductos.setModel(modelo);
     }
