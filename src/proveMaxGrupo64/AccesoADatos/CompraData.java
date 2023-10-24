@@ -258,61 +258,99 @@ public class CompraData {
         return proveedores;
     }
 //Aquellos productos que sean los más comprados entre fechas
-
-    public List<Producto> obtenerProductosMasCompradosEntreFechas(Date fechaInicio, Date fechaFin) {
-        List<Producto> productos = new ArrayList<>();
-        String sql = "SELECT dc.id_producto, SUM(dc.cantidad) AS total_comprado "
-                + "FROM detallecompra dc INNER JOIN compra c ON dc.id_compra = c.id_compra "
-                + "WHERE c.fechaCompra BETWEEN ? AND ? GROUP BY dc.id_producto "
-                + "ORDER BY total_comprado;";
-        int numeroDeProductos=0;
-        try {
-            PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-            ps.setDate(1, new java.sql.Date(fechaInicio.getTime()));
-            ps.setDate(2, new java.sql.Date(fechaFin.getTime()));
-            ps.setInt(3, numeroDeProductos);
-            try (ResultSet rs = ps.executeQuery()) {
-                while (rs.next()) {
-                    Producto producto = new Producto();
-                    producto.setIdProducto(rs.getInt("id_producto"));
-                    producto.setNombreProducto("nombre");
-                    producto.setDescripcion("descripcion");
-                    productos.add(producto);
-                }
-            }
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Error al obtener productos comprados para esas fechas" + ex.getMessage());
-        }
-        return productos;
-    }
     public List<Producto> obtenerProductosMasCompradosEntreFechas(java.util.Date fechaInicio, java.util.Date fechaFin) {
-        List<Producto> productos = new ArrayList<>();
-        String sql = "SELECT dc.id_producto, SUM(dc.cantidad) AS total_comprado "
-                + "FROM detallecompra dc INNER JOIN compra c ON dc.id_compra = c.id_compra "
-                + "WHERE c.fechaCompra BETWEEN ? AND ? GROUP BY dc.id_producto "
-                + "ORDER BY total_comprado DESC;"; 
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd"); // Formato de fecha de tu base de datos
-        String fechaInicioStr = sdf.format(fechaInicio);
-        String fechaFinStr = sdf.format(fechaFin);
-        try {
-            PreparedStatement ps = con.prepareStatement(sql);
-            ps.setDate(1, new java.sql.Date(fechaInicio.getTime()));
-            ps.setDate(2, new java.sql.Date(fechaFin.getTime()));
-
-            try (ResultSet rs = ps.executeQuery()) {
-                while (rs.next()) {
-                    Producto producto = new Producto();
-                    producto.setIdProducto(rs.getInt("id_producto"));
-                    producto.setNombreProducto("nombre"); 
-                    producto.setDescripcion("total_comprado");
-                    productos.add(producto);
-                }
+    List<Producto> productos = new ArrayList<>();
+    String sql = "SELECT c.id_compra, p.id_producto, p.nombre, p.descripcion, "
+            + "COUNT(dc.id_compra) AS total_compras FROM producto p "
+            + "INNER JOIN detallecompra dc ON p.id_producto = dc.id_producto "
+            + "INNER JOIN compra c ON dc.id_compra = c.id_compra "
+            + "WHERE c.fechaCompra BETWEEN ? AND ? GROUP BY p.id_producto "
+            + "ORDER BY total_compras DESC;";
+    
+    try (PreparedStatement ps = con.prepareStatement(sql)) {
+        ps.setDate(1, new java.sql.Date(fechaInicio.getTime()));
+        ps.setDate(2, new java.sql.Date(fechaFin.getTime()));
+        
+        try (ResultSet rs = ps.executeQuery()) {
+            while (rs.next()) {
+                Producto producto = new Producto();
+                producto.setIdProducto(rs.getInt("id_producto"));
+                producto.setNombreProducto(rs.getString("nombre"));
+                producto.setDescripcion(rs.getString("descripcion"));
+                productos.add(producto);
             }
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Error al obtener productos comprados para esas fechas: " + ex.getMessage());
         }
-        return productos;
+    } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al obtener productos comprados para esas fechas" + ex.getMessage());
     }
+    return productos;
+}
+
+//
+//    public List<Producto> obtenerProductosMasCompradosEntreFechas(java.util.Date fechaInicio, java.util.Date fechaFin) {
+//        List<Producto> productos = new ArrayList<>();
+//        String sql = "SELECT c.id_compra, p.id_producto, p.nombre, p.descripcion, COUNT(dc.id_compra) AS total_compras\n"
+//                + "FROM producto p\n"
+//                + "INNER JOIN detallecompra dc ON p.id_producto = dc.id_producto\n"
+//                + "INNER JOIN compra c ON dc.id_compra = c.id_compra\n"
+//                + "WHERE c.fechaCompra BETWEEN ? AND ?\n"
+//                + "GROUP BY p.id_producto\n"
+//                + "ORDER BY total_compras DESC;";
+//        int numeroDeProductos = 0;
+//        try {
+//            PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+//            ps.setDate(1, new java.sql.Date(fechaInicio.getTime()));
+//            ps.setDate(2, new java.sql.Date(fechaFin.getTime()));
+//            ps.setInt(3, numeroDeProductos);
+//            try (ResultSet rs = ps.executeQuery()) {
+//                while (rs.next()) {
+//                    while (rs.next()) {
+//                        Compra compra = new Compra();
+//                        compra.setIdCompra(rs.getInt("id_compra"));
+//                        //compra.setFecha(rs.getDate("fechaCompra"));
+//                        //String descripcionProducto = rs.getString("descripcion");
+//                        Producto producto = new Producto();
+//                        producto.setIdProducto(rs.getInt("id_producto"));
+//                        producto.setNombreProducto("nombreProducto");
+//                        producto.setDescripcion("descripcion");
+//                        productos.add(producto);
+//                    }
+//                }
+//            }
+//        } catch (SQLException ex) {
+//            JOptionPane.showMessageDialog(null, "Error al obtener productos comprados para esas fechas" + ex.getMessage());
+//        }
+//        return productos;
+//    }
+//
+//    public List<Producto> obtenerProductosMasCompradosEntreFechas(java.util.Date fechaInicio, java.util.Date fechaFin) {
+//        List<Producto> productos = new ArrayList<>();
+//        String sql = "SELECT dc.id_producto, SUM(dc.cantidad) AS total_comprado "
+//                + "FROM detallecompra dc INNER JOIN compra c ON dc.id_compra = c.id_compra "
+//                + "WHERE c.fechaCompra BETWEEN ? AND ? GROUP BY dc.id_producto "
+//                + "ORDER BY total_comprado DESC;";
+//        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd"); // Formato de fecha de tu base de datos
+//        String fechaInicioStr = sdf.format(fechaInicio);
+//        String fechaFinStr = sdf.format(fechaFin);
+//        try {
+//            PreparedStatement ps = con.prepareStatement(sql);
+//            ps.setDate(1, new java.sql.Date(fechaInicio.getTime()));
+//            ps.setDate(2, new java.sql.Date(fechaFin.getTime()));
+//
+//            try (ResultSet rs = ps.executeQuery()) {
+//                while (rs.next()) {
+//                    Producto producto = new Producto();
+//                    producto.setIdProducto(rs.getInt("id_producto"));
+//                    producto.setNombreProducto("nombre");
+//                    producto.setDescripcion("total_comprado");
+//                    productos.add(producto);
+//                }
+//            }
+//        } catch (SQLException ex) {
+//            JOptionPane.showMessageDialog(null, "Error al obtener productos comprados para esas fechas: " + ex.getMessage());
+//        }
+//        return productos;
+//    }
 
     //Aquellos productos están por debajo del stock mínimo
     public List<Producto> obtenerProductosPorDebajoDelStockMinimo() {
@@ -387,37 +425,38 @@ public class CompraData {
         }
         return compras;
     }
-    public List<Compra> contarComprasPorNombreProveedor(String nombreProveedor) {
-    List<Compra> compras = new ArrayList<>();
 
-    String sql = "SELECT c.id_compra, c.fechaCompra, dc.id_detalle, dc.id_producto, dc.cantidad, dc.precioCosto\n"
+    public List<Compra> contarComprasPorNombreProveedor(String nombreProveedor) {
+        List<Compra> compras = new ArrayList<>();
+
+        String sql = "SELECT c.id_compra, c.fechaCompra, dc.id_detalle, dc.id_producto, dc.cantidad, dc.precioCosto\n"
                 + "FROM compra c\n"
                 + "JOIN detallecompra dc ON c.id_compra = dc.id_compra\n"
                 + "JOIN proveedor p ON c.id_proveedor = p.id_proveedor\n"
                 + "WHERE p.razonSocial = ?";
-    
-    try {
-        PreparedStatement ps = con.prepareStatement(sql);
-        ps.setString(1, nombreProveedor);
-        ResultSet rs = ps.executeQuery();
-        
-        while (rs.next()) {
-            int idCompra = rs.getInt("id_compra");
-            LocalDate fechaCompra = rs.getDate("fechaCompra").toLocalDate();
-            Compra compra = new Compra();
-            compra.setIdCompra(idCompra);
-            compra.setFecha(rs.getDate("fechaCompra"));
+
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setString(1, nombreProveedor);
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                int idCompra = rs.getInt("id_compra");
+                LocalDate fechaCompra = rs.getDate("fechaCompra").toLocalDate();
+                Compra compra = new Compra();
+                compra.setIdCompra(idCompra);
+                compra.setFecha(rs.getDate("fechaCompra"));
 //            compra.setFecha(fechaCompra);
-            compras.add(compra);
+                compras.add(compra);
+            }
+
+            ps.close();
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al obtener compras del proveedor: " + ex.getMessage());
         }
-        
-        ps.close();
-    } catch (SQLException ex) {
-        JOptionPane.showMessageDialog(null, "Error al obtener compras del proveedor: " + ex.getMessage());
+
+        return compras;
     }
-    
-    return compras;
-}
 
 //////
 //    public List<Compra> contarComprasPorRazonSocial(String razonSocial) {
@@ -449,24 +488,23 @@ public class CompraData {
 //
 //        return compras;
 //    }
+    public void contarVecesComprasPorRazonSocial(String razonSocial) {
+        String sql = "SELECT COUNT(*) AS num_compras FROM compra c "
+                + "JOIN proveedor p ON c.id_proveedor = p.id_proveedor "
+                + "WHERE p.razonSocial = ?";
+        int numCompras = 0;
+        try (PreparedStatement ps = con.prepareStatement(sql)) {
+            ps.setString(1, razonSocial);
+            ResultSet rsCompras = ps.executeQuery();
 
-public void contarVecesComprasPorRazonSocial(String razonSocial) {
-    String sql = "SELECT COUNT(*) AS num_compras FROM compra c "
-            + "JOIN proveedor p ON c.id_proveedor = p.id_proveedor "
-            + "WHERE p.razonSocial = ?";
-    int numCompras = 0;
-    try (PreparedStatement ps = con.prepareStatement(sql)) {
-        ps.setString(1, razonSocial);
-        ResultSet rsCompras = ps.executeQuery();
-
-        if (rsCompras.next()) {
-            numCompras = rsCompras.getInt("num_compras");
-            JOptionPane.showMessageDialog(null, "La cantidad de veces que se le ha comprado a este proveedor es/son: " + numCompras);
+            if (rsCompras.next()) {
+                numCompras = rsCompras.getInt("num_compras");
+                JOptionPane.showMessageDialog(null, "La cantidad de veces que se le ha comprado a este proveedor es/son: " + numCompras);
+            }
+        } catch (Exception ex) {
+            // Manejar la excepción adecuadamente
+            JOptionPane.showMessageDialog(null, "Error al obtener compras del proveedor: " + ex.getMessage());
         }
-    } catch (Exception ex) {
-        // Manejar la excepción adecuadamente
-        JOptionPane.showMessageDialog(null, "Error al obtener compras del proveedor: " + ex.getMessage());
     }
-}
 
 }
