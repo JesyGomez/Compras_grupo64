@@ -1,4 +1,3 @@
-
 package proveMaxGrupo64.Vistas;
 
 import java.awt.Color;
@@ -56,7 +55,7 @@ public class CompraView extends javax.swing.JInternalFrame {
         jbRegistrarCompra = new javax.swing.JButton();
         jcbProveedor = new javax.swing.JComboBox<>();
         jdFecha = new com.toedter.calendar.JDateChooser();
-        jbGuardar = new javax.swing.JButton();
+        jbModificar = new javax.swing.JButton();
         jtIDProveedor = new javax.swing.JTextField();
         jlBuscarIdProveedor = new javax.swing.JLabel();
         jbLimpiarCompra = new javax.swing.JButton();
@@ -121,9 +120,14 @@ public class CompraView extends javax.swing.JInternalFrame {
         jdFecha.setDateFormatString("yyyy-MM-dd");
         jpFondo.add(jdFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 130, 210, 29));
 
-        jbGuardar.setBackground(new java.awt.Color(0, 0, 204));
-        jbGuardar.setText("Guardar");
-        jpFondo.add(jbGuardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 520, -1, -1));
+        jbModificar.setBackground(new java.awt.Color(0, 0, 204));
+        jbModificar.setText("Modificar");
+        jbModificar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbModificarActionPerformed(evt);
+            }
+        });
+        jpFondo.add(jbModificar, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 520, -1, -1));
 
         jtIDProveedor.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -471,12 +475,12 @@ public class CompraView extends javax.swing.JInternalFrame {
         } catch (NumberFormatException ex) {
             JOptionPane.showMessageDialog(this, "El ID debe ser un número válido.");
         }
+        habilitarCampos();
     }//GEN-LAST:event_jlBuscarIdCompraMouseClicked
 
     private void jtProducPorNombreKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtProducPorNombreKeyReleased
         // TODO add your handling code here:
-        
-        
+
         String nombreBuscado = jtProducPorNombre.getText();
 
         // Llama al método buscarProductoPorNombre en ProductoData para obtener los productos
@@ -490,6 +494,28 @@ public class CompraView extends javax.swing.JInternalFrame {
     private void jtIDProveedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtIDProveedorActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jtIDProveedorActionPerformed
+
+    private void jbModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbModificarActionPerformed
+        // TODO add your handling code here:
+habilitarCampos();
+        String idCompra = jtIdCompra.getText();
+        int idcompram = Integer.parseInt(idCompra);
+
+        // Creo un objeto Proveedor con el ID ingresado
+        Compra compra = new Compra();
+        compra.setIdCompra(idcompram);
+
+        CompraData compraData = new CompraData();
+//        List<Compra> idCompramod = compraData.modificarCompra(compra);
+
+//        
+//        Compra compr = new Compra();
+//        compr.setIdCompra(idcompram);
+//
+//        CompraData modif = new CompraData();
+//
+        compraData.modificarCompra(compra);
+    }//GEN-LAST:event_jbModificarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -506,8 +532,8 @@ public class CompraView extends javax.swing.JInternalFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton jbCerrarCompra;
-    private javax.swing.JButton jbGuardar;
     private javax.swing.JButton jbLimpiarCompra;
+    private javax.swing.JButton jbModificar;
     private javax.swing.JButton jbRegistrarCompra;
     private javax.swing.JButton jbSalir;
     private javax.swing.JComboBox<String> jcbProveedor;
@@ -541,7 +567,7 @@ public class CompraView extends javax.swing.JInternalFrame {
 
         jtaListaProductos.setEnabled(false);
         jtProducPorNombre.setEnabled(false);
-        jbGuardar.setEnabled(false);
+        jbModificar.setEnabled(false);
         jbCerrarCompra.setEnabled(false);
 
     }
@@ -550,7 +576,7 @@ public class CompraView extends javax.swing.JInternalFrame {
 
         jtaListaProductos.setEnabled(true);
         jtProducPorNombre.setEnabled(true);
-        jbGuardar.setEnabled(true);
+        jbModificar.setEnabled(true);
         jbCerrarCompra.setEnabled(true);
 
     }
@@ -559,9 +585,9 @@ public class CompraView extends javax.swing.JInternalFrame {
         modelo.addColumn("idProducto");
         modelo.addColumn("Nombre");
         modelo.addColumn("Descripcion");
+        modelo.addColumn("Precio Actual");
         modelo.addColumn("Stock");
         modelo.addColumn("Estado");
-        modelo.addColumn("Precio Actual");
         modelo.addColumn("Cantidad");
         jtaListaProductos.setModel(modelo);
     }
@@ -595,7 +621,7 @@ public class CompraView extends javax.swing.JInternalFrame {
 
             // Llena la tabla con los productos asociados al proveedor y la fecha
             for (Producto producto : productos) {
-                modelo.addRow(new Object[]{producto.getIdProducto(), producto.getNombreProducto(), producto.getDescripcion(), producto.getStock(), producto.isEstado()});
+                modelo.addRow(new Object[]{producto.getIdProducto(), producto.getNombreProducto(), producto.getDescripcion(), producto.getPrecioActual(), producto.getStock(), producto.isEstado()});
             }
         } else {
             // Si no se ha seleccionado un proveedor o una fecha, muestra un mensaje de error
@@ -605,15 +631,14 @@ public class CompraView extends javax.swing.JInternalFrame {
 
     private void llenarTablaProductos(List<Producto> productos) {
         // Limpia el modelo de la tabla antes de agregar nuevos datos
-        
+
         DefaultTableModel modelo = (DefaultTableModel) jtaListaProductos.getModel();
         modelo.setRowCount(0);
 
         // Llena la tabla con los productos obtenidos
-        
         for (Producto producto : productos) {
-            
-            modelo.addRow(new Object[]{producto.getIdProducto(), producto.getNombreProducto(), producto.getDescripcion(), producto.getStock(), producto.isEstado()});
+
+            modelo.addRow(new Object[]{producto.getIdProducto(), producto.getNombreProducto(), producto.getDescripcion(), producto.getPrecioActual(), producto.getStock(), producto.isEstado()});
         }
     }
 
@@ -626,14 +651,14 @@ public class CompraView extends javax.swing.JInternalFrame {
             return false;
         }
     }
-    
+
     private void deshabilitarCamposCompra() {
 
         jdFecha.setEnabled(false);
         jtIdCompra.setEnabled(false);
         jtIDProveedor.setEnabled(false);
         jcbProveedor.setEnabled(false);
-        jbGuardar.setEnabled(false);
+        jbModificar.setEnabled(false);
         jbRegistrarCompra.setEnabled(false);
         jbLimpiarCompra.setEnabled(false);
         jlBuscarIdCompra.setEnabled(false);
@@ -647,7 +672,7 @@ public class CompraView extends javax.swing.JInternalFrame {
         jtIdCompra.setEnabled(true);
         jtIDProveedor.setEnabled(true);
         jcbProveedor.setEnabled(true);
-        jbGuardar.setEnabled(true);
+        jbModificar.setEnabled(true);
         jbRegistrarCompra.setEnabled(true);
         jbLimpiarCompra.setEnabled(true);
 

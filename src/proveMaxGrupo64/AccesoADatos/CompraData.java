@@ -108,6 +108,7 @@ public class CompraData {
     public void modificarCompra(Compra compra) {
         String sql = "UPDATE compra SET id_proveedor = ?, fechaCompra= ? WHERE id_compra= ?";
         try (PreparedStatement ps = con.prepareStatement(sql)) {
+            
             ps.setInt(1, compra.getProveedor().getIdProveedor());
             ps.setDate(2, Date.valueOf(compra.getFecha()));
             ps.setInt(3, compra.getIdCompra());
