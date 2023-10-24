@@ -259,32 +259,32 @@ public class CompraData {
     }
 //Aquellos productos que sean los más comprados entre fechas
 
-//    public List<Producto> obtenerProductosMasCompradosEntreFechas(Date fechaInicio, Date fechaFin) {
-//        List<Producto> productos = new ArrayList<>();
-//        String sql = "SELECT dc.id_producto, SUM(dc.cantidad) AS total_comprado "
-//                + "FROM detallecompra dc INNER JOIN compra c ON dc.id_compra = c.id_compra "
-//                + "WHERE c.fechaCompra BETWEEN ? AND ? GROUP BY dc.id_producto "
-//                + "ORDER BY total_comprado;";
-//        int numeroDeProductos=0;
-//        try {
-//            PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-//            ps.setDate(1, new java.sql.Date(fechaInicio.getTime()));
-//            ps.setDate(2, new java.sql.Date(fechaFin.getTime()));
-//            ps.setInt(3, numeroDeProductos);
-//            try (ResultSet rs = ps.executeQuery()) {
-//                while (rs.next()) {
-//                    Producto producto = new Producto();
-//                    producto.setIdProducto(rs.getInt("id_producto"));
-//                    producto.setNombreProducto("nombre");
-//                    producto.setDescripcion("descripcion");
-//                    productos.add(producto);
-//                }
-//            }
-//        } catch (SQLException ex) {
-//            JOptionPane.showMessageDialog(null, "Error al obtener productos comprados para esas fechas" + ex.getMessage());
-//        }
-//        return productos;
-//    }
+    public List<Producto> obtenerProductosMasCompradosEntreFechas(Date fechaInicio, Date fechaFin) {
+        List<Producto> productos = new ArrayList<>();
+        String sql = "SELECT dc.id_producto, SUM(dc.cantidad) AS total_comprado "
+                + "FROM detallecompra dc INNER JOIN compra c ON dc.id_compra = c.id_compra "
+                + "WHERE c.fechaCompra BETWEEN ? AND ? GROUP BY dc.id_producto "
+                + "ORDER BY total_comprado;";
+        int numeroDeProductos=0;
+        try {
+            PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+            ps.setDate(1, new java.sql.Date(fechaInicio.getTime()));
+            ps.setDate(2, new java.sql.Date(fechaFin.getTime()));
+            ps.setInt(3, numeroDeProductos);
+            try (ResultSet rs = ps.executeQuery()) {
+                while (rs.next()) {
+                    Producto producto = new Producto();
+                    producto.setIdProducto(rs.getInt("id_producto"));
+                    producto.setNombreProducto("nombre");
+                    producto.setDescripcion("descripcion");
+                    productos.add(producto);
+                }
+            }
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al obtener productos comprados para esas fechas" + ex.getMessage());
+        }
+        return productos;
+    }
     public List<Producto> obtenerProductosMasCompradosEntreFechas(java.util.Date fechaInicio, java.util.Date fechaFin) {
         List<Producto> productos = new ArrayList<>();
         String sql = "SELECT dc.id_producto, SUM(dc.cantidad) AS total_comprado "
@@ -364,58 +364,6 @@ public class CompraData {
         return compra;
     }
 
-//        String sql = "SELECT id_compra, id_proveedor, fechaCompra FROM compra WHERE id_compra=?";
-//        Compra compra = null;
-//
-//        try {
-//            PreparedStatement ps = con.prepareStatement(sql);
-//            ps.setInt(1, id);
-//            ResultSet rs = ps.executeQuery();
-//
-//            if (rs.next()) {
-//                compra = new Compra();
-//                compra.setIdCompra(id);
-//                compra.setFecha(rs.getDate("fechaCompra").toLocalDate());
-//
-//            } else {
-//                System.out.println("La compra no se encontró en la lista.");
-//            }
-//
-//            ps.close();
-//        } catch (SQLException ex) {
-//            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Compra.");
-//        }
-//
-//        return compra;
-//    }
-//    public List<Compra> obtenerCompras() {
-//        List<Compra> compras = new ArrayList<>();
-//        String sql = "SELECT * FROM compra";
-//
-//        try (PreparedStatement ps = con.prepareStatement(sql);
-//                ResultSet rs = ps.executeQuery()) {
-//
-//            while (rs.next()) {
-//                Compra compra = new Compra();
-//                compra.setIdCompra(rs.getInt("id_compra"));
-//
-//                // Obtener el id_proveedor de la base de datos
-//                int idProveedor = rs.getInt("id_proveedor");
-//
-//                // Crear un objeto Proveedor con el id_proveedor
-//                Proveedor proveedor = new Proveedor(idProveedor);
-//                compra.setProveedor(proveedor);
-//
-//                compra.setFecha(rs.getDate("fechaCompra"));
-//                compras.add(compra);
-//            }
-//
-//        } catch (SQLException ex) {
-//            JOptionPane.showMessageDialog(null, "Error al obtener las compras: " + ex.getMessage());
-//        }
-//
-//        return compras;
-//    }
     public List<Compra> contarComprasProveedor(int idProveedor) {
         List<Compra> compras = new ArrayList<>();
 
@@ -439,36 +387,68 @@ public class CompraData {
         }
         return compras;
     }
+    public List<Compra> contarComprasPorNombreProveedor(String nombreProveedor) {
+    List<Compra> compras = new ArrayList<>();
 
-    public List<Compra> contarComprasPorRazonSocial(String razonSocial) {
-        List<Compra> compras = new ArrayList<>();
-        String sql = "SELECT c.id_compra, c.fechaCompra, dc.id_detalle, dc.id_producto, dc.cantidad, dc.precioCosto\n"
+    String sql = "SELECT c.id_compra, c.fechaCompra, dc.id_detalle, dc.id_producto, dc.cantidad, dc.precioCosto\n"
                 + "FROM compra c\n"
                 + "JOIN detallecompra dc ON c.id_compra = dc.id_compra\n"
                 + "JOIN proveedor p ON c.id_proveedor = p.id_proveedor\n"
                 + "WHERE p.razonSocial = ?";
-
-        try (PreparedStatement ps = con.prepareStatement(sql)) {
-            ps.setString(1, razonSocial);
-            ResultSet rsCompras = ps.executeQuery();
-
-            while (rsCompras.next()) {
-                int idCompra = rsCompras.getInt("id_compra");
-                LocalDate fechaCompra = rsCompras.getDate("fechaCompra").toLocalDate();
-                int idDetalle = rsCompras.getInt("id_detalle");
-                int idProducto = rsCompras.getInt("id_producto");
-                int cantidad = rsCompras.getInt("cantidad");
-                double precioCosto = rsCompras.getDouble("precioCosto");
-
-                Compra compra = new Compra();
-                compras.add(compra);
-            }
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Error al obtener compras del proveedor: " + ex.getMessage());
+    
+    try {
+        PreparedStatement ps = con.prepareStatement(sql);
+        ps.setString(1, nombreProveedor);
+        ResultSet rs = ps.executeQuery();
+        
+        while (rs.next()) {
+            int idCompra = rs.getInt("id_compra");
+            LocalDate fechaCompra = rs.getDate("fechaCompra").toLocalDate();
+            Compra compra = new Compra();
+            compra.setIdCompra(idCompra);
+            compra.setFecha(rs.getDate("fechaCompra"));
+//            compra.setFecha(fechaCompra);
+            compras.add(compra);
         }
-
-        return compras;
+        
+        ps.close();
+    } catch (SQLException ex) {
+        JOptionPane.showMessageDialog(null, "Error al obtener compras del proveedor: " + ex.getMessage());
     }
+    
+    return compras;
+}
+
+//////
+//    public List<Compra> contarComprasPorRazonSocial(String razonSocial) {
+//        List<Compra> compras = new ArrayList<>();
+//        String sql = "SELECT c.id_compra, c.fechaCompra, dc.id_detalle, dc.id_producto, dc.cantidad, dc.precioCosto\n"
+//                + "FROM compra c\n"
+//                + "JOIN detallecompra dc ON c.id_compra = dc.id_compra\n"
+//                + "JOIN proveedor p ON c.id_proveedor = p.id_proveedor\n"
+//                + "WHERE p.razonSocial = ?";
+//
+//        try (PreparedStatement ps = con.prepareStatement(sql)) {
+//            ps.setString(1, razonSocial);
+//            ResultSet rsCompras = ps.executeQuery();
+//
+//            while (rsCompras.next()) {
+//                int idCompra = rsCompras.getInt("id_compra");
+//                LocalDate fechaCompra = rsCompras.getDate("fechaCompra").toLocalDate();
+//                int idDetalle = rsCompras.getInt("id_detalle");
+//                int idProducto = rsCompras.getInt("id_producto");
+//                int cantidad = rsCompras.getInt("cantidad");
+//                double precioCosto = rsCompras.getDouble("precioCosto");
+//
+//                Compra compra = new Compra();
+//                compras.add(compra);
+//            }
+//        } catch (SQLException ex) {
+//            JOptionPane.showMessageDialog(null, "Error al obtener compras del proveedor: " + ex.getMessage());
+//        }
+//
+//        return compras;
+//    }
 
 public void contarVecesComprasPorRazonSocial(String razonSocial) {
     String sql = "SELECT COUNT(*) AS num_compras FROM compra c "

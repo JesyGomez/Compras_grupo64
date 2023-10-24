@@ -19,7 +19,7 @@ public class Compras_grupo64 {
         Connection con = Conexion.getConexion();
         //Compra comp = new Compra (0, proveedor, LocalDate.MIN);
         CompraData compra = new CompraData();
-        compra.contarComprasPorRazonSocial("Bazar S.A.");
+//        compra.contarComprasPorRazonSocial("Bazar S.A.");
         System.out.println(compra);
         //compra.registrarCompra(comp);
         //Producto tv = new Producto("DELL", "NoteBook", 600000, 2, true);
