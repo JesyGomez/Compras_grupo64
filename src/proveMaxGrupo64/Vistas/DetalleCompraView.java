@@ -33,6 +33,8 @@ public class DetalleCompraView extends javax.swing.JInternalFrame {
 
     public DetalleCompraView() {
         initComponents();
+        armarCabecera();
+        cargarProductos();
       
     }
 
@@ -206,13 +208,6 @@ public class DetalleCompraView extends javax.swing.JInternalFrame {
                 }
             }
         
-        
-        
-        
-        
-        
-        
-       
     }//GEN-LAST:event_jBModificarActionPerformed
     }
 
