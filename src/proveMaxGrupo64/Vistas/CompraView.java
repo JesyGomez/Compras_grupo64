@@ -128,12 +128,6 @@ public class CompraView extends javax.swing.JInternalFrame {
             }
         });
         jpFondo.add(jbModificar, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 520, -1, -1));
-
-        jtIDProveedor.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jtIDProveedorActionPerformed(evt);
-            }
-        });
         jpFondo.add(jtIDProveedor, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 220, 110, -1));
 
         jlBuscarIdProveedor.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
@@ -422,12 +416,9 @@ public class CompraView extends javax.swing.JInternalFrame {
 
             if (proveedorEncontrado != null) {
                 JOptionPane.showMessageDialog(this, "El proveedor se encontró en la lista.");
-                // Muestra el nombre del proveedor en el JComboBox
                 jcbProveedor.setSelectedItem(proveedorEncontrado.getRazonSocial());
             } else {
-                // Si no se encuentra el proveedor, muestra un mensaje de error
                 JOptionPane.showMessageDialog(this, "Proveedor no encontrado.");
-                // Limpia el JComboBox si no se encuentra el proveedor
                 jcbProveedor.setSelectedItem(null);
             }
         } catch (NumberFormatException ex) {
@@ -464,10 +455,8 @@ public class CompraView extends javax.swing.JInternalFrame {
                 Date fechaUtil = Date.from(compraEncontrada.getFecha().atStartOfDay().atZone(ZoneId.systemDefault()).toInstant());
                 jdFecha.setDate(fechaUtil);
             } else {
-                // Si no se encuentra la compra, muestra un mensaje de error
                 JOptionPane.showMessageDialog(this, "La compra no se ha encontrado.");
 
-                // Limpia el JComboBox y el JDateChooser si no se encuentra la compra
                 jtIDProveedor.setText(null);
                 jdFecha.setDate(null);
 
@@ -483,37 +472,22 @@ public class CompraView extends javax.swing.JInternalFrame {
 
         String nombreBuscado = jtProducPorNombre.getText();
 
-        // Llama al método buscarProductoPorNombre en ProductoData para obtener los productos
         ProductoData productoData = new ProductoData();
         List<Producto> productosEncontrados = productoData.buscarProductoPorNombre(nombreBuscado);
 
-        // Llena la tabla con los productos encontrados
         llenarTablaProductos(productosEncontrados);
     }//GEN-LAST:event_jtProducPorNombreKeyReleased
 
-    private void jtIDProveedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtIDProveedorActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jtIDProveedorActionPerformed
-
     private void jbModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbModificarActionPerformed
         // TODO add your handling code here:
-habilitarCampos();
+        habilitarCampos();
         String idCompra = jtIdCompra.getText();
         int idcompram = Integer.parseInt(idCompra);
 
-        // Creo un objeto Proveedor con el ID ingresado
         Compra compra = new Compra();
         compra.setIdCompra(idcompram);
 
         CompraData compraData = new CompraData();
-//        List<Compra> idCompramod = compraData.modificarCompra(compra);
-
-//        
-//        Compra compr = new Compra();
-//        compr.setIdCompra(idcompram);
-//
-//        CompraData modif = new CompraData();
-//
         compraData.modificarCompra(compra);
     }//GEN-LAST:event_jbModificarActionPerformed
 
@@ -606,7 +580,6 @@ habilitarCampos();
         Date fechaSeleccionada = jdFecha.getDate();
         String producASelec = jtProducPorNombre.getSelectedText();
 
-        // Verifica si se han seleccionado tanto un proveedor como una fecha
         if (proveedorSeleccionado != null && fechaSeleccionada != null) {
             // Convierte la fecha seleccionada de util.Date a LocalDate
             LocalDate fecha = fechaSeleccionada.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
@@ -615,27 +588,22 @@ habilitarCampos();
             ProductoData productoData = new ProductoData();
             List<Producto> productos = productoData.listarProductos();
 
-            // Limpia el modelo de la tabla antes de agregar nuevos datos
             DefaultTableModel modelo = (DefaultTableModel) jtaListaProductos.getModel();
             modelo.setRowCount(0);
 
-            // Llena la tabla con los productos asociados al proveedor y la fecha
             for (Producto producto : productos) {
                 modelo.addRow(new Object[]{producto.getIdProducto(), producto.getNombreProducto(), producto.getDescripcion(), producto.getPrecioActual(), producto.getStock(), producto.isEstado()});
             }
         } else {
-            // Si no se ha seleccionado un proveedor o una fecha, muestra un mensaje de error
             JOptionPane.showMessageDialog(this, "Por favor, seleccione un proveedor y una fecha antes de cargar los productos.");
         }
     }
 
     private void llenarTablaProductos(List<Producto> productos) {
-        // Limpia el modelo de la tabla antes de agregar nuevos datos
 
         DefaultTableModel modelo = (DefaultTableModel) jtaListaProductos.getModel();
         modelo.setRowCount(0);
 
-        // Llena la tabla con los productos obtenidos
         for (Producto producto : productos) {
 
             modelo.addRow(new Object[]{producto.getIdProducto(), producto.getNombreProducto(), producto.getDescripcion(), producto.getPrecioActual(), producto.getStock(), producto.isEstado()});

@@ -27,20 +27,18 @@ public class DetalleCompraData {
 
     public static final int ERROR_SQL_DETALLE_COMPRA_DUPLICADA = 1062;
 
-    
     public void guardarDetalleCompra(DetalleCompra dc) {
 
-        String sql = "INSERT INTO detallecompra(id_detalle, id_compra, id_producto, cantidad, precioCosto)"
-                + "VALUES(?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO detallecompra(id_compra, id_producto, cantidad, precioCosto) \n"
+                + "VALUES (?,?,?,?);";
 
         try {
             PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 
-            ps.setInt(1, dc.getIdDetalle());
-            ps.setInt(2, dc.getCompra().getIdCompra());
-            ps.setInt(3, dc.getProducto().getIdProducto());
-            ps.setInt(4, dc.getCantidad());
-            ps.setDouble(5, dc.getPrecioCosto());
+            ps.setInt(1, dc.getCompra().getIdCompra());
+            ps.setInt(2, dc.getProducto().getIdProducto());
+            ps.setInt(3, dc.getCantidad());
+            ps.setDouble(4, dc.getPrecioCosto());
 
             ps.executeUpdate();
 
@@ -95,17 +93,17 @@ public class DetalleCompraData {
         }
 
         return detalleCompra;
-    }  
-      
-      public void modificarDetalleCompra(DetalleCompra deta){
-      
-         String sql= "UPDATE detallecompra SET id_compra = ?, id_producto = ?,cantidad = ?, precioCosto = ?"
-                 + " WHERE  id_detalle = ?";
-      
+    }
+
+    public void modificarDetalleCompra(DetalleCompra deta) {
+
+        String sql = "UPDATE detallecompra SET id_compra = ?, id_producto = ?,cantidad = ?, precioCosto = ?"
+                + " WHERE  id_detalle = ?";
+
         try {
             PreparedStatement ps = con.prepareStatement(sql);
-            
-            ps.setInt(1, deta.getCompra().getIdCompra() );
+
+            ps.setInt(1, deta.getCompra().getIdCompra());
             ps.setInt(2, deta.getProducto().getIdProducto());
             ps.setInt(3, deta.getCantidad());
             ps.setDouble(4, deta.getPrecioCosto());
@@ -115,21 +113,20 @@ public class DetalleCompraData {
                 JOptionPane.showMessageDialog(null, "Detalle de Compra Modificada");
 
             }
-            
+
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Detalle de Compras");
         }
-      
-      
-      }
-       public void actualizarcantidad(int idDetalle, int cantidad) {
+
+    }
+
+    public void actualizarcantidad(int idDetalle, int cantidad) {
         String sql = "UPDATE  detallecompra SET cantidad = ? WHERE  idDetalle = ?";
         try {
             PreparedStatement ps = con.prepareStatement(sql);
-            ps.setInt(1,cantidad );
+            ps.setInt(1, cantidad);
             ps.setInt(2, idDetalle);
-             
-            
+
             int filas = ps.executeUpdate();
             if (filas > 0) {
                 JOptionPane.showMessageDialog(null, "Nota Actualizada");
@@ -140,18 +137,7 @@ public class DetalleCompraData {
         }
     }
 
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-       public void actualizarNota(int idAlumno, int idMateria, double nota) {
+    public void actualizarNota(int idAlumno, int idMateria, double nota) {
         String sql = "UPDATE inscripcion SET nota = ? WHERE idAlumno = ? AND idMateria = ?";
         try {
             PreparedStatement ps = con.prepareStatement(sql);
@@ -167,7 +153,8 @@ public class DetalleCompraData {
             JOptionPane.showMessageDialog(null, "Error al acceder a la Tabla");
         }
     }
- public List<DetalleCompra> listarDetallesCompra() {
+
+    public List<DetalleCompra> listarDetallesCompra() {
         String sql = "SELECT id_detalle, id_compra, id_producto, cantidad, precioCosto FROM detallecompra";
         List<DetalleCompra> detallesCompra = new ArrayList<>();
 
@@ -194,8 +181,6 @@ public class DetalleCompraData {
         return detallesCompra;
     }
 
-
-    
     /*public void modificarDetalleCompra(DetalleCompra dc) {
 
         String sql = "UPDATE detallecompra SET nombre = ?, descripcion = ?, precioActual = ?, stock = ?, estado = ?"

@@ -27,14 +27,13 @@ public class CompraData {
     public static final int ERROR_SQL_COMPRA_DUPLICADA = 1062;
 
     public void registrarCompra(Compra compra) {
-        String sql = "INSERT INTO compra (id_compra, id_proveedor, fechaCompra) VALUES (?, ?, ?)";
+        String sql = "INSERT INTO compra (id_proveedor, fechaCompra) VALUES (?, ?)";
 
         try {
             PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 
-            ps.setInt(1, compra.getIdCompra());
-            ps.setInt(2, compra.getProveedor().getIdProveedor());
-            ps.setDate(3, Date.valueOf(compra.getFecha()));
+            ps.setInt(1, compra.getProveedor().getIdProveedor());
+            ps.setDate(2, Date.valueOf(compra.getFecha()));
             ps.executeUpdate();
 
             ResultSet rs = ps.getGeneratedKeys();
@@ -162,7 +161,6 @@ public class CompraData {
 
                     DetalleCompra detalleCompra = new DetalleCompra();
                     detalleCompra.setCantidad(rs.getInt("cantidad"));
-                    // Supongamos que hay un método setDetalleCompra en la clase Producto para asociar el detalle de compra con el producto
                     detalleCompra.getCantidad();
 
                     if (!producto.isEstado()) {
