@@ -18,6 +18,7 @@ public class ComprasaUnProveedor extends javax.swing.JInternalFrame {
         initComponents();
         this.setSize(500, 450);
         this.setTitle("Compras por Proveedor");
+        ///
     }
 
     /**
