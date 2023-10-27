@@ -31,117 +31,85 @@ public class ConsultasView extends javax.swing.JInternalFrame {
         jbProductosCompra = new javax.swing.JButton();
 
         setClosable(true);
+        setIconifiable(true);
         setMaximizable(true);
+        setResizable(true);
+        setPreferredSize(new java.awt.Dimension(1100, 510));
 
         jpFondo.setBackground(new java.awt.Color(0, 0, 102));
+        jpFondo.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jlConsultas.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         jlConsultas.setForeground(new java.awt.Color(255, 255, 255));
-        jlConsultas.setText("CONSULTAR");
+        jlConsultas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/sobre.png"))); // NOI18N
+        jlConsultas.setText("*CONSULTAS*");
+        jpFondo.add(jlConsultas, new org.netbeans.lib.awtextra.AbsoluteConstraints(434, 27, 168, -1));
 
-        jbProductosPorCompra.setBackground(new java.awt.Color(255, 255, 255));
+        jbProductosPorCompra.setBackground(new java.awt.Color(0, 0, 102));
         jbProductosPorCompra.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        jbProductosPorCompra.setForeground(new java.awt.Color(0, 0, 0));
+        jbProductosPorCompra.setForeground(new java.awt.Color(255, 255, 255));
         jbProductosPorCompra.setText("Productos de una Compra");
         jbProductosPorCompra.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jbProductosPorCompraActionPerformed(evt);
             }
         });
+        jpFondo.add(jbProductosPorCompra, new org.netbeans.lib.awtextra.AbsoluteConstraints(645, 92, -1, 66));
 
-        jbProveedoresPorProducto.setBackground(new java.awt.Color(255, 255, 255));
+        jbProveedoresPorProducto.setBackground(new java.awt.Color(0, 0, 102));
         jbProveedoresPorProducto.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        jbProveedoresPorProducto.setForeground(new java.awt.Color(0, 0, 0));
+        jbProveedoresPorProducto.setForeground(new java.awt.Color(255, 255, 255));
         jbProveedoresPorProducto.setText("Proveedores por Producto");
         jbProveedoresPorProducto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jbProveedoresPorProductoActionPerformed(evt);
             }
         });
+        jpFondo.add(jbProveedoresPorProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 365, -1, 66));
 
-        jbComprasProveedor.setBackground(new java.awt.Color(255, 255, 255));
+        jbComprasProveedor.setBackground(new java.awt.Color(0, 0, 102));
         jbComprasProveedor.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        jbComprasProveedor.setForeground(new java.awt.Color(0, 0, 0));
+        jbComprasProveedor.setForeground(new java.awt.Color(255, 255, 255));
         jbComprasProveedor.setText("Compras a un Proveedor");
         jbComprasProveedor.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jbComprasProveedorActionPerformed(evt);
             }
         });
+        jpFondo.add(jbComprasProveedor, new org.netbeans.lib.awtextra.AbsoluteConstraints(425, 92, 192, 66));
 
-        jbProductosMasComprados.setBackground(new java.awt.Color(255, 255, 255));
+        jbProductosMasComprados.setBackground(new java.awt.Color(0, 0, 102));
         jbProductosMasComprados.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        jbProductosMasComprados.setForeground(new java.awt.Color(0, 0, 0));
+        jbProductosMasComprados.setForeground(new java.awt.Color(255, 255, 255));
         jbProductosMasComprados.setText("Productos Más Comprados");
         jbProductosMasComprados.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jbProductosMasCompradosActionPerformed(evt);
             }
         });
+        jpFondo.add(jbProductosMasComprados, new org.netbeans.lib.awtextra.AbsoluteConstraints(425, 365, -1, 66));
 
-        jbProductosMenorStock.setBackground(new java.awt.Color(255, 255, 255));
+        jbProductosMenorStock.setBackground(new java.awt.Color(0, 0, 102));
         jbProductosMenorStock.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        jbProductosMenorStock.setForeground(new java.awt.Color(0, 0, 0));
+        jbProductosMenorStock.setForeground(new java.awt.Color(255, 255, 255));
         jbProductosMenorStock.setText("Productos de Menor Stock");
         jbProductosMenorStock.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jbProductosMenorStockActionPerformed(evt);
             }
         });
+        jpFondo.add(jbProductosMenorStock, new org.netbeans.lib.awtextra.AbsoluteConstraints(645, 365, -1, 66));
 
-        jbProductosCompra.setBackground(new java.awt.Color(255, 255, 255));
+        jbProductosCompra.setBackground(new java.awt.Color(0, 0, 102));
         jbProductosCompra.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        jbProductosCompra.setForeground(new java.awt.Color(0, 0, 0));
+        jbProductosCompra.setForeground(new java.awt.Color(255, 255, 255));
         jbProductosCompra.setText("Productos de una Compra");
         jbProductosCompra.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jbProductosCompraActionPerformed(evt);
             }
         });
-
-        javax.swing.GroupLayout jpFondoLayout = new javax.swing.GroupLayout(jpFondo);
-        jpFondo.setLayout(jpFondoLayout);
-        jpFondoLayout.setHorizontalGroup(
-            jpFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jpFondoLayout.createSequentialGroup()
-                .addGroup(jpFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jpFondoLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jbProveedoresPorProducto)
-                        .addGap(41, 41, 41)
-                        .addComponent(jbComprasProveedor))
-                    .addGroup(jpFondoLayout.createSequentialGroup()
-                        .addComponent(jbProductosCompra)
-                        .addGroup(jpFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jpFondoLayout.createSequentialGroup()
-                                .addGap(67, 67, 67)
-                                .addComponent(jlConsultas, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jpFondoLayout.createSequentialGroup()
-                                .addGap(30, 30, 30)
-                                .addComponent(jbProductosMasComprados)
-                                .addGap(39, 39, 39)
-                                .addGroup(jpFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jbProductosMenorStock)
-                                    .addComponent(jbProductosPorCompra))))))
-                .addGap(17, 24, Short.MAX_VALUE))
-        );
-        jpFondoLayout.setVerticalGroup(
-            jpFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jpFondoLayout.createSequentialGroup()
-                .addGap(23, 23, 23)
-                .addComponent(jlConsultas)
-                .addGap(61, 61, 61)
-                .addGroup(jpFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jbProductosCompra, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jbComprasProveedor, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jbProductosPorCompra, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(60, 60, 60)
-                .addGroup(jpFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jbProveedoresPorProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jbProductosMasComprados, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jbProductosMenorStock, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(62, Short.MAX_VALUE))
-        );
+        jpFondo.add(jbProductosCompra, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 92, -1, 66));
 
         Escritorio2.setLayer(jpFondo, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
@@ -149,21 +117,15 @@ public class ConsultasView extends javax.swing.JInternalFrame {
         Escritorio2.setLayout(Escritorio2Layout);
         Escritorio2Layout.setHorizontalGroup(
             Escritorio2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 664, Short.MAX_VALUE)
+            .addGap(0, 1098, Short.MAX_VALUE)
             .addGroup(Escritorio2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(Escritorio2Layout.createSequentialGroup()
-                    .addContainerGap()
-                    .addComponent(jpFondo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addContainerGap()))
+                .addComponent(jpFondo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         Escritorio2Layout.setVerticalGroup(
             Escritorio2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 360, Short.MAX_VALUE)
+            .addGap(0, 488, Short.MAX_VALUE)
             .addGroup(Escritorio2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(Escritorio2Layout.createSequentialGroup()
-                    .addContainerGap()
-                    .addComponent(jpFondo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addContainerGap()))
+                .addComponent(jpFondo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());

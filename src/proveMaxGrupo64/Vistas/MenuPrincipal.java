@@ -1,4 +1,5 @@
 package proveMaxGrupo64.Vistas;
+
 public class MenuPrincipal extends javax.swing.JFrame {
 
     /**
@@ -6,8 +7,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
      */
     public MenuPrincipal() {
         initComponents();
-        this.setSize(1200,750);
-        //this.setExtendedState(this.MAXIMIZED_BOTH);
+        this.setExtendedState(this.MAXIMIZED_BOTH);
         Escritorio = new EscritorioModificado();
         this.setContentPane(Escritorio);
         setLocationRelativeTo(null);
@@ -26,12 +26,18 @@ public class MenuPrincipal extends javax.swing.JFrame {
         Escritorio = new javax.swing.JDesktopPane();
         jMenuBar1 = new javax.swing.JMenuBar();
         jmConsultas = new javax.swing.JMenu();
+        jmProductosPorCompra = new javax.swing.JMenuItem();
+        jmComprasPorProveedor = new javax.swing.JMenuItem();
+        jmProveedorPorProducto = new javax.swing.JMenuItem();
+        jmProductosMasComprados = new javax.swing.JMenuItem();
+        jmProductosMenorStock = new javax.swing.JMenuItem();
+        jmProductosPorFecha = new javax.swing.JMenuItem();
         jMCompras = new javax.swing.JMenu();
         jmRegistrarCompra = new javax.swing.JMenuItem();
         jMProductos = new javax.swing.JMenu();
-        jMIngresoProducto = new javax.swing.JMenuItem();
+        jmRegistroProductos = new javax.swing.JMenuItem();
         jMProveedores = new javax.swing.JMenu();
-        jMForProveedores = new javax.swing.JMenuItem();
+        jmForProveedores = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -42,11 +48,61 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jmConsultas.setText("Consultas");
         jmConsultas.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         jmConsultas.setPreferredSize(new java.awt.Dimension(150, 50));
-        jmConsultas.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jmConsultasMouseClicked(evt);
+
+        jmProductosPorCompra.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        jmProductosPorCompra.setText("Productos por Compra");
+        jmProductosPorCompra.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmProductosPorCompraActionPerformed(evt);
             }
         });
+        jmConsultas.add(jmProductosPorCompra);
+
+        jmComprasPorProveedor.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        jmComprasPorProveedor.setText("Compras por Proveedor");
+        jmComprasPorProveedor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmComprasPorProveedorActionPerformed(evt);
+            }
+        });
+        jmConsultas.add(jmComprasPorProveedor);
+
+        jmProveedorPorProducto.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        jmProveedorPorProducto.setText("Proveedor por Producto");
+        jmProveedorPorProducto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmProveedorPorProductoActionPerformed(evt);
+            }
+        });
+        jmConsultas.add(jmProveedorPorProducto);
+
+        jmProductosMasComprados.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        jmProductosMasComprados.setText("Productos mas Comprados");
+        jmProductosMasComprados.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmProductosMasCompradosActionPerformed(evt);
+            }
+        });
+        jmConsultas.add(jmProductosMasComprados);
+
+        jmProductosMenorStock.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        jmProductosMenorStock.setText("Producto de Menor Stock");
+        jmProductosMenorStock.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmProductosMenorStockActionPerformed(evt);
+            }
+        });
+        jmConsultas.add(jmProductosMenorStock);
+
+        jmProductosPorFecha.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        jmProductosPorFecha.setText("Productos por Fecha");
+        jmProductosPorFecha.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmProductosPorFechaActionPerformed(evt);
+            }
+        });
+        jmConsultas.add(jmProductosPorFecha);
+
         jMenuBar1.add(jmConsultas);
 
         jMCompras.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/ComprasLogo.png"))); // NOI18N
@@ -70,14 +126,14 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jMProductos.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         jMProductos.setPreferredSize(new java.awt.Dimension(150, 50));
 
-        jMIngresoProducto.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        jMIngresoProducto.setText("Registro de Productos");
-        jMIngresoProducto.addActionListener(new java.awt.event.ActionListener() {
+        jmRegistroProductos.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        jmRegistroProductos.setText("Registro de Productos");
+        jmRegistroProductos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMIngresoProductoActionPerformed(evt);
+                jmRegistroProductosActionPerformed(evt);
             }
         });
-        jMProductos.add(jMIngresoProducto);
+        jMProductos.add(jmRegistroProductos);
 
         jMenuBar1.add(jMProductos);
 
@@ -86,14 +142,14 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jMProveedores.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         jMProveedores.setPreferredSize(new java.awt.Dimension(150, 50));
 
-        jMForProveedores.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        jMForProveedores.setText("Formulario de proveedores");
-        jMForProveedores.addActionListener(new java.awt.event.ActionListener() {
+        jmForProveedores.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        jmForProveedores.setText("Formulario de proveedores");
+        jmForProveedores.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMForProveedoresActionPerformed(evt);
+                jmForProveedoresActionPerformed(evt);
             }
         });
-        jMProveedores.add(jMForProveedores);
+        jMProveedores.add(jmForProveedores);
 
         jMenuBar1.add(jMProveedores);
 
@@ -113,28 +169,28 @@ public class MenuPrincipal extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jMIngresoProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMIngresoProductoActionPerformed
-        // TODO add your handling code here:
-        
+    private void jmRegistroProductosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmRegistroProductosActionPerformed
+
         Escritorio.removeAll();
         Escritorio.repaint();
         ProductoView pv = new ProductoView();
         pv.setVisible(true);
         Escritorio.add(pv);
         Escritorio.moveToFront(pv);
-    }//GEN-LAST:event_jMIngresoProductoActionPerformed
+    }//GEN-LAST:event_jmRegistroProductosActionPerformed
 
-    private void jMForProveedoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMForProveedoresActionPerformed
+    private void jmForProveedoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmForProveedoresActionPerformed
+      
         Escritorio.removeAll();
         Escritorio.repaint();
         ProveedorView prv = new ProveedorView();
         prv.setVisible(true);
         Escritorio.add(prv);
         Escritorio.moveToFront(prv);
-    }//GEN-LAST:event_jMForProveedoresActionPerformed
+    }//GEN-LAST:event_jmForProveedoresActionPerformed
 
     private void jmRegistrarCompraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmRegistrarCompraActionPerformed
-        
+
         Escritorio.removeAll();
         Escritorio.repaint();
         CompraView cv = new CompraView();
@@ -143,16 +199,65 @@ public class MenuPrincipal extends javax.swing.JFrame {
         Escritorio.moveToFront(cv);
     }//GEN-LAST:event_jmRegistrarCompraActionPerformed
 
-    private void jmConsultasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jmConsultasMouseClicked
-        // TODO add your handling code here:
-       Escritorio.removeAll();
+    private void jmProductosPorCompraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmProductosPorCompraActionPerformed
+       
+        Escritorio.removeAll();
         Escritorio.repaint();
-        ConsultasView consultas = new ConsultasView();
-        consultas.setVisible(true);
-        Escritorio.add(consultas);
-        Escritorio.moveToFront(consultas);
+        ProductosdeUnaCompra ppc = new ProductosdeUnaCompra();
+        ppc.setVisible(true);
+        Escritorio.add(ppc);
+        Escritorio.moveToFront(ppc);
+    }//GEN-LAST:event_jmProductosPorCompraActionPerformed
 
-    }//GEN-LAST:event_jmConsultasMouseClicked
+    private void jmComprasPorProveedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmComprasPorProveedorActionPerformed
+      
+        Escritorio.removeAll();
+        Escritorio.repaint();
+        ComprasaUnProveedor cxp = new ComprasaUnProveedor();
+        cxp.setVisible(true);
+        Escritorio.add(cxp);
+        Escritorio.moveToFront(cxp);
+    }//GEN-LAST:event_jmComprasPorProveedorActionPerformed
+
+    private void jmProveedorPorProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmProveedorPorProductoActionPerformed
+      
+        Escritorio.removeAll();
+        Escritorio.repaint();
+        ProveePorProducto ppp = new ProveePorProducto();
+        ppp.setVisible(true);
+        Escritorio.add(ppp);
+        Escritorio.moveToFront(ppp);
+    }//GEN-LAST:event_jmProveedorPorProductoActionPerformed
+
+    private void jmProductosMasCompradosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmProductosMasCompradosActionPerformed
+      
+        Escritorio.removeAll();
+        Escritorio.repaint();
+        ProductosMasComprados pmc = new ProductosMasComprados();
+        pmc.setVisible(true);
+        Escritorio.add(pmc);
+        Escritorio.moveToFront(pmc);
+    }//GEN-LAST:event_jmProductosMasCompradosActionPerformed
+
+    private void jmProductosMenorStockActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmProductosMenorStockActionPerformed
+      
+        Escritorio.removeAll();
+        Escritorio.repaint();
+        ProductosdeMenorStock pms = new ProductosdeMenorStock();
+        pms.setVisible(true);
+        Escritorio.add(pms);
+        Escritorio.moveToFront(pms);
+    }//GEN-LAST:event_jmProductosMenorStockActionPerformed
+
+    private void jmProductosPorFechaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmProductosPorFechaActionPerformed
+
+        Escritorio.removeAll();
+        Escritorio.repaint();
+        ProducCompraPorFecha ppc = new ProducCompraPorFecha();
+        ppc.setVisible(true);
+        Escritorio.add(ppc);
+        Escritorio.moveToFront(ppc);
+    }//GEN-LAST:event_jmProductosPorFechaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -192,12 +297,18 @@ public class MenuPrincipal extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JDesktopPane Escritorio;
     private javax.swing.JMenu jMCompras;
-    private javax.swing.JMenuItem jMForProveedores;
-    private javax.swing.JMenuItem jMIngresoProducto;
     private javax.swing.JMenu jMProductos;
     private javax.swing.JMenu jMProveedores;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jmComprasPorProveedor;
     private javax.swing.JMenu jmConsultas;
+    private javax.swing.JMenuItem jmForProveedores;
+    private javax.swing.JMenuItem jmProductosMasComprados;
+    private javax.swing.JMenuItem jmProductosMenorStock;
+    private javax.swing.JMenuItem jmProductosPorCompra;
+    private javax.swing.JMenuItem jmProductosPorFecha;
+    private javax.swing.JMenuItem jmProveedorPorProducto;
     private javax.swing.JMenuItem jmRegistrarCompra;
+    private javax.swing.JMenuItem jmRegistroProductos;
     // End of variables declaration//GEN-END:variables
 }
