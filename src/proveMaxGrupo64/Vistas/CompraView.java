@@ -351,13 +351,13 @@ public class CompraView extends javax.swing.JInternalFrame {
             Date fechaN = jdFecha.getDate();
 
             LocalDate fecha = fechaN.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-
-            Proveedor proveedor = new Proveedor(); 
-            proveedor.setIdProveedor(PROPERTIES); 
-            Compra compra = new Compra(proveedor, fecha);
-
-            CompraData compraData = new CompraData();
-            compraData.registrarCompra(compra);
+//
+//            Proveedor proveedor = new Proveedor(); 
+//            proveedor.setIdProveedor(PROPERTIES); 
+//            Compra compra = new Compra(proveedor, fecha);
+//
+//            CompraData compraData = new CompraData();
+//            compraData.registrarCompra(compra);
         } catch (NumberFormatException ex) {
             JOptionPane.showMessageDialog(this, "La fecha debe ser válida.");
         }
@@ -369,8 +369,6 @@ public class CompraView extends javax.swing.JInternalFrame {
         dcv.setVisible(true);
         Escritorio3.add(dcv);
         Escritorio3.moveToFront(dcv);
-        CompraData compra = new CompraData();
-        compra.obtenerUltimaCompra();
     }//GEN-LAST:event_jbCerrarCompraActionPerformed
 
     private void jbLimpiarCompraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbLimpiarCompraActionPerformed
