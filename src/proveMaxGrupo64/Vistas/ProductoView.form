@@ -105,9 +105,9 @@
                                   <EmptySpace type="separate" max="-2" attributes="0"/>
                                   <Component id="jtbEditar" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace type="separate" max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="jbSalir" min="-2" pref="103" max="-2" attributes="0"/>
-                                      <Component id="jbEliminar" min="-2" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                      <Component id="jbSalir" max="32767" attributes="0"/>
+                                      <Component id="jbEliminar" max="32767" attributes="0"/>
                                   </Group>
                               </Group>
                           </Group>
@@ -172,7 +172,7 @@
                       <Component id="jtbEditar" alignment="3" min="-2" pref="35" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
-                  <Component id="jbSalir" min="-2" max="-2" attributes="0"/>
+                  <Component id="jbSalir" min="-2" pref="48" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
               </Group>
           </Group>
