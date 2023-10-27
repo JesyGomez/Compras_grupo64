@@ -268,30 +268,3 @@ public DetalleCompra obtenerUltimoDetalleCompra() {
         }
     }
 
-    public List<Producto> listarProductos() {
-
-        String sql = "SELECT id_producto, nombre, descripcion, precioActual, stock, estado FROM producto WHERE estado = 1";
-        ArrayList<Producto> productos = new ArrayList<>();
-        try {
-            PreparedStatement ps = con.prepareStatement(sql);
-
-            ResultSet rs = ps.executeQuery();
-            while (rs.next()) {
-                Producto producto = new Producto();
-                producto.setIdProducto(rs.getInt("id_producto"));
-                producto.setNombreProducto(rs.getString("nombre"));
-                producto.setDescripcion(rs.getString("descripcion"));
-                producto.setPrecioActual(rs.getDouble("precioActual"));
-                producto.setStock(rs.getInt("stock"));
-                producto.setEstado(true);
-
-                productos.add(producto);
-            }
-            ps.close();
-
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Producto");
-        }
-        return productos;
-    }*/
-}

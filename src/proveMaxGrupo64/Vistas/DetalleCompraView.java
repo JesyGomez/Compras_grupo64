@@ -35,8 +35,8 @@ public class DetalleCompraView extends javax.swing.JInternalFrame {
         compra.obtenerUltimaCompra();
         jtIDCompra.setText(String.valueOf(compra.obtenerUltimaCompra().getIdCompra()));
         jtIDProveedor.setText(String.valueOf(compra.obtenerUltimaCompra().getProveedor().getIdProveedor()));
-       cargarProductos();
-       llenarTabla();
+        cargarProductos();
+        llenarTabla();
 //        cargarDetallesCompras();
     }
 
@@ -211,7 +211,7 @@ public class DetalleCompraView extends javax.swing.JInternalFrame {
             }
 
     }//GEN-LAST:event_jBModificarActionPerformed
-    }
+  }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBModificar;
@@ -234,6 +234,7 @@ public class DetalleCompraView extends javax.swing.JInternalFrame {
             //jcbProducto.addItem(producto);
         }
     }
+
     private void armarCabecera() {
         modelo.addColumn("idProducto");
         modelo.addColumn("Nombre");
@@ -253,7 +254,6 @@ public class DetalleCompraView extends javax.swing.JInternalFrame {
 //        modelo.addColumn("PrecioCosto");
 //        jtaListaProductos.setModel(modelo);
 //    }
-
     private void borrarFilas() {
 
         int filas = jtaListaProductos.getRowCount() - 1;
@@ -305,13 +305,14 @@ public class DetalleCompraView extends javax.swing.JInternalFrame {
         // Devolvemos null para indicar que no se ingresó una nueva o se canceló la operación
         return null;
     }
+
     private void llenarTabla() {
         // Obtén el proveedor y la fecha seleccionados
         String idCompra = jtIDCompra.getText();
 
         if (idCompra != null) {
             // Convierte la fecha seleccionada de util.Date a LocalDate
-            
+
             ProductoData productoData = new ProductoData();
             List<Producto> productos = productoData.listarProductos();
 
