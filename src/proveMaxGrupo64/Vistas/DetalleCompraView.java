@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package proveMaxGrupo64.Vistas;
 
 import java.time.LocalDate;
@@ -14,6 +9,7 @@ import javax.swing.table.DefaultTableModel;
 import proveMaxGrupo64.AccesoADatos.CompraData;
 import proveMaxGrupo64.AccesoADatos.DetalleCompraData;
 import proveMaxGrupo64.AccesoADatos.ProductoData;
+import proveMaxGrupo64.Entidades.Compra;
 import proveMaxGrupo64.Entidades.DetalleCompra;
 import proveMaxGrupo64.Entidades.Producto;
 
@@ -22,7 +18,7 @@ import proveMaxGrupo64.Entidades.Producto;
  * @author Windows 10 OS
  */
 public class DetalleCompraView extends javax.swing.JInternalFrame {
-     
+
     private DetalleCompraData detaData;
     private DefaultTableModel modelo = new DefaultTableModel() {
         public boolean isCellEditable(int f, int c) {
@@ -33,9 +29,12 @@ public class DetalleCompraView extends javax.swing.JInternalFrame {
 
     public DetalleCompraView() {
         initComponents();
+        CompraData compra = new CompraData();
         armarCabecera();
-        cargarProductos();
-      
+        llenarCamposUltimaCompra();
+//        cargarProductos();
+        cargarDetallesCompras();
+        compra.obtenerUltimaCompra();
     }
 
     /**
@@ -190,24 +189,24 @@ public class DetalleCompraView extends javax.swing.JInternalFrame {
 
     private void jBModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBModificarActionPerformed
         // TODO add your handling code here:
-        
-         int filaSeleccinada = jtaListaProductos.getSelectedRow();
-         if (filaSeleccinada != -1) {
-            int idDetalle= (Integer) jtaListaProductos.getValueAt(filaSeleccinada, 0);
 
-          Integer nuevaCantidad = obtenerNuevaCantidad();
+        int filaSeleccinada = jtaListaProductos.getSelectedRow();
+        if (filaSeleccinada != -1) {
+            int idDetalle = (Integer) jtaListaProductos.getValueAt(filaSeleccinada, 0);
+
+            Integer nuevaCantidad = obtenerNuevaCantidad();
             if (nuevaCantidad != null) {
-                
-                if (nuevaCantidad >= 0 ) {
+
+                if (nuevaCantidad >= 0) {
                     jtaListaProductos.setValueAt(nuevaCantidad, filaSeleccinada, 3);
                     detaData.actualizarcantidad(idDetalle, nuevaCantidad);
-                   
+
                 } else {
                     // Si la nota no está en rango válido se muestra un mensaje de error 
                     JOptionPane.showMessageDialog(null, "La cantidad debe ser mayor a 0.", "Error", JOptionPane.ERROR_MESSAGE);
                 }
             }
-        
+
     }//GEN-LAST:event_jBModificarActionPerformed
     }
 
@@ -232,8 +231,8 @@ public class DetalleCompraView extends javax.swing.JInternalFrame {
             //jcbProducto.addItem(producto);
         }
     }
-    
-     private void armarCabecera() {
+
+    private void armarCabecera() {
         modelo.addColumn("Id.DetalleCompras");
         modelo.addColumn("Id.Compra");
         modelo.addColumn("Id.Producto");
@@ -244,18 +243,46 @@ public class DetalleCompraView extends javax.swing.JInternalFrame {
 
     private void borrarFilas() {
 
-        int filas =   jtaListaProductos.getRowCount() - 1;
+        int filas = jtaListaProductos.getRowCount() - 1;
         for (int f = filas; f >= 0; f--) {
             modelo.removeRow(f);
         }
     }
-    
-      private Integer  obtenerNuevaCantidad() {
+
+    private void cargarDetallesCompras() {
+        borrarFilas();
+        DetalleCompraData deta = new DetalleCompraData();
+        // Obtener los detalles de compras desde la base de datos
+        List<DetalleCompra> detallesCompras = deta.listarDetallesCompra();
+
+        // Llenar la tabla con los detalles de compras
+        for (DetalleCompra detalleCompra : detallesCompras) {
+            Object[] fila = {
+                detalleCompra.getIdDetalle(),
+                detalleCompra.getCompra().getIdCompra(),
+                detalleCompra.getProducto().getIdProducto(),
+                detalleCompra.getCantidad(),
+                detalleCompra.getPrecioCosto()
+            };
+            modelo.addRow(fila);
+        }
+    }
+
+    private void llenarCamposUltimaCompra() {
+        CompraData compra = new CompraData();
+        Compra ultimaCompra = compra.obtenerUltimaCompra();
+        if (ultimaCompra != null) {
+            jtIDCompra.setText(String.valueOf(ultimaCompra.getIdCompra()));
+            jtIDProveedor.setText(String.valueOf(ultimaCompra.getProveedor().getIdProveedor()));
+        }
+    }
+
+    private Integer obtenerNuevaCantidad() {
         String input = JOptionPane.showInputDialog("Ingrese la nueva Cantidad:");
         if (input != null) {
             try {
                 return Integer.parseInt(input);
-                  //return Double.parseDouble(input);
+                //return Double.parseDouble(input);
             } catch (NumberFormatException e) {
                 JOptionPane.showMessageDialog(null, "La entrada no es un número válido.", "Error", JOptionPane.ERROR_MESSAGE);
             }
@@ -263,5 +290,5 @@ public class DetalleCompraView extends javax.swing.JInternalFrame {
         // Devolvemos null para indicar que no se ingresó una nueva o se canceló la operación
         return null;
     }
-    
+
 }

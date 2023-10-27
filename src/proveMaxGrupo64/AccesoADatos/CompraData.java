@@ -457,36 +457,34 @@ public class CompraData {
         return compras;
     }
 
-//////
-//    public List<Compra> contarComprasPorRazonSocial(String razonSocial) {
-//        List<Compra> compras = new ArrayList<>();
-//        String sql = "SELECT c.id_compra, c.fechaCompra, dc.id_detalle, dc.id_producto, dc.cantidad, dc.precioCosto\n"
-//                + "FROM compra c\n"
-//                + "JOIN detallecompra dc ON c.id_compra = dc.id_compra\n"
-//                + "JOIN proveedor p ON c.id_proveedor = p.id_proveedor\n"
-//                + "WHERE p.razonSocial = ?";
-//
-//        try (PreparedStatement ps = con.prepareStatement(sql)) {
-//            ps.setString(1, razonSocial);
-//            ResultSet rsCompras = ps.executeQuery();
-//
-//            while (rsCompras.next()) {
-//                int idCompra = rsCompras.getInt("id_compra");
-//                LocalDate fechaCompra = rsCompras.getDate("fechaCompra").toLocalDate();
-//                int idDetalle = rsCompras.getInt("id_detalle");
-//                int idProducto = rsCompras.getInt("id_producto");
-//                int cantidad = rsCompras.getInt("cantidad");
-//                double precioCosto = rsCompras.getDouble("precioCosto");
-//
-//                Compra compra = new Compra();
-//                compras.add(compra);
-//            }
-//        } catch (SQLException ex) {
-//            JOptionPane.showMessageDialog(null, "Error al obtener compras del proveedor: " + ex.getMessage());
-//        }
-//
-//        return compras;
-//    }
+public Compra obtenerUltimaCompra() {
+    Compra ultimaCompra = null;
+    String sql = "SELECT * FROM compra ORDER BY id_compra DESC LIMIT 1";
+
+    try (PreparedStatement ps = con.prepareStatement(sql)) {
+        ResultSet rs = ps.executeQuery();
+
+        if (rs.next()) {
+            int idCompra = rs.getInt("id_compra");
+            int idProveedor = rs.getInt("id_proveedor");
+            Date fechaCompra = rs.getDate("fechaCompra");
+
+            // Obtén el proveedor asociado a esta compra
+            ProveedorData proveedorData = new ProveedorData();
+            Proveedor proveedor = proveedorData.buscarProveedor(idProveedor);
+
+            // Crea el objeto Compra con los datos obtenidos de la consulta
+            ultimaCompra = new Compra(idCompra, proveedor, fechaCompra.toLocalDate());
+        }
+
+        rs.close();
+    } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al obtener datos de la tabla Detalle de Compra: " + ex.getMessage());
+    }
+
+    return ultimaCompra;
+}
+
     public void contarVecesComprasPorRazonSocial(String razonSocial) {
         String sql = "SELECT COUNT(*) AS num_compras FROM compra c "
                 + "JOIN proveedor p ON c.id_proveedor = p.id_proveedor "
