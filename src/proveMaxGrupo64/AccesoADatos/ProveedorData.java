@@ -1,4 +1,3 @@
-
 package proveMaxGrupo64.AccesoADatos;
 
 import java.sql.Connection;
@@ -57,7 +56,7 @@ public class ProveedorData {
             ps.setString(3, proveedor.getDomicilio());
             ps.setString(4, proveedor.getTelefono());
             ps.setInt(5, proveedor.getIdProveedor());
-            
+
             int exito = ps.executeUpdate();
             if (exito == 1) {
                 JOptionPane.showMessageDialog(null, "Proveedor modificado exitosamente!");
@@ -144,8 +143,7 @@ public class ProveedorData {
                 proveedor.setRazonSocial(rs.getString("razonSocial"));
                 proveedor.setDomicilio(rs.getNString("domicilio"));
                 proveedor.setTelefono(rs.getNString("telefono"));
-               
-                
+
                 proveedores.add(proveedor);
             }
             ps.close();
@@ -154,6 +152,7 @@ public class ProveedorData {
         }
         return proveedores;
     }
+
     public List<Proveedor> contarComprasProveedor(Proveedor proveedor) {
         List<Proveedor> compras = new ArrayList<>();
         String sql = "SELECT * FROM compra WHERE id_Proveedor = ?";
@@ -163,16 +162,32 @@ public class ProveedorData {
             try (ResultSet rs = ps.executeQuery()) {
                 while (rs.next()) {
                     Proveedor proveedorEncontrado = new Proveedor();
-                proveedorEncontrado.setIdProveedor(rs.getInt("id_Proveedor"));
-                // Obtener y asignar más detalles del proveedor según tus necesidades
+                    proveedorEncontrado.setIdProveedor(rs.getInt("id_Proveedor"));
+                    // Obtener y asignar más detalles del proveedor según tus necesidades
 
-                proveedor.getIdProveedor();
+                    proveedor.getIdProveedor();
                 }
             }
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error al obtener compras del proveedor: " + ex.getMessage());
         }
         return compras;
+    }
+
+    public boolean existeProveedor(int idProveedor) {
+        String sql = "SELECT COUNT(*) FROM proveedor WHERE id_proveedor = ?";
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1, idProveedor);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                int count = rs.getInt(1);
+                return count > 0; // Si el recuento es mayor que 0, significa que el proveedor existe
+            }
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al verificar la existencia del proveedor: " + ex.getMessage());
+        }
+        return false; // En caso de error, se considera que el proveedor no existe
     }
 
 }
