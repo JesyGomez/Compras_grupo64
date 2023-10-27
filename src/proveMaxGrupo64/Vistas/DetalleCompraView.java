@@ -33,8 +33,11 @@ public class DetalleCompraView extends javax.swing.JInternalFrame {
         armarCabecera();
         llenarCamposUltimaCompra();
 //        cargarProductos();
-        cargarDetallesCompras();
+//        cargarDetallesCompras();
         compra.obtenerUltimaCompra();
+        jtIDCompra.setText(String.valueOf(compra.obtenerUltimaCompra().getIdCompra()));
+        jtIDProveedor.setText(String.valueOf(compra.obtenerUltimaCompra().getProveedor().getIdProveedor()));
+
     }
 
     /**
@@ -274,6 +277,7 @@ public class DetalleCompraView extends javax.swing.JInternalFrame {
         if (ultimaCompra != null) {
             jtIDCompra.setText(String.valueOf(ultimaCompra.getIdCompra()));
             jtIDProveedor.setText(String.valueOf(ultimaCompra.getProveedor().getIdProveedor()));
+            jtaListaProductos.setModel(modelo);
         }
     }
 

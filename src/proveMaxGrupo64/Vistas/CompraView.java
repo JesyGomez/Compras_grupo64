@@ -378,6 +378,8 @@ public class CompraView extends javax.swing.JInternalFrame {
         dcv.setVisible(true);
         Escritorio3.add(dcv);
         Escritorio3.moveToFront(dcv);
+        CompraData compra = new CompraData();
+        compra.obtenerUltimaCompra();
     }//GEN-LAST:event_jbCerrarCompraActionPerformed
 
     private void jbLimpiarCompraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbLimpiarCompraActionPerformed
