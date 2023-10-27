@@ -257,6 +257,12 @@ public class ProveedorView extends javax.swing.JInternalFrame {
             int idAEliminar = Integer.parseInt(jtfIDProveedor.getText());
             ProveedorData proveedorAEliminar = new ProveedorData();
 
+            // Comprobar si el proveedor existe antes de eliminarlo
+            if (proveedorAEliminar.buscarProveedor(idAEliminar) == null) {
+                JOptionPane.showMessageDialog(this, "No se ha encontrado el proveedor con el ID especificado.", "Proveedor no encontrado", JOptionPane.ERROR_MESSAGE);
+                return; // No eliminar ni deshabilitar campos
+            }
+
             // Mostrar un cuadro de diálogo de confirmación para eliminar el proveedor, para evitar accidentes.
             int respuesta = JOptionPane.showConfirmDialog(this, "¿Estás seguro de que deseas eliminar este Proveedor?", "Confirmar Eliminación", JOptionPane.YES_NO_OPTION);
 
@@ -264,12 +270,21 @@ public class ProveedorView extends javax.swing.JInternalFrame {
                 proveedorAEliminar.eliminarProveedor(idAEliminar);
                 verificarBotonEditar();
                 limpiarCampos();
+                // Deshabilitar los campos después de eliminar
+                jtfRazonSocial.setEnabled(false);
+                jtfDomicilio.setEnabled(false);
+                jtfTelefono.setEnabled(false);
             }
 
         } catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(this, "Error: Debe ingresar un código válido.", "Error de Entrada", JOptionPane.ERROR_MESSAGE);
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Error inesperado: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        } finally {
+            // Habilitar los campos nuevamente después de eliminar
+            jtfRazonSocial.setEnabled(true);
+            jtfDomicilio.setEnabled(true);
+            jtfTelefono.setEnabled(true);
         }
     }//GEN-LAST:event_jbEliminarActionPerformed
 
@@ -291,34 +306,45 @@ public class ProveedorView extends javax.swing.JInternalFrame {
 
     private void jbGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbGuardarActionPerformed
         try {
+            String razonSocial = jtfRazonSocial.getText();
+            String domicilio = jtfDomicilio.getText();
+            String telefono = jtfTelefono.getText();
+
+            if (razonSocial.isEmpty() || domicilio.isEmpty() || telefono.isEmpty()) {
+                JOptionPane.showMessageDialog(this, "Error: Todos los campos deben estar llenos.", "Error de Entrada", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
+            // Comprobar si el teléfono contiene solo números
+            if (!telefono.matches("\\d+")) {
+                JOptionPane.showMessageDialog(this, "Error: El teléfono debe contener solo números.", "Error de Entrada", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
 
             ProveedorData prove = new ProveedorData();
             Proveedor nuevoProveedor = new Proveedor();
 
-            String razonSocial = jtfRazonSocial.getText();
-            String domicilio = jtfDomicilio.getText();
-            String telefono = jtfTelefono.getText();
+            // Deshabilitar el campo de ID
+            jtfIDProveedor.setEnabled(false);
 
             nuevoProveedor.setRazonSocial(razonSocial);
             nuevoProveedor.setDomicilio(domicilio);
             nuevoProveedor.setTelefono(telefono);
 
             if (modoEdicion) {
-                int id = Integer.parseInt(jtfIDProveedor.getText());
-                nuevoProveedor.setIdProveedor(id);
-                prove.modificarProveedor(nuevoProveedor);
-                verificarBotonEditar();
-
+                // No permitir modificar el ID
+                JOptionPane.showMessageDialog(this, "No puedes modificar el ID existente.", "Error", JOptionPane.ERROR_MESSAGE);
             } else {
                 prove.guardarProveedor(nuevoProveedor);
                 verificarBotonEditar();
             }
 
-            //limpiarCampos();
-        } catch (NumberFormatException e) {
-            JOptionPane.showMessageDialog(this, "Error: Debe ingresar un código válido.", "Error de Entrada", JOptionPane.ERROR_MESSAGE);
+            limpiarCampos();
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Error inesperado: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        } finally {
+            // Habilitar el campo de ID nuevamente después de guardar
+            jtfIDProveedor.setEnabled(true);
         }
     }//GEN-LAST:event_jbGuardarActionPerformed
 
@@ -348,29 +374,58 @@ public class ProveedorView extends javax.swing.JInternalFrame {
 
     private void jbEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbEditarActionPerformed
 
-        ProveedorData proveedorData = new ProveedorData();
+     ProveedorData proveedorData = new ProveedorData();
+    int idProveedor;
 
-        try {
-            int idProveedor = Integer.parseInt(jtfIDProveedor.getText());
-            String razonSocial = jtfRazonSocial.getText();
-            String domicilio = jtfDomicilio.getText();
-            String telefono = jtfTelefono.getText();
+    try {
+        idProveedor = Integer.parseInt(jtfIDProveedor.getText());
+    } catch (NumberFormatException ex) {
+        JOptionPane.showMessageDialog(this, "El ID debe ser un número válido.", "Error de Entrada", JOptionPane.ERROR_MESSAGE);
+        return; // Salir del método si el ID no es válido
+    }
 
-            // Crear una instancia de Proveedor con los datos modificados
-            Proveedor proveedorModificado = new Proveedor(idProveedor, razonSocial, domicilio, telefono);
-            // Mostrar un cuadro de diálogo de confirmación
-            int confirmacion = JOptionPane.showConfirmDialog(this, "¿Seguro desea realizar este cambio en el proveedor?", "Confirmar Modificación", JOptionPane.YES_NO_OPTION);
+    // Verificar si el ID existe en la base de datos
+    if (!proveedorData.existeProveedor(idProveedor)) {
+        JOptionPane.showMessageDialog(this, "El ID de proveedor no existe en la base de datos.", "ID no encontrado", JOptionPane.WARNING_MESSAGE);
+        return; // Salir del método si el ID no existe
+    }
 
-            if (confirmacion == JOptionPane.YES_OPTION) {
-                // El usuario ha confirmado, entonces realizamos la modificación del proveedor
-                proveedorData.modificarProveedor(proveedorModificado);
+    // Obtener los valores actuales antes de la edición
+    String razonSocialActual = jtfRazonSocial.getText();
+    String domicilioActual = jtfDomicilio.getText();
+    String telefonoActual = jtfTelefono.getText();
 
-                limpiarCampos();
+    String razonSocialNueva = jtfRazonSocial.getText();
+    String domicilioNueva = jtfDomicilio.getText();
+    String telefonoNueva = jtfTelefono.getText();
 
-            }
-        } catch (NumberFormatException ex) {
-            JOptionPane.showMessageDialog(this, "El ID debe ser un número válido.");
-        }
+    // Crear una instancia de Proveedor con los datos modificados
+    Proveedor proveedorModificado = new Proveedor(idProveedor, razonSocialNueva, domicilioNueva, telefonoNueva);
+
+    // Verificar qué campos han cambiado y actualizar solo esos campos
+    if (!razonSocialActual.equals(razonSocialNueva)) {
+        // El campo de razonSocial ha cambiado, actualiza el proveedor
+        proveedorModificado.setRazonSocial(razonSocialNueva);
+    }
+
+    if (!domicilioActual.equals(domicilioNueva)) {
+        // El campo de domicilio ha cambiado, actualiza el proveedor
+        proveedorModificado.setDomicilio(domicilioNueva);
+    }
+
+    if (!telefonoActual.equals(telefonoNueva)) {
+        // El campo de telefono ha cambiado, actualiza el proveedor
+        proveedorModificado.setTelefono(telefonoNueva);
+    }
+
+    // Mostrar un cuadro de diálogo de confirmación
+    int confirmacion = JOptionPane.showConfirmDialog(this, "¿Seguro desea realizar este cambio en el proveedor?", "Confirmar Modificación", JOptionPane.YES_NO_OPTION);
+
+    if (confirmacion == JOptionPane.YES_OPTION) {
+        // El usuario ha confirmado, entonces realizamos la modificación del proveedor
+        proveedorData.modificarProveedor(proveedorModificado);
+        limpiarCampos();
+    }
     }//GEN-LAST:event_jbEditarActionPerformed
 
 
