@@ -1,5 +1,8 @@
 package proveMaxGrupo64.Entidades;
 
+import proveMaxGrupo64.AccesoADatos.CompraData;
+import proveMaxGrupo64.AccesoADatos.ProductoData;
+
 public class DetalleCompra {
 
     private int idDetalle;
@@ -24,6 +27,10 @@ public class DetalleCompra {
         this.precioCosto = precioCosto;
         this.compra = compra;
         this.producto = producto;
+    }
+
+    public DetalleCompra(int idDetalleCompra, int cantidad, double precioCosto, CompraData compra, ProductoData producto) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     public int getIdDetalle() {

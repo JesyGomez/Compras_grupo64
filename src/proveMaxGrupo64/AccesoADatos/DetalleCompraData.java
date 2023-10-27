@@ -59,7 +59,36 @@ public class DetalleCompraData {
         }
 
     }
+public DetalleCompra obtenerUltimoDetalleCompra() {
+    DetalleCompra ultimoDetalleCompra = null;
+    String sql = "SELECT * FROM detallecompra ORDER BY id_detalle DESC LIMIT 1";
 
+    try (PreparedStatement ps = con.prepareStatement(sql)) {
+        ResultSet rs = ps.executeQuery();
+
+        if (rs.next()) {
+            int idDetalleCompra = rs.getInt("id_detalle");
+            int idCompra = rs.getInt("id_compra");
+            int idProducto = rs.getInt("id_producto");
+            int cantidad = rs.getInt("cantidad");
+            double precioCosto = rs.getDouble("precioCosto");
+
+            CompraData compra = new CompraData();
+                    compra.buscarCompraPorId(idCompra);
+
+            ProductoData producto = new ProductoData();
+                    producto.buscarProductoPorId(idCompra);
+
+            ultimoDetalleCompra = new DetalleCompra(idDetalleCompra, cantidad, precioCosto, compra, producto);
+        }
+
+        rs.close();
+    } catch (SQLException ex) {
+        JOptionPane.showMessageDialog(null, "Error al obtener datos de la tabla Detalle de Compra: " + ex.getMessage());
+    }
+
+    return ultimoDetalleCompra;
+}
     public DetalleCompra buscarDetalleCompraPorId(int id) {
 
         String sql = "SELECT id_detalle, id_compra, id_producto, cantidad, precioCosto"

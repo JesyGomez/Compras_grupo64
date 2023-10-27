@@ -31,7 +31,8 @@ public class DetalleCompraView extends javax.swing.JInternalFrame {
         initComponents();
         CompraData compra = new CompraData();
         armarCabecera();
-        llenarCamposUltimaCompra();
+//        llenarCamposUltimaCompra();
+       detaData.obtenerUltimoDetalleCompra();
 //        cargarProductos();
 //        cargarDetallesCompras();
         compra.obtenerUltimaCompra();
