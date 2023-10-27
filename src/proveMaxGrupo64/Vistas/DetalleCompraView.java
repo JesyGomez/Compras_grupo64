@@ -31,14 +31,13 @@ public class DetalleCompraView extends javax.swing.JInternalFrame {
         initComponents();
         CompraData compra = new CompraData();
         armarCabecera();
-//        llenarCamposUltimaCompra();
-       detaData.obtenerUltimoDetalleCompra();
-//        cargarProductos();
-//        cargarDetallesCompras();
+        llenarCamposUltimaCompra();
         compra.obtenerUltimaCompra();
         jtIDCompra.setText(String.valueOf(compra.obtenerUltimaCompra().getIdCompra()));
         jtIDProveedor.setText(String.valueOf(compra.obtenerUltimaCompra().getProveedor().getIdProveedor()));
-
+       cargarProductos();
+       llenarTabla();
+//        cargarDetallesCompras();
     }
 
     /**
@@ -235,15 +234,25 @@ public class DetalleCompraView extends javax.swing.JInternalFrame {
             //jcbProducto.addItem(producto);
         }
     }
-
     private void armarCabecera() {
-        modelo.addColumn("Id.DetalleCompras");
-        modelo.addColumn("Id.Compra");
-        modelo.addColumn("Id.Producto");
+        modelo.addColumn("idProducto");
+        modelo.addColumn("Nombre");
+        modelo.addColumn("Descripcion");
+        modelo.addColumn("Precio Actual");
+        modelo.addColumn("Stock");
+        modelo.addColumn("Estado");
         modelo.addColumn("Cantidad");
-        modelo.addColumn("PrecioCosto");
         jtaListaProductos.setModel(modelo);
     }
+
+//    private void armarCabecera() {
+//        modelo.addColumn("Id.DetalleCompras");
+//        modelo.addColumn("Id.Compra");
+//        modelo.addColumn("Id.Producto");
+//        modelo.addColumn("Cantidad");
+//        modelo.addColumn("PrecioCosto");
+//        jtaListaProductos.setModel(modelo);
+//    }
 
     private void borrarFilas() {
 
@@ -278,6 +287,7 @@ public class DetalleCompraView extends javax.swing.JInternalFrame {
         if (ultimaCompra != null) {
             jtIDCompra.setText(String.valueOf(ultimaCompra.getIdCompra()));
             jtIDProveedor.setText(String.valueOf(ultimaCompra.getProveedor().getIdProveedor()));
+            ProductoData produSele = new ProductoData();
             jtaListaProductos.setModel(modelo);
         }
     }
@@ -294,6 +304,37 @@ public class DetalleCompraView extends javax.swing.JInternalFrame {
         }
         // Devolvemos null para indicar que no se ingresó una nueva o se canceló la operación
         return null;
+    }
+    private void llenarTabla() {
+        // Obtén el proveedor y la fecha seleccionados
+        String idCompra = jtIDCompra.getText();
+
+        if (idCompra != null) {
+            // Convierte la fecha seleccionada de util.Date a LocalDate
+            
+            ProductoData productoData = new ProductoData();
+            List<Producto> productos = productoData.listarProductos();
+
+            DefaultTableModel modelo = (DefaultTableModel) jtaListaProductos.getModel();
+            modelo.setRowCount(0);
+
+            for (Producto producto : productos) {
+                modelo.addRow(new Object[]{producto.getIdProducto(), producto.getNombreProducto(), producto.getDescripcion(), producto.getPrecioActual(), producto.getStock(), producto.isEstado()});
+            }
+        } else {
+            //JOptionPane.showMessageDialog(this, "Por favor, seleccione un proveedor y una fecha antes de cargar los productos.");
+        }
+    }
+
+    private void llenarTablaProductos(List<Producto> productos) {
+
+        DefaultTableModel modelo = (DefaultTableModel) jtaListaProductos.getModel();
+        modelo.setRowCount(0);
+
+        for (Producto producto : productos) {
+
+            modelo.addRow(new Object[]{producto.getIdProducto(), producto.getNombreProducto(), producto.getDescripcion(), producto.getPrecioActual(), producto.getStock(), producto.isEstado()});
+        }
     }
 
 }

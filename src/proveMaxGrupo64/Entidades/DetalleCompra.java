@@ -30,7 +30,6 @@ public class DetalleCompra {
     }
 
     public DetalleCompra(int idDetalleCompra, int cantidad, double precioCosto, CompraData compra, ProductoData producto) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     public int getIdDetalle() {
