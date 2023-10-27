@@ -349,15 +349,19 @@ public class CompraView extends javax.swing.JInternalFrame {
         try {
             String proveSeleccionado = (String) jcbProveedor.getSelectedItem();
             Date fechaN = jdFecha.getDate();
-
+            String idProvee = (String) jtIDProveedor.getText();
+            if (!validar(idProvee)) {
+                JOptionPane.showMessageDialog(this, "El ID del proveedor debe ser un número entero.");
+                return;
+            }
             LocalDate fecha = fechaN.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-
-            Proveedor proveedor = new Proveedor(); 
-            proveedor.setIdProveedor(PROPERTIES); 
-            Compra compra = new Compra(proveedor, fecha);
-
-            CompraData compraData = new CompraData();
-            compraData.registrarCompra(compra);
+//
+//            Proveedor proveedor = new Proveedor(); 
+//            proveedor.setIdProveedor(PROPERTIES); 
+//            Compra compra = new Compra(proveedor, fecha);
+//
+//            CompraData compraData = new CompraData();
+//            compraData.registrarCompra(compra);
         } catch (NumberFormatException ex) {
             JOptionPane.showMessageDialog(this, "La fecha debe ser válida.");
         }
@@ -421,7 +425,7 @@ public class CompraView extends javax.swing.JInternalFrame {
     private void jlBuscarIdCompraMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jlBuscarIdCompraMouseClicked
         CompraData compraData = new CompraData();
         try {
-            String idCompra = jtIdCompra.getText().trim();
+            String idCompra = jtIdCompra.getText();
             Compra compraEncontrada = null;
             if (!idCompra.isEmpty()) {
                 int idComp = Integer.parseInt(idCompra);

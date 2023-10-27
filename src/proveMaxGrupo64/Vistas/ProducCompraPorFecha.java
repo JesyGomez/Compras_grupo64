@@ -148,9 +148,9 @@ public class ProducCompraPorFecha extends javax.swing.JInternalFrame {
                     producto.getIdProducto(),
                     producto.getNombreProducto(),
                     producto.getDescripcion(),
+                    producto.getPrecioActual(),
                     producto.getStock(),
                     producto.isEstado() ? "Activo" : "Inactivo",
-                    producto.getPrecioActual()
                 });
             }
         }
