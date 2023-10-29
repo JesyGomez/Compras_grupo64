@@ -252,32 +252,39 @@ public class DetalleCompraView extends javax.swing.JInternalFrame {
 
     private void jbCerrarCompraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbCerrarCompraActionPerformed
 
-int idCompra = Integer.parseInt(jtIDCompra.getText());
-    DetalleCompraData dcdata = new DetalleCompraData();
+        int idCompra = Integer.parseInt(jtIDCompra.getText());
+        int idProveedor = Integer.parseInt(jtIDProveedor.getText());
+        DetalleCompraData dcdata = new DetalleCompraData();
 
-    for (int i = 0; i < jtaListaProductos.getRowCount(); i++) {
-        // Verificar si la fila está seleccionada
-        if (jtaListaProductos.isRowSelected(i)) {
-            int idProducto = Integer.parseInt(jtaListaProductos.getValueAt(i, 0).toString());
-            int cantidad = Integer.parseInt(jtaListaProductos.getValueAt(i, 6).toString());
-            double precioActual = Double.parseDouble(jtaListaProductos.getValueAt(i, 3).toString());
-            double precioCosto = precioActual * cantidad;
+        for (int i = 0; i < jtaListaProductos.getRowCount(); i++) {
+            // Verificar si la fila está seleccionada
+            if (jtaListaProductos.isRowSelected(i)) {
+                int idProducto = Integer.parseInt(jtaListaProductos.getValueAt(i, 0).toString());
+                int cantidad = Integer.parseInt(jtaListaProductos.getValueAt(i, 6).toString());
+                double precioActual = Double.parseDouble(jtaListaProductos.getValueAt(i, 3).toString());
+                double precioCosto = precioActual * cantidad;
 
-            // Crear objeto DetalleCompra
-            DetalleCompra dc = new DetalleCompra();
-            Compra compra = new Compra();
-            compra.setIdCompra(idCompra);
-            Producto producto = new Producto();
-            producto.setIdProducto(idProducto);
-            dc.setCompra(compra);
-            dc.setProducto(producto);
-            dc.setCantidad(cantidad);
-            dc.setPrecioCosto(precioCosto);
+                // Crear objeto DetalleCompra
+                DetalleCompra dc = new DetalleCompra();
+                Compra compra = new Compra();
+                compra.setIdCompra(idCompra);
+                Producto producto = new Producto();
+                producto.setIdProducto(idProducto);
+                dc.setCompra(compra);
+                dc.setProducto(producto);
+                dc.setCantidad(cantidad);
+                dc.setPrecioCosto(precioCosto);
 
-            // Llamar al método para guardar el detalle de compra
-            dcdata.guardarDetalleCompra(dc);
+                // Llamar al método para guardar el detalle de compra
+                dcdata.guardarDetalleCompra(dc);
+            }
         }
-    }
+        jtIDProveedor.setText("");
+        jtIDProveedor.setText("");
+
+        // Limpiar tabla
+        DefaultTableModel modelo = (DefaultTableModel) jtaListaProductos.getModel();
+        modelo.setRowCount(0);
     }//GEN-LAST:event_jbCerrarCompraActionPerformed
 
     private void jbSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSalirActionPerformed
