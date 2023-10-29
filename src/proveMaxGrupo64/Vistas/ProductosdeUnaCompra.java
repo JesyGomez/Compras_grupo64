@@ -125,7 +125,7 @@ public class ProductosdeUnaCompra extends javax.swing.JInternalFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(24, 24, 24)
                 .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 54, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 78, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(jtIdCompra, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -169,17 +169,12 @@ public class ProductosdeUnaCompra extends javax.swing.JInternalFrame {
         borrarFilas();
 //        DefaultTableModel modelo = (DefaultTableModel) jtProductos.getModel();
             for (Producto producto : productos) {
-                modelo.addRow(new Object[]{
-                    producto.getIdProducto(),
-                    producto.getNombreProducto(),
-                    producto.getDescripcion(),
-                    producto.getStock(),
+                modelo.addRow(new Object[]{producto.getIdProducto(), producto.getNombreProducto(), producto.getDescripcion(), producto.getPrecioActual(), producto.getStock(), 
                     producto.isEstado() ? "Activo" : "Inactivo",
-                    producto.getPrecioActual()
                 });
             }
         }catch(NumberFormatException ex){
-            JOptionPane.showMessageDialog(this, "El ID de la compra debe ser un numero");
+            JOptionPane.showMessageDialog(this, "El ID de la compra debe ser un número");
             jtIdCompra.setText("");
         }
     }//GEN-LAST:event_jbBuscarActionPerformed
@@ -211,9 +206,9 @@ public class ProductosdeUnaCompra extends javax.swing.JInternalFrame {
         modelo.addColumn("ID");
         modelo.addColumn("Nombre");
         modelo.addColumn("Descripción");
+        modelo.addColumn("Precio de Costo");
         modelo.addColumn("Stock");
         modelo.addColumn("Estado");
-        modelo.addColumn("Precio de Costo");
         jtProductos.setModel(modelo);
     }
 
