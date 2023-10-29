@@ -11,7 +11,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         Escritorio = new EscritorioModificado();
         this.setContentPane(Escritorio);
         setLocationRelativeTo(null);
-        this.setTitle("Sistema de Compras");
+        this.setTitle("ProveMax-Sistema de Compras");
     }
 
     /**

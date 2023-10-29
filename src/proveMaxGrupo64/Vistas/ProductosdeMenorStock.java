@@ -6,6 +6,7 @@ import proveMaxGrupo64.AccesoADatos.CompraData;
 import proveMaxGrupo64.Entidades.Producto;
 
 public class ProductosdeMenorStock extends javax.swing.JInternalFrame {
+
     private DefaultTableModel modelo = new DefaultTableModel() {
         public boolean isCellEditable(int f, int c) {
             return false;
@@ -152,20 +153,19 @@ public class ProductosdeMenorStock extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jbConsultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbConsultarActionPerformed
-CompraData stock = new CompraData();
-List<Producto> productos = stock.obtenerProductosPorDebajoDelStockMinimo();
-        
+        CompraData stock = new CompraData();
+        List<Producto> productos = stock.obtenerProductosPorDebajoDelStockMinimo();
+
         borrarFilas();
-            for (Producto producto : productos) {
-                modelo.addRow(new Object[]{
-                    producto.getIdProducto(),
-                    producto.getNombreProducto(),
-                    producto.getDescripcion(),
-                    producto.getStock(),
-                    producto.isEstado() ? "Activo" : "Inactivo",
-                    producto.getPrecioActual()
-                });
-            }
+        for (Producto producto : productos) {
+            modelo.addRow(new Object[]{
+                producto.getIdProducto(),
+                producto.getNombreProducto(),
+                producto.getDescripcion(),
+                producto.getPrecioActual(),
+                producto.getStock(),
+                producto.isEstado() ? "Activo" : "Inactivo",});
+        }
     }//GEN-LAST:event_jbConsultarActionPerformed
 
 
@@ -181,14 +181,15 @@ List<Producto> productos = stock.obtenerProductosPorDebajoDelStockMinimo();
     private javax.swing.JTable jtProductos;
     // End of variables declaration//GEN-END:variables
     private void armarCabecera() {
-        modelo.addColumn("id_producto");
+        modelo.addColumn("Id_Producto");
         modelo.addColumn("Nombre");
         modelo.addColumn("Descripción");
+        modelo.addColumn("Precio Actual");
         modelo.addColumn("Stock");
         modelo.addColumn("Estado");
-        modelo.addColumn("Precio de Costo");
         jtProductos.setModel(modelo);
     }
+
     private void borrarFilas() {
         int filas = jtProductos.getRowCount() - 1;
         for (int f = filas; f >= 0; f--) {
