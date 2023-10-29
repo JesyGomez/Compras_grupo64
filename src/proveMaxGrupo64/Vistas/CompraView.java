@@ -102,7 +102,6 @@ public class CompraView extends javax.swing.JInternalFrame {
             }
         });
 
-        jdFecha.setDateFormatString("dd/MM/yyyy");
         jdFecha.setMaxSelectableDate(new java.util.Date());
         jdFecha.setMinSelectableDate(new java.util.Date(1577851309000L));
 
@@ -163,12 +162,12 @@ public class CompraView extends javax.swing.JInternalFrame {
                                 .addComponent(jbRegistrarCompra, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
                                 .addComponent(jbCerrarCompra)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 106, Short.MAX_VALUE)
+                                .addGap(66, 66, 66)
                                 .addComponent(jbSalir))))
                     .addGroup(Escritorio3Layout.createSequentialGroup()
                         .addGap(247, 247, 247)
                         .addComponent(jLabel1)))
-                .addGap(27, 27, 27))
+                .addContainerGap(37, Short.MAX_VALUE))
         );
         Escritorio3Layout.setVerticalGroup(
             Escritorio3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -187,7 +186,7 @@ public class CompraView extends javax.swing.JInternalFrame {
                 .addComponent(jLabel5)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jcbProveedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 166, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 164, Short.MAX_VALUE)
                 .addGroup(Escritorio3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jbCerrarCompra)
                     .addComponent(jbRegistrarCompra, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -200,7 +199,7 @@ public class CompraView extends javax.swing.JInternalFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(Escritorio3, javax.swing.GroupLayout.DEFAULT_SIZE, 768, Short.MAX_VALUE)
+            .addComponent(Escritorio3, javax.swing.GroupLayout.DEFAULT_SIZE, 738, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

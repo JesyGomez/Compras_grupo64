@@ -7,7 +7,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
      */
     public MenuPrincipal() {
         initComponents();
-        this.setExtendedState(this.MAXIMIZED_BOTH);
+      //  this.setExtendedState(this.MAXIMIZED_BOTH);
         Escritorio = new EscritorioModificado();
         this.setContentPane(Escritorio);
         setLocationRelativeTo(null);

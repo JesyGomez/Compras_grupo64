@@ -166,22 +166,6 @@ public DetalleCompra obtenerUltimoDetalleCompra() {
         }
     }
 
-    public void actualizarNota(int idAlumno, int idMateria, double nota) {
-        String sql = "UPDATE inscripcion SET nota = ? WHERE idAlumno = ? AND idMateria = ?";
-        try {
-            PreparedStatement ps = con.prepareStatement(sql);
-            ps.setDouble(1, nota);
-            ps.setInt(2, idAlumno);
-            ps.setDouble(3, idMateria);
-            int filas = ps.executeUpdate();
-            if (filas > 0) {
-                JOptionPane.showMessageDialog(null, "Nota Actualizada");
-            }
-            ps.close();
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Error al acceder a la Tabla");
-        }
-    }
 
     public List<DetalleCompra> listarDetallesCompra() {
         String sql = "SELECT id_detalle, id_compra, id_producto, cantidad, precioCosto FROM detallecompra";
@@ -210,61 +194,5 @@ public DetalleCompra obtenerUltimoDetalleCompra() {
         return detallesCompra;
     }
 
-    /*public void modificarDetalleCompra(DetalleCompra dc) {
-
-        String sql = "UPDATE detallecompra SET nombre = ?, descripcion = ?, precioActual = ?, stock = ?, estado = ?"
-                + " WHERE id_producto = ?";
-
-        try {
-            PreparedStatement ps = con.prepareStatement(sql);
-            ps.setString(1, dc.getNombreProducto());
-            ps.setString(2, dc.getDescripcion());
-            ps.setDouble(3, dc.getPrecioActual());
-            ps.setInt(4, dc.getStock());
-            ps.setBoolean(5, dc.isEstado());
-            ps.setInt(6, dc.getIdProducto());
-
-            int exito = ps.executeUpdate();
-            if (exito == 1) {
-                JOptionPane.showMessageDialog(null, "Producto Modificado");
-
-            }
-
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Producto");
-        }
-    }
-
-    public void dadaDeBajaProducto(int id) {
-
-        String sql = "UPDATE producto SET estado = 0 WHERE id_producto = ?";
-
-        try {
-            PreparedStatement ps = con.prepareStatement(sql);
-            ps.setInt(1, id);
-            int exito = ps.executeUpdate();
-            if (exito == 1) {
-                JOptionPane.showMessageDialog(null, "Producto Dado de Baja");
-
-            }
-
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Producto");
-        }
-
-    }
-
-    public void eliminarProductoPorIdYNombre(int id, String nombre) {
-        String sql = "DELETE FROM producto WHERE id_producto = ? AND nombre = ?";
-
-        try {
-            PreparedStatement ps = con.prepareStatement(sql);
-            ps.setInt(1, id);
-            ps.setString(2, nombre);
-            ps.executeUpdate();
-            ps.close();
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Producto");
-        }*/
     }
 
