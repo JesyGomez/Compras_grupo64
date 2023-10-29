@@ -158,7 +158,7 @@ public DetalleCompra obtenerUltimoDetalleCompra() {
 
             int filas = ps.executeUpdate();
             if (filas > 0) {
-                JOptionPane.showMessageDialog(null, "Nota Actualizada");
+                JOptionPane.showMessageDialog(null, "Cantidad Actualizada");
             }
             ps.close();
         } catch (SQLException ex) {
