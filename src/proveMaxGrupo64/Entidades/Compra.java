@@ -23,6 +23,7 @@ public class Compra {
         this.fecha = fecha;
     }
 
+
     public int getIdCompra() {
         return idCompra;
     }
