@@ -22,6 +22,7 @@ public class CompraView extends javax.swing.JInternalFrame {
         CompraData compra = new CompraData();
         DetalleCompra detacom = new DetalleCompra();
         cargarProveedor();
+        jdFecha.getDateEditor().setEnabled(false);
 
     }
 

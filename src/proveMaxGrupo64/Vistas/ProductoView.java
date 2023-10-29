@@ -125,7 +125,7 @@ public class ProductoView extends javax.swing.JInternalFrame {
 
         jLabel7.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel7.setText("Estado:");
+        jLabel7.setText("Estado Activo:");
 
         jbSalir.setBackground(new java.awt.Color(0, 0, 102));
         jbSalir.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N

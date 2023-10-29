@@ -17,7 +17,10 @@ public class ComprasaUnProveedor extends javax.swing.JInternalFrame {
     public ComprasaUnProveedor() {
         initComponents();
         this.setTitle("Compras por Proveedor");
-        ///
+        DefaultTableModel modelo = new DefaultTableModel();
+        modelo.addColumn("ID Compra");
+        modelo.addColumn("Fecha Compra");
+        jtComprasPorProveedor.setModel(modelo);
     }
 
     /**
@@ -206,26 +209,39 @@ public class ComprasaUnProveedor extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jtProveedorBuscadoKeyReleased
 
     private void jbBuscarProveedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBuscarProveedorActionPerformed
-        String idProvee = jtIDProveedor.getText();
-        int idProveedor = Integer.parseInt(idProvee);
+        
+        try {
+            String idProvee = jtIDProveedor.getText();
+            int idProveedor = Integer.parseInt(idProvee);
+            
+            if (idProveedor <= 0) {
+                JOptionPane.showMessageDialog(this, "El ID del proveedor debe ser un numero entero positivo."
+                        + " Intentelo nuevamente.");
+                jtIDProveedor.setText("");
+            }
 
-        // Creo un objeto Proveedor con el ID ingresado
-        Proveedor proveedor = new Proveedor();
-        proveedor.setIdProveedor(idProveedor);
-
-        CompraData compraData = new CompraData();
-        List<Compra> comprasProveedor = compraData.contarComprasProveedor(proveedor);
-
-        DefaultTableModel modelo = new DefaultTableModel();
-        modelo.addColumn("ID Compra");
-        modelo.addColumn("Fecha Compra");
-        for (Compra compra : comprasProveedor) {
-            modelo.addRow(new Object[]{
-                compra.getIdCompra(),
-                compra.getFecha(),});
+            // Creo un objeto Proveedor con el ID ingresado
+            Proveedor proveedor = new Proveedor();
+            proveedor.setIdProveedor(idProveedor);
+            
+            CompraData compraData = new CompraData();
+            List<Compra> comprasProveedor = compraData.contarComprasProveedor(proveedor);
+            
+            DefaultTableModel modelo = new DefaultTableModel();
+            modelo.addColumn("ID Compra");
+            modelo.addColumn("Fecha Compra");
+            for (Compra compra : comprasProveedor) {
+                modelo.addRow(new Object[]{
+                    compra.getIdCompra(),
+                    compra.getFecha(),});
+            }
+            
+            jtComprasPorProveedor.setModel(modelo);
+        
+        } catch (NumberFormatException ex) {
+            JOptionPane.showMessageDialog(this, "El ID del proveedor debe ser un numero");
+            jtIDProveedor.setText("");
         }
-
-        jtComprasPorProveedor.setModel(modelo);
     }//GEN-LAST:event_jbBuscarProveedorActionPerformed
 
     private void jbBuscarPorNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBuscarPorNombreActionPerformed
@@ -237,18 +253,18 @@ public class ComprasaUnProveedor extends javax.swing.JInternalFrame {
         provee.contarVecesComprasPorRazonSocial(proveedorBuscado);
         CompraData compraData = new CompraData();
         List<Compra> comprasProveedor = compraData.contarComprasPorNombreProveedor(proveedorBuscado);
-
+        
         DefaultTableModel modelo = new DefaultTableModel();
         modelo.addColumn("ID Compra");
         modelo.addColumn("Fecha Compra");
-
+        
         for (Compra compra : comprasProveedor) {
             modelo.addRow(new Object[]{
                 compra.getIdCompra(),
                 compra.getFecha()
             });
         }
-
+        
         jtComprasPorProveedor.setModel(modelo);
     }//GEN-LAST:event_jbBuscarPorNombreActionPerformed
 
@@ -281,21 +297,4 @@ public class ComprasaUnProveedor extends javax.swing.JInternalFrame {
     private javax.swing.JTextField jtProveedorBuscado;
     // End of variables declaration//GEN-END:variables
 
-//    private void llenarTablaComprasPorProveedor(String razonSocial) {
-//        CompraData provee = new CompraData();
-//        List<Compra> comprasProveedor = provee.contarComprasPorNombreProveedor(MENU_BAR_PROPERTY);
-//
-//        DefaultTableModel modelo = new DefaultTableModel();
-//        modelo.addColumn("ID Compra");
-//        modelo.addColumn("Fecha Compra");
-//
-//        // Agrega las filas a la tabla
-//        for (Compra compra : comprasProveedor) {
-//            modelo.addRow(new Object[]{
-//                compra.getIdCompra(),
-//                compra.getFecha()
-//            });
-//        }
-//        jtComprasPorProveedor.setModel(modelo);
-//    }
 }
