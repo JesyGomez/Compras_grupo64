@@ -101,7 +101,9 @@ public class CompraView extends javax.swing.JInternalFrame {
             }
         });
 
-        jdFecha.setDateFormatString("yyyy-MM-dd");
+        jdFecha.setDateFormatString("dd/MM/yyyy");
+        jdFecha.setMaxSelectableDate(new java.util.Date());
+        jdFecha.setMinSelectableDate(new java.util.Date(1577851309000L));
 
         jLabel1.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
