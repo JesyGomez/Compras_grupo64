@@ -106,29 +106,6 @@ public class ProveedorData {
         return proveedor;
     }
 
-    public Proveedor buscarProveedorPorRazonSocial(String razonSocial) {
-        String sql = "SELECT id_proveedor, razonSocial, domicilio, telefono FROM proveedor WHERE razonSocial = ?";
-        Proveedor proveedor = null;
-        try {
-            PreparedStatement ps = con.prepareStatement(sql);
-            ps.setString(1, razonSocial);
-            ResultSet rs = ps.executeQuery();
-            if (rs.next()) {
-                proveedor = new Proveedor();
-                proveedor.setIdProveedor(rs.getInt("id_proveedor"));
-                proveedor.setRazonSocial(rs.getString("razonSocial"));
-                proveedor.setDomicilio(rs.getNString("domicilio"));
-                proveedor.setTelefono(rs.getNString("telefono"));
-
-            } else {
-                JOptionPane.showMessageDialog(null, "No existe un proveedor con esa razon social");
-            }
-            ps.close();
-        } catch (SQLException ex) {
-            Logger.getLogger(ProveedorData.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return proveedor;
-    }
 
     public List<Proveedor> listarProveedores() {
         String sql = "SELECT id_proveedor, razonSocial, domicilio, telefono FROM proveedor";
@@ -163,8 +140,6 @@ public class ProveedorData {
                 while (rs.next()) {
                     Proveedor proveedorEncontrado = new Proveedor();
                     proveedorEncontrado.setIdProveedor(rs.getInt("id_Proveedor"));
-                    // Obtener y asignar más detalles del proveedor según tus necesidades
-
                     proveedor.getIdProveedor();
                 }
             }
