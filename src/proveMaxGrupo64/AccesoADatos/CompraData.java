@@ -278,6 +278,7 @@ public class CompraData {
                 producto.setNombreProducto(rs.getString("nombre"));
                 producto.setDescripcion(rs.getString("descripcion"));
                 productos.add(producto);
+             
             }
         }
     } catch (SQLException ex) {

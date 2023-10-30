@@ -59,6 +59,7 @@ public class ProducCompraPorFecha extends javax.swing.JInternalFrame {
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/icono2.png"))); // NOI18N
         jLabel1.setText("*PRODUCTOS COMPRADOS EN FECHA*");
 
+        jdFechaSolicitada.setDateFormatString("dd/MM/yyyy");
         jdFechaSolicitada.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
             public void propertyChange(java.beans.PropertyChangeEvent evt) {
                 jdFechaSolicitadaPropertyChange(evt);

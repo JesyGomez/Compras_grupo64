@@ -62,10 +62,14 @@ public class ProductosMasComprados extends javax.swing.JInternalFrame {
         jPanel1.setForeground(new java.awt.Color(73, 90, 222));
         jPanel1.setPreferredSize(new java.awt.Dimension(734, 550));
 
+        jdFechaInicio.setDateFormatString("dd/MM/yyyy");
+
         jLabel3.setBackground(new java.awt.Color(255, 255, 255));
         jLabel3.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("Y");
+
+        jdFechaFin.setDateFormatString("dd/MM/yyyy");
 
         jLabel1.setBackground(new java.awt.Color(255, 255, 255));
         jLabel1.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N

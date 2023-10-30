@@ -102,7 +102,7 @@ public class CompraView extends javax.swing.JInternalFrame {
             }
         });
 
-        jdFecha.setDateFormatString("dd/MMM/yyyy");
+        jdFecha.setDateFormatString("dd/MM/yyyy");
         jdFecha.setMaxSelectableDate(new java.util.Date());
         jdFecha.setMinSelectableDate(new java.util.Date(1577851309000L));
 

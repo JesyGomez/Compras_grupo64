@@ -139,6 +139,9 @@
       </Layout>
       <SubComponents>
         <Component class="com.toedter.calendar.JDateChooser" name="jdFechaInicio">
+          <Properties>
+            <Property name="dateFormatString" type="java.lang.String" value="dd/MM/yyyy"/>
+          </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel3">
           <Properties>
@@ -155,6 +158,9 @@
           </Properties>
         </Component>
         <Component class="com.toedter.calendar.JDateChooser" name="jdFechaFin">
+          <Properties>
+            <Property name="dateFormatString" type="java.lang.String" value="dd/MM/yyyy"/>
+          </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel1">
           <Properties>
