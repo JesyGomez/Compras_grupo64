@@ -1,9 +1,5 @@
 package proveMaxGrupo64.Vistas;
 
-import java.time.LocalDate;
-import java.time.ZoneId;
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -40,10 +36,9 @@ public class DetalleCompraView extends javax.swing.JInternalFrame {
         llenarTabla();
         jtIDCompra.setEnabled(false);
         jtIDProveedor.setEnabled(false);
-        
+
     }
 
-  
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -57,7 +52,6 @@ public class DetalleCompraView extends javax.swing.JInternalFrame {
         jtIDCompra = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         jtIDProveedor = new javax.swing.JTextField();
-        jBModificar = new javax.swing.JButton();
         jbCerrarCompra = new javax.swing.JButton();
         jbSalir = new javax.swing.JButton();
 
@@ -95,17 +89,6 @@ public class DetalleCompraView extends javax.swing.JInternalFrame {
         jLabel5.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setText("ID Proveedor:");
-
-        jBModificar.setBackground(new java.awt.Color(0, 0, 102));
-        jBModificar.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        jBModificar.setForeground(new java.awt.Color(255, 255, 255));
-        jBModificar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Actualizar (2).png"))); // NOI18N
-        jBModificar.setText("Modificar");
-        jBModificar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBModificarActionPerformed(evt);
-            }
-        });
 
         jbCerrarCompra.setBackground(new java.awt.Color(0, 0, 102));
         jbCerrarCompra.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
@@ -153,15 +136,10 @@ public class DetalleCompraView extends javax.swing.JInternalFrame {
                 .addGap(18, 18, 18)
                 .addGroup(jpFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jpFondoLayout.createSequentialGroup()
-                        .addGroup(jpFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jpFondoLayout.createSequentialGroup()
-                                .addComponent(jBModificar)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 444, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jpFondoLayout.createSequentialGroup()
-                                .addGap(201, 201, 201)
-                                .addComponent(jbCerrarCompra)
-                                .addGap(107, 107, 107)
-                                .addComponent(jbSalir)))
+                        .addGap(201, 201, 201)
+                        .addComponent(jbCerrarCompra)
+                        .addGap(107, 107, 107)
+                        .addComponent(jbSalir)
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addComponent(jScrollPane1))
                 .addContainerGap())
@@ -187,9 +165,7 @@ public class DetalleCompraView extends javax.swing.JInternalFrame {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jpFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jBModificar)
-                        .addComponent(jbCerrarCompra))
+                    .addComponent(jbCerrarCompra, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpFondoLayout.createSequentialGroup()
                         .addComponent(jbSalir)
                         .addGap(1, 1, 1)))
@@ -210,40 +186,23 @@ public class DetalleCompraView extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jBModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBModificarActionPerformed
-        // TODO add your handling code here:
-
-        int filaSeleccinada = jtaListaProductos.getSelectedRow();
-        if (filaSeleccinada != -1) {
-            int idDetalle = (Integer) jtaListaProductos.getValueAt(filaSeleccinada, 0);
-
-            Integer nuevaCantidad = obtenerNuevaCantidad();
-            if (nuevaCantidad != null) {
-
-                if (nuevaCantidad >= 0) {
-                    jtaListaProductos.setValueAt(nuevaCantidad, filaSeleccinada, 3);
-                    detaData.actualizarcantidad(idDetalle, nuevaCantidad);
-
-                } else {
-                    // Si la nota no está en rango válido se muestra un mensaje de error 
-                    JOptionPane.showMessageDialog(null, "La cantidad debe ser mayor a 0.", "Error", JOptionPane.ERROR_MESSAGE);
-                }
-            }
-        }
-    }//GEN-LAST:event_jBModificarActionPerformed
-
     private void jbCerrarCompraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbCerrarCompraActionPerformed
 
         int idCompra = Integer.parseInt(jtIDCompra.getText());
         int idProveedor = Integer.parseInt(jtIDProveedor.getText());
         DetalleCompraData dcdata = new DetalleCompraData();
+        DefaultTableModel modelo = (DefaultTableModel) jtaListaProductos.getModel();
 
-        for (int i = 0; i < jtaListaProductos.getRowCount(); i++) {
-            // Verificar si la fila está seleccionada
-            if (jtaListaProductos.isRowSelected(i)) {
-                int idProducto = Integer.parseInt(jtaListaProductos.getValueAt(i, 0).toString());
-                int cantidad = Integer.parseInt(jtaListaProductos.getValueAt(i, 6).toString());
-                double precioActual = Double.parseDouble(jtaListaProductos.getValueAt(i, 3).toString());
+        for (int i = 0; i < modelo.getRowCount(); i++) {
+            int idProducto = Integer.parseInt(modelo.getValueAt(i, 0).toString());
+            Object cantidadObj = modelo.getValueAt(i, 6); 
+
+            // Verificamos de vacio o no de la celda cantidad.
+            
+            if (cantidadObj != null && !cantidadObj.toString().trim().isEmpty()) {
+                int cantidad = Integer.parseInt(cantidadObj.toString());
+
+                double precioActual = Double.parseDouble(modelo.getValueAt(i, 3).toString());
                 double precioCosto = precioActual * cantidad;
 
                 // Crear objeto DetalleCompra
@@ -261,11 +220,12 @@ public class DetalleCompraView extends javax.swing.JInternalFrame {
                 dcdata.guardarDetalleCompra(dc);
             }
         }
+
         jtIDProveedor.setText("");
-        jtIDProveedor.setText("");
+        jtIDCompra.setText("");
+        salida();
 
         // Limpiar tabla
-        DefaultTableModel modelo = (DefaultTableModel) jtaListaProductos.getModel();
         modelo.setRowCount(0);
     }//GEN-LAST:event_jbCerrarCompraActionPerformed
 
@@ -280,7 +240,6 @@ public class DetalleCompraView extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jbSalirActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jBModificar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;
@@ -392,6 +351,16 @@ public class DetalleCompraView extends javax.swing.JInternalFrame {
 
             modelo.addRow(new Object[]{producto.getIdProducto(), producto.getNombreProducto(), producto.getDescripcion(), producto.getPrecioActual(), producto.getStock(), producto.isEstado()});
         }
+    }
+    
+    private void salida(){
+        
+        jtIDCompra.setEnabled(false);
+        jtIDProveedor.setEnabled(false);
+        jtaListaProductos.setEnabled(false);
+        jbCerrarCompra.setEnabled(false);
+        
+        
     }
 
 }

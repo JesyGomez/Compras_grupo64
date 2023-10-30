@@ -102,6 +102,7 @@ public class CompraView extends javax.swing.JInternalFrame {
             }
         });
 
+        jdFecha.setDateFormatString("dd/MMM/yyyy");
         jdFecha.setMaxSelectableDate(new java.util.Date());
         jdFecha.setMinSelectableDate(new java.util.Date(1577851309000L));
 
@@ -278,6 +279,7 @@ public class CompraView extends javax.swing.JInternalFrame {
         deshabilitarCampos();
         habilitarCamposCompra();
         jbNuevaCompra.setEnabled(false);
+        jdFecha.setDate(new Date());
     }//GEN-LAST:event_jbNuevaCompraActionPerformed
 
 
