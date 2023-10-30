@@ -165,6 +165,7 @@ public class ProducCompraPorFecha extends javax.swing.JInternalFrame {
     private javax.swing.JPanel jpEscritorio;
     private javax.swing.JTable jtListaProductos;
     // End of variables declaration//GEN-END:variables
+    
     private void armarCabecera() {
         modelo.addColumn("ID");
         modelo.addColumn("Nombre");

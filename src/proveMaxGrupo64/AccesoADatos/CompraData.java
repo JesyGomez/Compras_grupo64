@@ -156,6 +156,7 @@ public class CompraData {
                     producto.setIdProducto(rs.getInt("id_compra"));
                     producto.setNombreProducto(rs.getString("nombre_producto"));
                     producto.setDescripcion(rs.getString("descripcion"));
+                    producto.setPrecioActual(rs.getDouble("precioActual"));
                     producto.setStock(rs.getInt("stock"));
                     producto.setEstado(rs.getBoolean("estado"));
 
