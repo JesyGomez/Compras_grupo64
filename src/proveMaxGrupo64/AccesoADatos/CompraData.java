@@ -51,56 +51,7 @@ public class CompraData {
             }
 
         }
-        // Método para registrar una compra con productos seleccionados
-//    public void registrarCompra(Compra compra, List<Producto> productosSeleccionados) {
-//        String sqlCompra = "INSERT INTO compra (id_compra, id_proveedor, fechaCompra) VALUES (?, ?, ?)";
-//        String sqlDetalleCompra = "INSERT INTO detalle_compra (id_compra, id_producto, cantidad) VALUES (?, ?, ?)";
-//
-//        try {
-//            con.setAutoCommit(false);
-//
-//            // Registrar la compra
-//            PreparedStatement psCompra = con.prepareStatement(sqlCompra, Statement.RETURN_GENERATED_KEYS);
-//            psCompra.setInt(1, compra.getIdCompra());
-//            psCompra.setInt(2, compra.getProveedor().getIdProveedor());
-//            psCompra.setDate(3, Date.valueOf(compra.getFecha()));
-//            psCompra.executeUpdate();
-//
-//            // Obtener el ID de la compra generada
-//            ResultSet rsCompra = psCompra.getGeneratedKeys();
-//            int idCompraGenerada = 0;
-//            if (rsCompra.next()) {
-//                idCompraGenerada = rsCompra.getInt(1);
-//            }
-//
-//            // Registrar los productos seleccionados en la compra
-//            PreparedStatement psDetalleCompra = con.prepareStatement(sqlDetalleCompra);
-//            for (Producto producto : productosSeleccionados) {
-//                psDetalleCompra.setInt(1, idCompraGenerada);
-//                psDetalleCompra.setInt(2, producto.getIdProducto());
-//                //psDetalleCompra.setInt(3, producto.getCantidad.()); // La cantidad de productos seleccionados
-//                psDetalleCompra.executeUpdate();
-//            }
-//
-//            con.commit();
-//            con.setAutoCommit(true);
-//
-//            JOptionPane.showMessageDialog(null, "La compra fue Guardada exitosamente!");
-//
-//        } catch (SQLException ex) {
-//            try {
-//                con.rollback();
-//                con.setAutoCommit(true);
-//            } catch (SQLException rollbackEx) {
-//                rollbackEx.printStackTrace(); // Manejar el error al hacer rollback
-//            }
-//
-//            if (ex.getErrorCode() == ERROR_SQL_COMPRA_DUPLICADA) {
-//                JOptionPane.showMessageDialog(null, "La Compra que intenta guardar, ya existe.");
-//            } else {
-//                JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Compra");
-//            }
-//        }
+       
 
     }
 
